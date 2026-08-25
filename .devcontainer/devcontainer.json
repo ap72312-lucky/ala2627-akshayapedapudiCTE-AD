@@ -1,0 +1,78 @@
+{
+  // ============================================================
+  //  devcontainer.json — the Codespace for this course.
+  //
+  //  This is the file that answers "create the codespace for me".
+  //  You do not build a Codespace once and hand it out; you commit
+  //  THIS, and every Codespace anyone opens from this repo comes up
+  //  identical, forever. Student's machine, student's quota, same
+  //  environment as everyone else.
+  //
+  //  Codespaces vs github.dev — the difference that matters:
+  //    github.dev  no compute. Edits and commits. Cannot run code.
+  //                Only "web extensions" install.
+  //    Codespace   a real Linux machine. Terminal, Python, servers,
+  //                and the FULL extension marketplace — which is why
+  //                the extensions listed below are worth listing here
+  //                and were deliberately left out of .vscode/.
+  // ============================================================
+
+  "name": "CTE — Software & App Design",
+
+  // Python because App Design 1 lives in Python. Node comes along for
+  // anything front-end. Pinned to a version so a student in May gets
+  // the same box as a student in August.
+  "image": "mcr.microsoft.com/devcontainers/python:3.12-bookworm",
+
+  "features": {
+    "ghcr.io/devcontainers/features/node:1": { "version": "lts" }
+  },
+
+  "customizations": {
+    "vscode": {
+      // Same editor rules as .vscode/settings.json, so the Codespace and
+      // github.dev behave the same way. Two spaces, wrap, tags that close
+      // themselves, no trailing whitespace in the diff.
+      "settings": {
+        "editor.tabSize": 2,
+        "editor.insertSpaces": true,
+        "editor.detectIndentation": false,
+        "editor.wordWrap": "on",
+        "editor.linkedEditing": true,
+        "editor.minimap.enabled": false,
+        "files.trimTrailingWhitespace": true,
+        "files.insertFinalNewline": true,
+        "terminal.integrated.defaultProfile.linux": "bash"
+      },
+
+      // These need a real machine, so they work HERE and not in github.dev.
+      "extensions": [
+        "ms-python.python",           // run and debug Python
+        "esbenp.prettier-vscode",     // one formatter, so nobody argues about spacing
+        "ms-vscode.live-server",      // preview HTML with live reload
+
+        // Codex, OpenAI's coding agent. Installing it here means every student
+        // has it on day one instead of hunting the marketplace.
+        //
+        // IT WILL NOT SIGN IN ON A FREE CHATGPT ACCOUNT. The extension supports
+        // Plus, Pro, Business, Edu and Enterprise plans only. If ALA provides
+        // ChatGPT Edu, it works; if the school accounts are free tier, students
+        // get an icon that can never authenticate — check one account before
+        // telling a class to use it.
+        "openai.chatgpt"
+      ]
+    }
+  },
+
+  // python -m http.server 8000 is how a student previews the page. This
+  // forwards that port and pops the preview automatically instead of
+  // making them hunt for a URL.
+  "forwardPorts": [8000],
+  "portsAttributes": {
+    "8000": { "label": "Web preview", "onAutoForward": "openPreview" }
+  },
+
+  // Runs once when the Codespace is created. Prints the versions so the
+  // very first thing a student sees is proof the machine is real.
+  "postCreateCommand": "python --version && node --version"
+}

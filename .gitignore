@@ -1,0 +1,5 @@
+# Nothing here needs building, so there is very little to ignore.
+# This file exists so the habit is visible from day one.
+.DS_Store
+Thumbs.db
+._*

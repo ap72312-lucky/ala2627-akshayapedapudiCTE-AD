@@ -1,0 +1,77 @@
+/* ============================================================
+   styles.css — this is YOURS to change. That is the point.
+   Every value below is a decision somebody made. Change one,
+   commit, and look at what happened.
+   ============================================================ */
+
+/* The custom properties. Change a colour ONCE here and it
+   changes everywhere it is used further down. */
+:root {
+  --ink:        #1a1a1a;   /* body text */
+  --muted:      #5a6472;   /* quieter text */
+  --accent:     #0a6373;   /* links and rules — make this yours */
+  --paper:      #ffffff;
+  --line:       #e2e6ec;
+  --measure:    34rem;     /* how wide a line of text gets before it wraps */
+}
+
+/* A sensible reset. Without border-box, padding makes boxes
+   wider than you asked for, and nothing lines up. */
+*, *::before, *::after { box-sizing: border-box; }
+
+body {
+  margin: 0 auto;
+  padding: 3rem 1.25rem 4rem;
+  max-width: var(--measure);
+  background: var(--paper);
+  color: var(--ink);
+  font: 1rem/1.65 system-ui, -apple-system, "Segoe UI", Roboto, sans-serif;
+}
+
+h1 {
+  margin: 0;
+  font-size: 2.15rem;
+  line-height: 1.15;
+  letter-spacing: -0.02em;
+}
+
+.tagline {
+  margin: 0.5rem 0 0;
+  color: var(--muted);
+  font-size: 1.05rem;
+}
+
+h2 {
+  margin: 2.75rem 0 0.75rem;
+  padding-bottom: 0.4rem;
+  border-bottom: 1px solid var(--line);
+  font-size: 0.82rem;
+  font-weight: 700;
+  letter-spacing: 0.12em;
+  text-transform: uppercase;
+  color: var(--accent);
+}
+
+ul { margin: 0; padding-left: 1.1rem; }
+li { margin-bottom: 0.6rem; }
+
+a {
+  color: var(--accent);
+  text-underline-offset: 3px;
+}
+a:hover { text-decoration: none; }
+
+footer {
+  margin-top: 3.5rem;
+  padding-top: 1rem;
+  border-top: 1px solid var(--line);
+  color: var(--muted);
+  font-size: 0.85rem;
+}
+
+/* Someone reading this on a phone is the common case, not the
+   edge case. Test it there before you call the page done. */
+@media (max-width: 30rem) {
+  body { padding-top: 2rem; }
+  h1   { font-size: 1.8rem; }
+}

@@ -1,0 +1,54 @@
+{
+  // ==========================================================
+  //  These settings travel WITH the repo. Any student who opens
+  //  this project in github.dev gets the same editor as everyone
+  //  else, with nothing to install and nothing to configure.
+  //
+  //  Everything in here is built into VS Code itself. github.dev
+  //  has no compute behind it, so extensions that need a language
+  //  server or a terminal will not run — these all work anyway.
+  // ==========================================================
+
+  // Two spaces, always spaces. Mixed tabs and spaces is the single
+  // most common reason a classmate's file looks broken on your screen.
+  "editor.tabSize": 2,
+  "editor.insertSpaces": true,
+  "editor.detectIndentation": false,
+
+  // Long lines wrap instead of running off the side. On a Chromebook
+  // screen this is the difference between reading your code and not.
+  "editor.wordWrap": "on",
+
+  // Show the indent guides and whitespace so nesting is visible.
+  "editor.guides.indentation": true,
+  "editor.renderWhitespace": "boundary",
+
+  // Auto-close and auto-rename HTML tags. Forgetting a closing tag is
+  // the #1 thing that makes a page render wrong with no error message.
+  "html.autoClosingTags": true,
+  "editor.linkedEditing": true,
+
+  // Trim trailing spaces and guarantee a final newline on save. Keeps
+  // commit diffs about what you actually changed, not invisible spaces.
+  "files.trimTrailingWhitespace": true,
+  "files.insertFinalNewline": true,
+
+  // Format HTML and CSS with the formatter built into VS Code.
+  "editor.formatOnSave": true,
+  "[html]": { "editor.defaultFormatter": "vscode.html-language-features" },
+  "[css]":  { "editor.defaultFormatter": "vscode.css-language-features" },
+
+  // Python lives in game/ and does NOT follow the 2-space rule above. Four spaces
+  // is the language's own convention, and unlike HTML the indent is not cosmetic —
+  // it is what says which lines are inside your if and your while. Format-on-save
+  // is off for Python because it needs an extension github.dev cannot run, and a
+  // half-working formatter is worse than none.
+  "[python]": {
+    "editor.tabSize": 4,
+    "editor.formatOnSave": false
+  },
+
+  // A quiet editor. No minimap eating screen width on a small display.
+  "editor.minimap.enabled": false,
+  "workbench.startupEditor": "readme"
+}
