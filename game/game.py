@@ -19,9 +19,9 @@
 # "State" is just the stuff the game has to remember while it runs.
 # Change these and the game starts differently — try it.
 
-player_name = ""          # we ask for this at the start
+player_name = "Lucky"          # we ask for this at the start
 room = "hall"             # where the player is right now
-has_key = False           # True or False — do they have the key?
+has_key = True           # True or False — do they have the key?
 moves = 0                 # how many turns they have taken
 
 
