@@ -127,36 +127,14 @@ footer a:hover {
   margin-left: 7px;
 }
 
-.ambient {
-  position: absolute;
-  width: 30rem;
-  height: 30rem;
-  border-radius: 50%;
-  filter: blur(4px);
-  opacity: .18;
-  pointer-events: none;
-}
-
-.ambient-one {
-  background: var(--cyan);
-  top: 20rem;
-  right: -14rem;
-}
-
-.ambient-two {
-  background: var(--peach);
-  top: 75rem;
-  left: -18rem;
-}
-
 .clover-border {
   position: fixed;
   inset: 10px;
   z-index: 3;
   pointer-events: none;
-  color: #b8efcf;
+  color: #a8a8a8;
   font: 1rem/1 "Trebuchet MS", sans-serif;
-  text-shadow: 0 0 2px #fff, 0 0 7px #b8efcf, 1px 1px 0 #555;
+  text-shadow: 0 0 2px #fff, 0 0 7px #bdbdbd, 1px 1px 0 #444;
 }
 
 .clover-edge {
