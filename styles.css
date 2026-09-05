@@ -26,19 +26,18 @@ body {
   margin: 0;
   min-width: 320px;
   overflow-x: hidden;
-  background:
-    radial-gradient(ellipse at 8% 12%, rgba(242, 182, 198, .82) 0 5rem, transparent 5.3rem),
-    radial-gradient(ellipse at 26% 4%, rgba(216, 199, 237, .8) 0 9rem, transparent 9.4rem),
-    radial-gradient(ellipse at 51% 17%, rgba(169, 223, 224, .76) 0 7rem, transparent 7.5rem),
-    radial-gradient(ellipse at 79% 8%, rgba(248, 229, 167, .8) 0 8rem, transparent 8.5rem),
-    radial-gradient(ellipse at 96% 31%, rgba(246, 201, 184, .8) 0 10rem, transparent 10.5rem),
-    radial-gradient(ellipse at 14% 47%, rgba(169, 223, 224, .72) 0 11rem, transparent 11.5rem),
-    radial-gradient(ellipse at 43% 56%, rgba(246, 201, 184, .7) 0 8rem, transparent 8.5rem),
-    radial-gradient(ellipse at 72% 48%, rgba(216, 199, 237, .75) 0 12rem, transparent 12.5rem),
-    radial-gradient(ellipse at 91% 72%, rgba(242, 182, 198, .72) 0 9rem, transparent 9.5rem),
-    radial-gradient(ellipse at 30% 88%, rgba(248, 229, 167, .72) 0 11rem, transparent 11.5rem),
-    radial-gradient(ellipse at 65% 92%, rgba(169, 223, 224, .76) 0 10rem, transparent 10.5rem),
-    var(--paper);
+  background: linear-gradient(to bottom,
+      #f2b6c6 0%,
+      #f6c9b8 12%,
+      #f8e5a7 24%,
+      #c9e5b5 36%,
+      #a9dfe0 49%,
+      #d8c7ed 62%,
+      #fff9f5 75%,
+      #d5d5d5 88%,
+      #555 96%,
+      #242424 100%);
+  background-attachment: fixed;
   color: var(--ink);
   font: 16px/1.6 Georgia, "Times New Roman", serif;
 }
