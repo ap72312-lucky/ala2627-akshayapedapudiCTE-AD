@@ -157,6 +157,49 @@ footer a:hover {
   left: -18rem;
 }
 
+.clover-border {
+  position: fixed;
+  inset: 10px;
+  z-index: 3;
+  pointer-events: none;
+  color: #fff;
+  text-shadow: 0 0 2px #fff, 0 0 7px #aaa, 1px 1px 0 #303030;
+  font: 1rem/1 "Segoe UI Emoji", sans-serif;
+}
+
+.clover-edge {
+  position: absolute;
+  display: block;
+  white-space: nowrap;
+  opacity: .9;
+}
+
+.clover-top {
+  top: -7px;
+  left: 50%;
+  transform: translateX(-50%);
+}
+
+.clover-right {
+  top: 50%;
+  right: -5px;
+  transform: translateY(-50%);
+  text-align: center;
+}
+
+.clover-bottom {
+  bottom: -7px;
+  left: 50%;
+  transform: translateX(-50%) rotate(180deg);
+}
+
+.clover-left {
+  top: 50%;
+  left: -5px;
+  transform: translateY(-50%) rotate(180deg);
+  text-align: center;
+}
+
 .hero {
   display: grid;
   grid-template-columns: 1.25fr .75fr;
