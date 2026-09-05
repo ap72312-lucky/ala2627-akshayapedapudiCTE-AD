@@ -1,6 +1,6 @@
 :root {
-  --ink: #302b36;
-  --muted: #716b78;
+  --ink: #303030;
+  --muted: #737373;
   --acid: #f2b6c6;
   --cyan: #a9dfe0;
   --paper: #fff9f5;
@@ -8,7 +8,7 @@
   --butter: #f8e5a7;
   --peach: #f6c9b8;
   --glass: rgba(255, 255, 255, 0.58);
-  --line: rgba(48, 43, 54, 0.16);
+  --line: rgba(48, 48, 48, 0.16);
   --max: 1180px;
 }
 
@@ -26,7 +26,19 @@ body {
   margin: 0;
   min-width: 320px;
   overflow-x: hidden;
-  background: radial-gradient(circle at 80% 5%, var(--lavender) 0, transparent 32rem), radial-gradient(circle at 10% 60%, var(--cyan) 0, transparent 30rem), var(--paper);
+  background:
+    radial-gradient(ellipse at 8% 12%, rgba(242, 182, 198, .82) 0 5rem, transparent 5.3rem),
+    radial-gradient(ellipse at 26% 4%, rgba(216, 199, 237, .8) 0 9rem, transparent 9.4rem),
+    radial-gradient(ellipse at 51% 17%, rgba(169, 223, 224, .76) 0 7rem, transparent 7.5rem),
+    radial-gradient(ellipse at 79% 8%, rgba(248, 229, 167, .8) 0 8rem, transparent 8.5rem),
+    radial-gradient(ellipse at 96% 31%, rgba(246, 201, 184, .8) 0 10rem, transparent 10.5rem),
+    radial-gradient(ellipse at 14% 47%, rgba(169, 223, 224, .72) 0 11rem, transparent 11.5rem),
+    radial-gradient(ellipse at 43% 56%, rgba(246, 201, 184, .7) 0 8rem, transparent 8.5rem),
+    radial-gradient(ellipse at 72% 48%, rgba(216, 199, 237, .75) 0 12rem, transparent 12.5rem),
+    radial-gradient(ellipse at 91% 72%, rgba(242, 182, 198, .72) 0 9rem, transparent 9.5rem),
+    radial-gradient(ellipse at 30% 88%, rgba(248, 229, 167, .72) 0 11rem, transparent 11.5rem),
+    radial-gradient(ellipse at 65% 92%, rgba(169, 223, 224, .76) 0 10rem, transparent 10.5rem),
+    var(--paper);
   color: var(--ink);
   font: 16px/1.6 Georgia, "Times New Roman", serif;
 }
@@ -83,7 +95,7 @@ footer {
 
 .brand-mark,
 .brand-dot {
-  color: var(--acid);
+  color: #6b6b6b;
 }
 
 nav {
@@ -95,14 +107,14 @@ nav {
 
 nav a {
   text-decoration: none;
-  color: #5d5662;
+  color: #626262;
 }
 
 nav a:hover,
 .text-link:hover,
 .project-link:hover,
 footer a:hover {
-  color: #302b36;
+  color: #303030;
 }
 
 .nav-cta {
@@ -112,7 +124,7 @@ footer a:hover {
 }
 
 .nav-cta span {
-  color: #6e6576;
+  color: #6b6b6b;
   margin-left: 7px;
 }
 
@@ -158,18 +170,18 @@ footer a:hover {
 }
 
 .eyebrow {
-  color: #6e6576;
+  color: #5f5f5f;
   display: flex;
   align-items: center;
   gap: 10px;
 }
 
 .status-dot {
-  background: #6e6576;
+  background: #302b36;
   width: 7px;
   height: 7px;
   border-radius: 50%;
-  box-shadow: 0 0 15px var(--lavender);
+  box-shadow: 0 0 15px rgba(48, 48, 48, .35);
 }
 
 h1,
@@ -197,7 +209,7 @@ h1 em,
 h2 em {
   font-family: Georgia, serif;
   font-weight: 400;
-  color: var(--cyan);
+  color: #6b6b6b;
 }
 
 .hero-text {
@@ -225,7 +237,7 @@ h2 em {
 
 .button-primary {
   background: var(--butter);
-  color: #302b36;
+  color: #303030;
 }
 
 .button-primary:hover {
@@ -234,14 +246,14 @@ h2 em {
 
 .text-link,
 .project-link {
-  color: #4e4854;
+  color: #4f4f4f;
   font: 700 .78rem/1 "Trebuchet MS", sans-serif;
   text-decoration: none;
 }
 
 .text-link span,
 .project-link span {
-  color: #8b6b83;
+  color: #6b6b6b;
   margin-left: 7px;
 }
 
@@ -305,7 +317,7 @@ h2 em {
 }
 
 .card-kicker {
-  color: #8b6b83;
+  color: #5f5f5f;
   margin-bottom: 8px;
   font-size: .64rem;
 }
@@ -339,7 +351,7 @@ h2 em {
 }
 
 .stats strong {
-  color: #8b6b83;
+  color: #303030;
   font: 700 2.2rem/1 "Trebuchet MS", sans-serif;
 }
 
@@ -351,7 +363,7 @@ h2 em {
 }
 
 .stats p {
-  color: #5d5662;
+  color: #626262;
   font-style: italic;
   margin: 0;
   padding-left: 14%;
@@ -373,7 +385,7 @@ h2 em {
 }
 
 .section-label span {
-  color: #8b6b83;
+  color: #5f5f5f;
   margin-right: 13px;
 }
 
@@ -445,7 +457,7 @@ h2 em {
   z-index: 1;
   left: 25px;
   top: 25px;
-  color: #5d5662;
+  color: #626262;
   font: 700 1.5rem/.95 "Trebuchet MS", sans-serif;
 }
 
@@ -485,7 +497,7 @@ h2 em {
   padding: 35px;
   border-radius: 4px;
   background: #f1e8f1;
-  color: #5d5662;
+  color: #626262;
   font: 1rem/2 monospace;
 }
 
@@ -495,17 +507,17 @@ h2 em {
 
 .code-visual span:first-child,
 .code-visual span:last-child {
-  color: #6e9fa5;
+  color: #5f5f5f;
 }
 
 .indent {
   padding-left: 25px;
-  color: #8b6b83;
+  color: #303030;
 }
 
 .indent-two {
   padding-left: 50px;
-  color: #9b7b68;
+  color: #777;
 }
 
 .project-content {
@@ -546,7 +558,7 @@ h2 em {
 
 .button-light {
   background: #fff;
-  color: #302b36;
+  color: #303030;
   white-space: nowrap;
 }
 
@@ -568,7 +580,7 @@ footer p {
 }
 
 footer span {
-  color: #8b6b83;
+  color: #6b6b6b;
   margin: 0 8px;
 }
 
