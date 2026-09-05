@@ -27,27 +27,20 @@ body {
   min-width: 320px;
   overflow-x: hidden;
   background:
-    radial-gradient(ellipse at 5% 10%, rgba(242, 182, 198, .74) 0 18%, transparent 42%),
-    radial-gradient(ellipse at 36% 0%, rgba(216, 199, 237, .72) 0 22%, transparent 48%),
-    radial-gradient(ellipse at 72% 12%, rgba(169, 223, 224, .7) 0 20%, transparent 46%),
-    radial-gradient(ellipse at 105% 22%, rgba(248, 229, 167, .72) 0 21%, transparent 44%),
-    radial-gradient(ellipse at 4% 54%, rgba(246, 201, 184, .68) 0 22%, transparent 46%),
-    radial-gradient(ellipse at 44% 47%, rgba(169, 223, 224, .62) 0 20%, transparent 45%),
-    radial-gradient(ellipse at 88% 55%, rgba(216, 199, 237, .7) 0 24%, transparent 49%),
-    radial-gradient(ellipse at 22% 100%, rgba(248, 229, 167, .68) 0 23%, transparent 47%),
-    radial-gradient(ellipse at 70% 94%, rgba(242, 182, 198, .68) 0 24%, transparent 48%),
+    radial-gradient(ellipse at 8% 12%, rgba(242, 182, 198, .82) 0 5rem, transparent 5.3rem),
+    radial-gradient(ellipse at 26% 4%, rgba(216, 199, 237, .8) 0 9rem, transparent 9.4rem),
+    radial-gradient(ellipse at 51% 17%, rgba(169, 223, 224, .76) 0 7rem, transparent 7.5rem),
+    radial-gradient(ellipse at 79% 8%, rgba(248, 229, 167, .8) 0 8rem, transparent 8.5rem),
+    radial-gradient(ellipse at 96% 31%, rgba(246, 201, 184, .8) 0 10rem, transparent 10.5rem),
+    radial-gradient(ellipse at 14% 47%, rgba(169, 223, 224, .72) 0 11rem, transparent 11.5rem),
+    radial-gradient(ellipse at 43% 56%, rgba(246, 201, 184, .7) 0 8rem, transparent 8.5rem),
+    radial-gradient(ellipse at 72% 48%, rgba(216, 199, 237, .75) 0 12rem, transparent 12.5rem),
+    radial-gradient(ellipse at 91% 72%, rgba(242, 182, 198, .72) 0 9rem, transparent 9.5rem),
+    radial-gradient(ellipse at 30% 88%, rgba(248, 229, 167, .72) 0 11rem, transparent 11.5rem),
+    radial-gradient(ellipse at 65% 92%, rgba(169, 223, 224, .76) 0 10rem, transparent 10.5rem),
     var(--paper);
-  background-size: 145% 145%;
-  background-position: 0 0;
-  animation: tie-dye-shift 28s ease-in-out infinite alternate;
   color: var(--ink);
   font: 16px/1.6 Georgia, "Times New Roman", serif;
-}
-
-@keyframes tie-dye-shift {
-  to {
-    background-position: 12% 8%;
-  }
 }
 
 body::before {
@@ -162,16 +155,16 @@ footer a:hover {
   inset: 10px;
   z-index: 3;
   pointer-events: none;
-  color: #fff;
-  text-shadow: 0 0 2px #fff, 0 0 7px #aaa, 1px 1px 0 #303030;
-  font: 1rem/1 "Segoe UI Emoji", sans-serif;
+  color: #b8efcf;
+  font: 1rem/1 "Trebuchet MS", sans-serif;
+  text-shadow: 0 0 2px #fff, 0 0 7px #b8efcf, 1px 1px 0 #555;
 }
 
 .clover-edge {
   position: absolute;
   display: block;
   white-space: nowrap;
-  opacity: .9;
+  opacity: .95;
 }
 
 .clover-top {
@@ -239,19 +232,6 @@ h2,
 h3,
 p {
   margin-top: 0;
-}
-
-h1,
-h2,
-h3,
-p,
-.brand,
-nav,
-.button,
-.text-link,
-.project-link,
-footer {
-  text-shadow: 0 0 1px #fff, 0 0 5px rgba(255, 255, 255, .7), 1px 1px 0 rgba(48, 48, 48, .22);
 }
 
 h1,
