@@ -67,8 +67,14 @@
     </section>
 
     <section class="about-section" id="about" aria-labelledby="about-title">
-      <div class="section-label"><span>01</span> A little quote</div>
-      <div class="quote-card">
+      <div class="quote-side">
+        <div class="section-label"><span>01</span> A little quote</div>
+        <div class="quote-black-space drawing-card">
+          <button class="erase-button" type="button">Erase</button>
+          <canvas class="drawing-canvas" aria-label="Drawing canvas"></canvas>
+        </div>
+      </div>
+      <div>
         <h2 id="about-title">"An investment in knowledge<br><em>always pays the best interest."</em></h2>
         <p class="large-copy">I am working toward strong grades while building confidence in English, Math, History, and
           Technology. I care about understanding how things work so I can be of use for myself and people around me.</p>
@@ -147,6 +153,55 @@
 
     glitterSurface.addEventListener('pointermove', leaveGlitter);
     glitterSurface.addEventListener('touchmove', leaveGlitter, { passive: true });
+
+    const drawingCard = document.querySelector('.drawing-card');
+    const drawingCanvas = drawingCard.querySelector('.drawing-canvas');
+    const eraseButton = drawingCard.querySelector('.erase-button');
+    const drawingContext = drawingCanvas.getContext('2d');
+    let isDrawing = false;
+
+    function resizeDrawingCanvas() {
+      const scale = window.devicePixelRatio || 1;
+      const bounds = drawingCanvas.getBoundingClientRect();
+      drawingCanvas.width = bounds.width * scale;
+      drawingCanvas.height = bounds.height * scale;
+      drawingContext.scale(scale, scale);
+      drawingContext.lineCap = 'round';
+      drawingContext.lineJoin = 'round';
+      drawingContext.strokeStyle = '#111';
+      drawingContext.lineWidth = 4;
+    }
+
+    function draw(event) {
+      if (!isDrawing) return;
+      const bounds = drawingCanvas.getBoundingClientRect();
+      drawingContext.lineTo(event.clientX - bounds.left, event.clientY - bounds.top);
+      drawingContext.stroke();
+      drawingContext.beginPath();
+      drawingContext.moveTo(event.clientX - bounds.left, event.clientY - bounds.top);
+    }
+
+    drawingCanvas.addEventListener('pointerdown', (event) => {
+      isDrawing = true;
+      drawingCanvas.setPointerCapture(event.pointerId);
+      const bounds = drawingCanvas.getBoundingClientRect();
+      drawingContext.beginPath();
+      drawingContext.moveTo(event.clientX - bounds.left, event.clientY - bounds.top);
+    });
+    drawingCanvas.addEventListener('pointermove', draw);
+    drawingCanvas.addEventListener('pointerup', () => {
+      isDrawing = false;
+      drawingContext.beginPath();
+    });
+    drawingCanvas.addEventListener('pointercancel', () => {
+      isDrawing = false;
+      drawingContext.beginPath();
+    });
+    eraseButton.addEventListener('click', () => {
+      drawingContext.clearRect(0, 0, drawingCanvas.width, drawingCanvas.height);
+    });
+    window.addEventListener('resize', resizeDrawingCanvas);
+    resizeDrawingCanvas();
   </script>
 
 </body>
