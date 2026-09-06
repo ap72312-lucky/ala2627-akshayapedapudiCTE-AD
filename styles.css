@@ -408,6 +408,68 @@ h2 em {
   touch-action: none;
 }
 
+.drawing-tools {
+  position: absolute;
+  z-index: 2;
+  top: 10px;
+  left: 10px;
+  display: flex;
+  gap: 6px;
+  padding: 5px;
+  border: 1px solid rgba(48, 48, 48, .15);
+  border-radius: 20px;
+  background: rgba(255, 255, 255, .86);
+  box-shadow: 0 4px 12px rgba(48, 48, 48, .12);
+}
+
+.color-button {
+  width: 18px;
+  height: 18px;
+  padding: 0;
+  border: 2px solid #fff;
+  border-radius: 50%;
+  background: var(--swatch-color);
+  box-shadow: 0 0 0 1px rgba(48, 48, 48, .3);
+  cursor: pointer;
+}
+
+.color-button:hover,
+.color-button.is-selected {
+  box-shadow: 0 0 0 2px #303030;
+}
+
+.color-button[data-color="#111111"] {
+  --swatch-color: #111111;
+}
+
+.color-button[data-color="#e53935"] {
+  --swatch-color: #e53935;
+}
+
+.color-button[data-color="#f57c00"] {
+  --swatch-color: #f57c00;
+}
+
+.color-button[data-color="#fbc02d"] {
+  --swatch-color: #fbc02d;
+}
+
+.color-button[data-color="#43a047"] {
+  --swatch-color: #43a047;
+}
+
+.color-button[data-color="#1e88e5"] {
+  --swatch-color: #1e88e5;
+}
+
+.color-button[data-color="#8e24aa"] {
+  --swatch-color: #8e24aa;
+}
+
+.color-button[data-color="#ec407a"] {
+  --swatch-color: #ec407a;
+}
+
 .erase-button {
   position: absolute;
   z-index: 2;

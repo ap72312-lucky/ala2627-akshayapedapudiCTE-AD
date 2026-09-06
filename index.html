@@ -70,6 +70,17 @@
       <div class="quote-side">
         <div class="section-label"><span>01</span> A little quote</div>
         <div class="quote-black-space drawing-card">
+          <div class="drawing-tools" role="group" aria-label="Drawing colors">
+            <button class="color-button is-selected" type="button" data-color="#111111" aria-label="Black"
+              title="Black"></button>
+            <button class="color-button" type="button" data-color="#e53935" aria-label="Red" title="Red"></button>
+            <button class="color-button" type="button" data-color="#f57c00" aria-label="Orange" title="Orange"></button>
+            <button class="color-button" type="button" data-color="#fbc02d" aria-label="Yellow" title="Yellow"></button>
+            <button class="color-button" type="button" data-color="#43a047" aria-label="Green" title="Green"></button>
+            <button class="color-button" type="button" data-color="#1e88e5" aria-label="Blue" title="Blue"></button>
+            <button class="color-button" type="button" data-color="#8e24aa" aria-label="Purple" title="Purple"></button>
+            <button class="color-button" type="button" data-color="#ec407a" aria-label="Pink" title="Pink"></button>
+          </div>
           <button class="erase-button" type="button">Erase</button>
           <canvas class="drawing-canvas" aria-label="Drawing canvas"></canvas>
         </div>
@@ -158,6 +169,7 @@
     const drawingCard = document.querySelector('.drawing-card');
     const drawingCanvas = drawingCard.querySelector('.drawing-canvas');
     const eraseButton = drawingCard.querySelector('.erase-button');
+    const colorButtons = drawingCard.querySelectorAll('.color-button');
     const drawingContext = drawingCanvas.getContext('2d');
     let isDrawing = false;
 
@@ -200,6 +212,13 @@
     });
     eraseButton.addEventListener('click', () => {
       drawingContext.clearRect(0, 0, drawingCanvas.width, drawingCanvas.height);
+    });
+    colorButtons.forEach((button) => {
+      button.addEventListener('click', () => {
+        drawingContext.strokeStyle = button.dataset.color;
+        colorButtons.forEach((colorButton) => colorButton.classList.remove('is-selected'));
+        button.classList.add('is-selected');
+      });
     });
     window.addEventListener('resize', resizeDrawingCanvas);
     resizeDrawingCanvas();
