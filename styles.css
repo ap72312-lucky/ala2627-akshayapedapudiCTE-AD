@@ -256,12 +256,12 @@ h2 em {
 }
 
 .button-primary {
-  background: var(--butter);
-  color: #303030;
+  background: #858585;
+  color: #fff;
 }
 
 .button-primary:hover {
-  background: #fff0bd;
+  background: #a6a6a6;
 }
 
 .text-link,
