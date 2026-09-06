@@ -478,18 +478,6 @@ h2 em {
   box-shadow: 0 12px 25px rgba(48, 48, 48, .24), inset 4px 4px 0 rgba(255, 255, 255, .8);
 }
 
-.roblox-cutout {
-  width: 72px;
-  height: 72px;
-  display: grid;
-  place-items: center;
-  transform: rotate(-14deg);
-  background: #8fc8ed;
-  color: #fff;
-  font: 700 2.3rem/1 "Trebuchet MS", sans-serif;
-  box-shadow: inset 0 0 0 6px rgba(255, 255, 255, .7);
-}
-
 .code-visual {
   height: 250px;
   margin: 20px;
