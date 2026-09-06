@@ -676,6 +676,8 @@ h2 em {
 }
 
 .contact-section {
+  position: relative;
+  overflow: hidden;
   display: flex;
   align-items: end;
   justify-content: space-between;
@@ -683,7 +685,34 @@ h2 em {
   margin: 0 28px 75px;
   padding: 45px;
   border-radius: 10px;
-  background: linear-gradient(105deg, rgba(246, 201, 184, .42), rgba(216, 199, 237, .36));
+  background: linear-gradient(180deg, #f3abc4 0%, #83cde2 52%, #b69bdd 100%);
+}
+
+.contact-section::before {
+  position: absolute;
+  inset: -35% -15%;
+  content: "";
+  background: repeating-radial-gradient(ellipse at 0 50%, transparent 0 28px, rgba(255, 255, 255, .2) 29px 38px, transparent 39px 72px);
+  background-size: 210px 100%;
+  mix-blend-mode: soft-light;
+  opacity: .8;
+  pointer-events: none;
+  animation: contact-wave 9s linear infinite;
+}
+
+.contact-section>* {
+  position: relative;
+  z-index: 1;
+}
+
+@keyframes contact-wave {
+  from {
+    background-position: 0 0;
+  }
+
+  to {
+    background-position: 210px 0;
+  }
 }
 
 .contact-section h2 {
@@ -699,6 +728,12 @@ h2 em {
 
 .button-light:hover {
   background: white;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .contact-section::before {
+    animation: none;
+  }
 }
 
 footer {
