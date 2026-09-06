@@ -94,7 +94,8 @@
         </article>
         <article class="project-card project-secondary glass-panel">
           <div class="project-number">02 / FOR OPPORTUNITY TAKERS</div>
-          <div class="code-visual" aria-hidden="true"><span>&lt;body&gt;</span><span class="indent">learning
+          <div class="code-visual glitter-surface" aria-hidden="true"><span>&lt;body&gt;</span><span
+              class="indent">learning
               {</span><span class="indent-two">fast: true;</span><span class="indent">}</span><span>&lt;/body&gt;</span>
           </div>
           <div class="project-content">
@@ -121,6 +122,32 @@
     <p>Built by yours truly. <span>•</span> Continuing to learn since 2011</p>
     <p><a href="assignments/">Assignments archive ↗</a></p>
   </footer>
+
+  <script>
+    const glitterSurface = document.querySelector('.glitter-surface');
+    let lastSpark = 0;
+
+    function leaveGlitter(event) {
+      const point = event.touches ? event.touches[0] : event;
+      if (!point) return;
+
+      const now = performance.now();
+      if (now - lastSpark < 45) return;
+      lastSpark = now;
+
+      const bounds = glitterSurface.getBoundingClientRect();
+      const spark = document.createElement('i');
+      spark.className = 'glitter-spark';
+      spark.style.left = `${point.clientX - bounds.left}px`;
+      spark.style.top = `${point.clientY - bounds.top}px`;
+      spark.style.setProperty('--spark-size', `${Math.random() * 4 + 3}px`);
+      glitterSurface.append(spark);
+      window.setTimeout(() => spark.remove(), 850);
+    }
+
+    glitterSurface.addEventListener('pointermove', leaveGlitter);
+    glitterSurface.addEventListener('touchmove', leaveGlitter, { passive: true });
+  </script>
 
 </body>
 

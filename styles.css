@@ -476,28 +476,74 @@ h2 em {
   margin: 20px;
   padding: 35px;
   border-radius: 4px;
-  background: #f1e8f1;
-  color: #626262;
+  position: relative;
+  overflow: hidden;
+  background: #181818;
+  color: #f5f5f5;
   font: 1rem/2 monospace;
+}
+
+.glitter-surface {
+  isolation: isolate;
+  cursor: crosshair;
+  box-shadow: inset 0 0 0 1px rgba(255, 255, 255, .18), 0 10px 25px rgba(0, 0, 0, .2);
+}
+
+.glitter-surface::before {
+  content: "";
+  position: absolute;
+  inset: 0;
+  z-index: 0;
+  opacity: .65;
+  background-image: radial-gradient(circle, #fff 0 1px, transparent 1.5px), radial-gradient(circle, #999 0 1px, transparent 1.5px);
+  background-position: 12px 18px, 48px 63px;
+  background-size: 67px 71px, 89px 83px;
+}
+
+.glitter-spark {
+  position: absolute;
+  z-index: 3;
+  width: var(--spark-size);
+  height: var(--spark-size);
+  border-radius: 50%;
+  pointer-events: none;
+  background: #fff;
+  box-shadow: 0 0 4px 1px #fff, 0 0 10px 2px #aaa;
+  transform: translate(-50%, -50%);
+  animation: sparkle-fade .85s ease-out forwards;
+}
+
+@keyframes sparkle-fade {
+  0% {
+    opacity: 1;
+    transform: translate(-50%, -50%) scale(1.4);
+  }
+
+  100% {
+    opacity: 0;
+    transform: translate(-50%, -50%) scale(.2);
+  }
 }
 
 .code-visual span {
   display: block;
+  position: relative;
+  z-index: 2;
 }
 
 .code-visual span:first-child,
 .code-visual span:last-child {
-  color: #5f5f5f;
+  color: #fff;
 }
 
 .indent {
   padding-left: 25px;
-  color: #303030;
+  color: #d1d1d1;
 }
 
 .indent-two {
   padding-left: 50px;
-  color: #777;
+  color: #aaa;
 }
 
 .project-content {
