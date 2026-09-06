@@ -305,35 +305,20 @@ h2 em {
   place-items: center;
 }
 
-.orbit {
-  position: absolute;
-  border: 1px solid rgba(139, 107, 131, .45);
-  border-radius: 50%;
-  transform: rotate(-28deg);
-}
-
-.orbit-a {
-  width: 190px;
-  height: 84px;
-}
-
-.orbit-b {
-  width: 150px;
-  height: 150px;
-  transform: rotate(58deg);
-  border-color: rgba(110, 159, 165, .45);
-}
-
-.core {
-  width: 76px;
-  height: 76px;
+.github-mark {
+  width: 112px;
+  height: 112px;
   display: grid;
   place-items: center;
   border-radius: 50%;
-  background: linear-gradient(135deg, var(--butter), var(--peach));
-  color: #302b36;
-  font: 700 1.3rem monospace;
-  box-shadow: 0 0 50px rgba(246, 201, 184, .45);
+  background: #fff;
+  box-shadow: 0 0 45px rgba(255, 255, 255, .8), 0 12px 25px rgba(48, 48, 48, .16);
+}
+
+.github-mark svg {
+  width: 76px;
+  height: 76px;
+  fill: #303030;
 }
 
 .card-kicker {
