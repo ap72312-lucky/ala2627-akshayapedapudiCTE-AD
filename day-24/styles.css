@@ -1,0 +1,86 @@
+/* ============================================================
+   Trailhead — styles.css
+   Everything you write today goes in this file.
+   The base styling is already done. You are doing the LAYOUT.
+   ============================================================ */
+
+body{
+  margin: 0;
+  font-family: system-ui, -apple-system, "Segoe UI", sans-serif;
+  color: #1f2937;
+  background: #f9fafb;
+  line-height: 1.6;
+}
+
+main{ max-width: 60rem; margin: 0 auto; padding: 2rem 1.25rem; }
+
+
+/* ------------------------------------------------------------
+   1. THE HEADER ROW
+   Right now the logo and the nav are stacked on top of each other,
+   because a div and a nav are both block elements.
+
+   Make them sit on ONE row, with the logo hard left, the nav hard
+   right, and both lined up through the middle.
+
+   Ask yourself in this order:
+     - which element is the CONTAINER? that is what gets display:flex
+     - which axis is the main axis right now?
+     - which property spaces things ALONG that axis?
+     - which property lines things up ACROSS it?
+   ------------------------------------------------------------ */
+
+.site-header{
+  background: #ffffff;
+  border-bottom: 1px solid #e5e7eb;
+  padding: 1rem 1.25rem;
+
+  /* YOUR CODE HERE */
+
+}
+
+.logo{ font-weight: 800; font-size: 1.25rem; letter-spacing: -0.01em; }
+
+.nav a{
+  color: #4338ca;
+  text-decoration: none;
+  font-weight: 600;
+  margin-left: 1.25rem;
+}
+
+
+/* ------------------------------------------------------------
+   2. THE CARD ROW
+   The three cards are stacked. Put them side by side, sharing the
+   width evenly, with a real gap between them — not a margin.
+
+   Two of these go on the CONTAINER and one goes on the CARDS.
+   Work out which is which before you type anything.
+   ------------------------------------------------------------ */
+
+.cards{
+
+  /* YOUR CODE HERE */
+
+}
+
+.card{
+  background: #ffffff;
+  border: 1px solid #e5e7eb;
+  border-radius: 12px;
+  padding: 1.25rem;
+
+  /* YOUR CODE HERE — how does a card take an equal share? */
+
+}
+
+.card h2{ margin: 0 0 .5rem; font-size: 1.1rem; }
+.card p{ margin: 0; color: #4b5563; }
+
+
+/* ------------------------------------------------------------
+   3. IF YOU FINISH EARLY
+   Change .cards to flex-direction: column and look at what happens
+   to the property you used to space them out. Then change it back.
+   That one change is the whole lesson.
+   ------------------------------------------------------------ */
