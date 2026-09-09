@@ -494,6 +494,97 @@ h2 em {
   font: .75rem/1.4 "Trebuchet MS", sans-serif;
 }
 
+.timing-game {
+  padding: 20px;
+  border: 1px solid rgba(48, 48, 48, .16);
+  border-radius: 10px;
+  background: rgba(255, 255, 255, .58);
+  box-shadow: 0 14px 30px rgba(48, 48, 48, .1);
+}
+
+.timing-game-heading {
+  display: flex;
+  align-items: flex-start;
+  justify-content: space-between;
+  gap: 15px;
+}
+
+.timing-game .section-label {
+  margin-bottom: 7px;
+}
+
+.timing-game h3 {
+  margin: 0;
+  font-size: 1.65rem;
+  letter-spacing: -.03em;
+}
+
+.timing-game-icon {
+  display: grid;
+  width: 38px;
+  height: 38px;
+  place-items: center;
+  border-radius: 50%;
+  background: var(--butter);
+  font-size: 1.15rem;
+}
+
+.timing-instructions,
+.timing-result {
+  color: var(--muted);
+  font-size: .87rem;
+}
+
+.timing-instructions {
+  margin: 12px 0 18px;
+}
+
+.timing-readout {
+  display: flex;
+  align-items: baseline;
+  gap: 10px;
+  margin-bottom: 16px;
+}
+
+.target-label {
+  color: var(--muted);
+  font: 700 .63rem/1 "Trebuchet MS", sans-serif;
+  letter-spacing: .1em;
+  text-transform: uppercase;
+}
+
+.target-time {
+  font: 700 2rem/1 "Trebuchet MS", sans-serif;
+}
+
+.elapsed-time {
+  color: #6b6b6b;
+  font: .82rem/1 "Trebuchet MS", sans-serif;
+}
+
+.timing-button {
+  border: 0;
+  border-radius: 4px;
+  padding: 12px 15px;
+  background: #303030;
+  color: #fff;
+  cursor: pointer;
+  font: 700 .72rem/1 "Trebuchet MS", sans-serif;
+}
+
+.timing-button:hover {
+  background: #666;
+}
+
+.timing-result {
+  min-height: 1.4em;
+  margin: 13px 0 0;
+}
+
+.timing-game.is-perfect .timing-result {
+  color: #28733d;
+}
+
 .section-label {
   color: var(--muted);
 }

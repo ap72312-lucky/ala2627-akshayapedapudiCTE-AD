@@ -26,7 +26,8 @@
   </div>
 
   <header class="site-header">
-    <a class="brand" href="index.html" aria-label="Name"><span class="~">🍀</span>Lucky Ducki<span class="~">🦆</span></a>
+    <a class="brand" href="index.html" aria-label="Name"><span class="~">🍀</span>Lucky Ducki<span
+        class="~">🦆</span></a>
     <nav aria-label="Main navigation">
       <a href="#about">About</a>
       <a href="#work">What I make</a>
@@ -85,6 +86,23 @@
           <canvas class="drawing-canvas" aria-label="Drawing canvas"></canvas>
         </div>
         <p class="drawing-caption">Draw here to show off your arts!</p>
+        <section class="timing-game" aria-labelledby="timing-game-title">
+          <div class="timing-game-heading">
+            <div>
+              <p class="section-label">A quick challenge</p>
+              <h3 id="timing-game-title">Stop the clock</h3>
+            </div>
+            <span class="timing-game-icon" aria-hidden="true">⏱</span>
+          </div>
+          <p class="timing-instructions">Start the clock, then click stop when the timer reaches the target.</p>
+          <div class="timing-readout" aria-live="polite">
+            <span class="target-label">Target</span>
+            <strong class="target-time">5.00s</strong>
+            <span class="elapsed-time">Ready?</span>
+          </div>
+          <button class="timing-button" type="button">Start challenge</button>
+          <p class="timing-result" aria-live="polite">Can you land exactly on the target?</p>
+        </section>
       </div>
       <div>
         <h2 id="about-title">"An investment in knowledge<br><em>always pays the best interest."</em></h2>
@@ -222,6 +240,58 @@
     });
     window.addEventListener('resize', resizeDrawingCanvas);
     resizeDrawingCanvas();
+
+    const timingGame = document.querySelector('.timing-game');
+    const timingButton = timingGame.querySelector('.timing-button');
+    const targetTime = timingGame.querySelector('.target-time');
+    const elapsedTime = timingGame.querySelector('.elapsed-time');
+    const timingResult = timingGame.querySelector('.timing-result');
+    let challengeTarget = 5;
+    let challengeStart = 0;
+    let timerFrame;
+    let challengeActive = false;
+
+    function chooseTarget() {
+      challengeTarget = Math.floor(Math.random() * 6 + 3);
+      targetTime.textContent = `${challengeTarget.toFixed(2)}s`;
+    }
+
+    function updateTimer() {
+      if (!challengeActive) return;
+      const elapsed = (performance.now() - challengeStart) / 1000;
+      elapsedTime.textContent = `${elapsed.toFixed(2)}s`;
+      timerFrame = requestAnimationFrame(updateTimer);
+    }
+
+    function finishChallenge() {
+      challengeActive = false;
+      cancelAnimationFrame(timerFrame);
+      const elapsed = (performance.now() - challengeStart) / 1000;
+      const difference = Math.abs(elapsed - challengeTarget);
+      elapsedTime.textContent = `${elapsed.toFixed(2)}s`;
+      timingButton.textContent = 'Try again';
+      timingResult.textContent = difference < 0.05
+        ? `Perfect! You were only ${difference.toFixed(2)}s away.`
+        : `You were ${difference.toFixed(2)}s away. Give it another go!`;
+      timingGame.classList.toggle('is-perfect', difference < 0.05);
+    }
+
+    timingButton.addEventListener('click', () => {
+      if (challengeActive) {
+        finishChallenge();
+        return;
+      }
+
+      chooseTarget();
+      challengeStart = performance.now();
+      challengeActive = true;
+      timingButton.textContent = 'Stop the clock';
+      timingResult.textContent = 'Keep your focus...';
+      timingGame.classList.remove('is-perfect');
+      updateTimer();
+    });
+
+    chooseTarget();
   </script>
 
 </body>
