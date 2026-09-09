@@ -58,10 +58,11 @@ main{ max-width: 60rem; margin: 0 auto; padding: 2rem 1.25rem; }
    Work out which is which before you type anything.
    ------------------------------------------------------------ */
 
-.cards{
-
-  /* YOUR CODE HERE */
-
+.cards {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: stretch;
 }
 
 .card{
