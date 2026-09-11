@@ -296,9 +296,10 @@ h1 {
 .ufo-image {
   position: absolute;
   top: 68px;
-  right: 28px;
-  font-size: 3.4rem;
+  left: 50%;
+  font-size: 6rem;
   filter: drop-shadow(0 8px 8px rgba(79, 57, 128, .22));
+  transform: translateX(-50%);
 }
 
 .card--lift:hover .ufo-image {
@@ -309,11 +310,11 @@ h1 {
 
   0%,
   100% {
-    transform: translateY(0) rotate(-4deg);
+    transform: translateX(-50%) translateY(0) rotate(-4deg);
   }
 
   50% {
-    transform: translateY(-14px) rotate(4deg);
+    transform: translateX(-50%) translateY(-32px) rotate(4deg);
   }
 }
 
