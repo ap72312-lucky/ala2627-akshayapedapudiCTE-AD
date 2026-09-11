@@ -419,6 +419,30 @@ h1 {
   animation: signal .9s ease-in-out infinite;
 }
 
+.heart-image {
+  width: max-content;
+  margin: 18px auto 0;
+  font-size: 4.2rem;
+  filter: drop-shadow(0 8px 8px rgba(237, 78, 145, .28));
+}
+
+.card--pulse:hover .heart-image,
+.card--pulse:focus .heart-image {
+  animation: heart-pulse .9s ease-in-out infinite;
+}
+
+@keyframes heart-pulse {
+
+  0%,
+  100% {
+    transform: scale(1);
+  }
+
+  50% {
+    transform: scale(1.22);
+  }
+}
+
 .runner {
   position: relative;
   overflow: hidden;
