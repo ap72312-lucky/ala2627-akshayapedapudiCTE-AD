@@ -20,7 +20,13 @@ body {
   min-width: 320px;
   margin: 0;
   color: var(--ink);
-  background: #fff;
+  background: linear-gradient(180deg,
+      #ffffff 0%,
+      #f0f0f0 18%,
+      #b7b7b7 38%,
+      #767676 58%,
+      #2a2a2a 78%,
+      #101010 100%);
   font-family: 'Space Grotesk', sans-serif;
 }
 
@@ -35,20 +41,33 @@ body::after {
 
 body::before {
   background:
-    radial-gradient(circle at 7% 16%, #fff 0 3px, #ff6b9d 4px 13px, rgba(255, 107, 157, .25) 14px 28px, transparent 29px),
-    radial-gradient(circle at 90% 18%, #fff 0 2px, #65d9ff 3px 9px, rgba(101, 217, 255, .25) 10px 25px, transparent 26px),
-    radial-gradient(circle at 18% 76%, #fff 0 4px, #ffd35a 5px 16px, rgba(255, 211, 90, .22) 17px 32px, transparent 33px),
-    radial-gradient(circle at 84% 78%, #fff 0 3px, #a77bff 4px 12px, rgba(167, 123, 255, .23) 13px 29px, transparent 30px);
-  animation: rainbow-orbs 34s linear infinite alternate;
+    radial-gradient(circle at 12% 18%, rgba(255, 255, 255, .96) 0 7px, rgba(255, 107, 157, .85) 8px 15px, rgba(255, 107, 157, .22) 16px 28px, transparent 29px),
+    radial-gradient(circle at 84% 22%, rgba(255, 255, 255, .94) 0 6px, rgba(101, 217, 255, .86) 7px 14px, rgba(101, 217, 255, .18) 15px 26px, transparent 27px),
+    radial-gradient(circle at 22% 76%, rgba(255, 255, 255, .95) 0 8px, rgba(255, 211, 90, .8) 9px 17px, rgba(255, 211, 90, .18) 18px 30px, transparent 31px),
+    radial-gradient(circle at 76% 76%, rgba(255, 255, 255, .94) 0 7px, rgba(167, 123, 255, .85) 8px 15px, rgba(167, 123, 255, .18) 16px 28px, transparent 29px);
+  filter: blur(.3px) saturate(1.2);
+  animation: orb-drift 28s ease-in-out infinite alternate;
 }
 
 body::after {
   background:
-    radial-gradient(circle at 38% 11%, #fff 0 2px, #6ee7b7 3px 7px, rgba(110, 231, 183, .24) 8px 20px, transparent 21px),
-    radial-gradient(circle at 62% 35%, #fff 0 3px, #ff8c5a 4px 11px, rgba(255, 140, 90, .22) 12px 26px, transparent 27px),
-    radial-gradient(circle at 44% 92%, #fff 0 3px, #5fa8ff 4px 10px, rgba(95, 168, 255, .23) 11px 24px, transparent 25px),
-    radial-gradient(circle at 96% 58%, #fff 0 2px, #f26bff 3px 8px, rgba(242, 107, 255, .2) 9px 21px, transparent 22px);
-  animation: rainbow-orbs 42s linear -12s infinite alternate-reverse;
+    radial-gradient(circle at 38% 12%, rgba(255, 255, 255, .9) 0 5px, rgba(110, 231, 183, .84) 6px 12px, rgba(110, 231, 183, .15) 13px 24px, transparent 25px),
+    radial-gradient(circle at 62% 35%, rgba(255, 255, 255, .88) 0 6px, rgba(255, 140, 90, .82) 7px 14px, rgba(255, 140, 90, .15) 15px 27px, transparent 28px),
+    radial-gradient(circle at 44% 92%, rgba(255, 255, 255, .92) 0 5px, rgba(95, 168, 255, .82) 6px 12px, rgba(95, 168, 255, .15) 13px 24px, transparent 25px),
+    radial-gradient(circle at 92% 58%, rgba(255, 255, 255, .88) 0 5px, rgba(242, 107, 255, .8) 6px 12px, rgba(242, 107, 255, .14) 13px 25px, transparent 26px);
+  opacity: .85;
+  filter: blur(.5px) saturate(1.15);
+  animation: orb-drift 34s ease-in-out infinite alternate-reverse;
+}
+
+@keyframes orb-drift {
+  0% {
+    transform: translate3d(-1.5vw, 0, 0) scale(.96);
+  }
+
+  100% {
+    transform: translate3d(1.7vw, -1.2vh, 0) scale(1.04);
+  }
 }
 
 .page-shell {
