@@ -376,6 +376,8 @@
         photoSlide.style.display = 'none';
       }
 
+      photoSlide.classList.toggle('is-zoomed', photoIndex === 1 || photoIndex === 2);
+
       photoDots.forEach((dot, dotIndex) => {
         dot.classList.toggle('is-active', dotIndex === photoIndex);
       });

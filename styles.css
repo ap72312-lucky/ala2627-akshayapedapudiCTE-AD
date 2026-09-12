@@ -643,6 +643,12 @@ h2 em {
   object-fit: cover;
   display: block;
   background: #111;
+  transition: transform .25s ease, opacity .25s ease;
+  transform-origin: center center;
+}
+
+.photo-slide.is-zoomed {
+  transform: scale(1.16);
 }
 
 .photo-dots {
