@@ -160,7 +160,7 @@
 
     function resetCacti() {
       const stageWidth = stage.clientWidth;
-      cactusPositions = [stageWidth + 80, stageWidth + 360];
+      cactusPositions = [stageWidth + 80, stageWidth + 520];
       cactusNodes.forEach((cactus, index) => {
         cactus.style.animation = 'none';
         cactus.style.left = `${cactusPositions[index]}px`;
@@ -240,7 +240,7 @@
         let nextPosition = position - distance;
         if (nextPosition < -80) {
           const otherPosition = cactusPositions[index === 0 ? 1 : 0];
-          nextPosition = Math.max(stageWidth + 120, otherPosition + 180 + Math.random() * 140);
+          nextPosition = Math.max(stageWidth + 180, otherPosition + 300 + Math.random() * 220);
         }
         cactusNodes[index].style.left = `${nextPosition}px`;
         return nextPosition;
