@@ -125,7 +125,7 @@
       </div>
     </section>
 
-    <footer class="footer">Flexbox layout · CSS keyframes · no JavaScript</footer>
+    <footer class="footer">Flexbox layout · CSS keyframes · no JavaScript · YIPPEE · 9/12/26</footer>
   </main>
 
   <script>
@@ -193,7 +193,7 @@
       resetCacti();
       updateSpeed();
       dinoJumpButton.disabled = false;
-      dinoStartButton.textContent = 'Restart';
+      dinoStartButton.textContent = 'End';
 
       if (gameFrame) cancelAnimationFrame(gameFrame);
       gameFrame = requestAnimationFrame(gameLoop);
@@ -265,17 +265,18 @@
       gameFrame = requestAnimationFrame(gameLoop);
     }
 
-    dinoStartButton.addEventListener('click', startGame);
+    dinoStartButton.addEventListener('click', () => {
+      if (isGameRunning) {
+        endGame();
+        return;
+      }
+      startGame();
+    });
     dinoJumpButton.addEventListener('click', triggerDinoJump);
     document.addEventListener('keydown', (event) => {
-      if (event.code === 'Space' || event.code === 'ArrowUp') {
-        event.preventDefault();
-        if (!isGameRunning) {
-          startGame();
-          return;
-        }
-        triggerDinoJump();
-      }
+      if (event.code !== 'Space') return;
+      event.preventDefault();
+      if (isGameRunning) dinoJumpButton.click();
     });
 
     stage.classList.add('is-idle');
