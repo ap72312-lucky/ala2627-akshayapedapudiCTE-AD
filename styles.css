@@ -48,12 +48,12 @@ body::before {
   inset: 0;
   z-index: 0;
   pointer-events: none;
-  opacity: .75;
+  opacity: .8;
   background-image:
-    radial-gradient(circle, #1f1d22 0 2.8px, transparent 3.6px),
-    radial-gradient(circle, #fff 0 1.5px, transparent 2.2px);
-  background-position: 0 0, 46px 46px;
-  background-size: 92px 92px;
+    radial-gradient(circle, #1f1d22 0 2.8px, transparent 3.8px),
+    radial-gradient(circle, #fff 0 1.5px, transparent 2.3px);
+  background-position: 0 0, 64px 0;
+  background-size: 128px 24px;
 }
 
 body::after {
@@ -62,10 +62,10 @@ body::after {
   inset: 0;
   z-index: 0;
   pointer-events: none;
-  opacity: .75;
-  background-image: radial-gradient(circle, #8a8a8a 0 2.2px, transparent 3px);
-  background-position: 18% 22%;
-  background-size: 150px 150px;
+  opacity: .8;
+  background-image: radial-gradient(circle, #8a8a8a 0 2.1px, transparent 3px);
+  background-position: 32px 0;
+  background-size: 128px 24px;
 }
 
 a,
