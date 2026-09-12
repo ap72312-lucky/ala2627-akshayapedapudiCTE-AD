@@ -187,6 +187,8 @@
       score = 0;
       lastTime = 0;
       speedMultiplier = 1;
+      isDinoJumping = false;
+      dinoRunner.classList.remove('dino-jump');
       isGameRunning = true;
       stage.classList.add('is-running');
       stage.classList.remove('is-idle');
@@ -201,6 +203,8 @@
 
     function endGame() {
       isGameRunning = false;
+      isDinoJumping = false;
+      dinoRunner.classList.remove('dino-jump');
       if (gameFrame) cancelAnimationFrame(gameFrame);
       gameFrame = null;
       stage.classList.remove('is-running');
