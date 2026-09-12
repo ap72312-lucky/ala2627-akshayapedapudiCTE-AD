@@ -881,7 +881,7 @@ h1 {
 }
 
 .dino-runner.dino-jump {
-  animation: dino-jump .45s var(--ease) both;
+  animation: dino-jump .8s var(--ease) both;
 }
 
 .dino-body,
