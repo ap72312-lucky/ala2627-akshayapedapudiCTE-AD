@@ -108,13 +108,14 @@
           <div class="photo-gallery-header">
             <p class="section-label"><span>02</span> Photo gallery</p>
             <div class="photo-nav" aria-label="Photo gallery controls">
-              <button class="photo-arrow photo-arrow-prev" type="button" aria-label="Previous photo">‹</button>
-              <button class="photo-arrow photo-arrow-next" type="button" aria-label="Next photo">›</button>
+              <button class="photo-arrow photo-arrow-prev" type="button" aria-label="Previous photo">↩️</button>
+              <button class="photo-arrow photo-arrow-next" type="button" aria-label="Next photo">↪️</button>
             </div>
           </div>
           <div class="photo-frame">
             <img class="photo-slide" src="" alt="Gallery photo">
           </div>
+          <p class="photo-caption">Edit this caption</p>
           <div class="photo-dots" aria-label="Slide position">
             <button class="photo-dot is-active" type="button" aria-label="View slide 1"></button>
             <button class="photo-dot" type="button" aria-label="View slide 2"></button>
@@ -355,7 +356,15 @@
       '.vscode/images/yellow-bird-Sunny4.jpg',
       '.vscode/images/black-dog-and-human-Baila&Me.jpg'
     ];
+    const photoCaptions = [
+      'Two birds',
+      'White bunny',
+      'White dog',
+      'Yellow bird',
+      'Dog and human'
+    ];
     const photoSlide = document.querySelector('.photo-slide');
+    const photoCaption = document.querySelector('.photo-caption');
     const photoDots = document.querySelectorAll('.photo-dot');
     const photoPrev = document.querySelector('.photo-arrow-prev');
     const photoNext = document.querySelector('.photo-arrow-next');
@@ -377,6 +386,7 @@
       }
 
       photoSlide.classList.toggle('is-zoomed', photoIndex === 1 || photoIndex === 2);
+      photoCaption.textContent = photoCaptions[photoIndex] || 'Edit this caption';
 
       photoDots.forEach((dot, dotIndex) => {
         dot.classList.toggle('is-active', dotIndex === photoIndex);

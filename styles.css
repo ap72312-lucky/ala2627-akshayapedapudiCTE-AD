@@ -651,6 +651,14 @@ h2 em {
   transform: scale(1.16);
 }
 
+.photo-caption {
+  margin: 10px 0 0;
+  text-align: center;
+  color: #5f5f5f;
+  font-size: .8rem;
+  min-height: 1.2em;
+}
+
 .photo-dots {
   display: flex;
   justify-content: center;
