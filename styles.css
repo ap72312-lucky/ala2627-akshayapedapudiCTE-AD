@@ -52,8 +52,8 @@ body::before {
   background-image:
     radial-gradient(circle, #1f1d22 0 2.8px, transparent 3.8px),
     radial-gradient(circle, #fff 0 1.5px, transparent 2.3px);
-  background-position: 0 0, 64px 0;
-  background-size: 128px 24px;
+  background-position: 0 0, 0 64px;
+  background-size: 24px 128px;
 }
 
 body::after {
@@ -64,8 +64,8 @@ body::after {
   pointer-events: none;
   opacity: .8;
   background-image: radial-gradient(circle, #8a8a8a 0 2.1px, transparent 3px);
-  background-position: 32px 0;
-  background-size: 128px 24px;
+  background-position: 0 32px;
+  background-size: 24px 128px;
 }
 
 a,
