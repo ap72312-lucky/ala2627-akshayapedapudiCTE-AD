@@ -233,7 +233,7 @@
     }
 
     function moveCacti(delta) {
-      const distance = delta * (0.22 + speedMultiplier * 0.05);
+      const distance = delta * (0.24 + speedMultiplier * 0.08);
       const stageWidth = stage.clientWidth;
 
       cactusPositions = cactusPositions.map((position, index) => {
@@ -255,7 +255,7 @@
       lastTime = timestamp;
 
       score += delta * 0.01;
-      speedMultiplier = Math.min(2.5, 1 + score * 0.02);
+      speedMultiplier = 1 + score * 0.04;
       moveCacti(delta);
       renderScores();
 
