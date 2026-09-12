@@ -48,13 +48,12 @@ body::before {
   inset: 0;
   z-index: 0;
   pointer-events: none;
-  opacity: .8;
+  opacity: .75;
   background-image:
-    radial-gradient(circle, #1f1d22 0 2.6px, transparent 3.2px),
-    radial-gradient(circle, #fff 0 1.5px, transparent 2px);
+    radial-gradient(circle, #1f1d22 0 2.8px, transparent 3.6px),
+    radial-gradient(circle, #fff 0 1.5px, transparent 2.2px);
   background-position: 0 0, 46px 46px;
   background-size: 92px 92px;
-  animation: drift-black-white 42s linear infinite;
 }
 
 body::after {
@@ -63,31 +62,10 @@ body::after {
   inset: 0;
   z-index: 0;
   pointer-events: none;
-  opacity: .7;
-  background-image: radial-gradient(circle, #8a8a8a 0 1.8px, transparent 2.6px);
+  opacity: .75;
+  background-image: radial-gradient(circle, #8a8a8a 0 2.2px, transparent 3px);
   background-position: 18% 22%;
   background-size: 150px 150px;
-  animation: drift-gray 26s linear infinite alternate;
-}
-
-@keyframes drift-black-white {
-  0% {
-    background-position: 0 0, 46px 46px;
-  }
-
-  100% {
-    background-position: 92% 0, 0 46px;
-  }
-}
-
-@keyframes drift-gray {
-  0% {
-    background-position: 18% 22%;
-  }
-
-  100% {
-    background-position: 18% 8%;
-  }
 }
 
 a,
