@@ -383,12 +383,19 @@ h2 em {
   display: grid;
   grid-template-columns: .7fr 1fr;
   gap: 10vw;
+  align-items: start;
 }
 
 .quote-side {
   display: flex;
   flex-direction: column;
   gap: 25px;
+}
+
+.about-copy {
+  display: flex;
+  flex-direction: column;
+  gap: 18px;
 }
 
 .quote-black-space {
@@ -586,12 +593,13 @@ h2 em {
 }
 
 .photo-gallery {
-  margin-top: 18px;
+  margin-top: 8px;
   padding: 18px 18px 12px;
   border: 1px solid rgba(48, 48, 48, .16);
   border-radius: 12px;
   background: rgba(255, 255, 255, .62);
   box-shadow: 0 14px 30px rgba(48, 48, 48, .08);
+  max-width: 620px;
 }
 
 .photo-gallery-header {
