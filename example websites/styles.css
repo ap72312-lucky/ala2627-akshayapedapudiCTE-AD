@@ -777,6 +777,13 @@ h1 {
   text-transform: uppercase;
 }
 
+.dino-stage.is-idle .dino-cloud,
+.dino-stage.is-idle .dino-ground::before,
+.dino-stage.is-idle .dino-runner,
+.dino-stage.is-idle .dino-cactus {
+  animation-play-state: paused;
+}
+
 .dino-stage {
   position: relative;
   overflow: hidden;
