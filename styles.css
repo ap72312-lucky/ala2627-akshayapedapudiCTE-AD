@@ -1076,6 +1076,13 @@ h2 em {
   background: linear-gradient(180deg, #d9eef8 0%, #bfe7f6 45%, #e9f6d0 100%);
 }
 
+.dino-stage.is-idle .dino-cloud,
+.dino-stage.is-idle .dino-ground::before,
+.dino-stage.is-idle .dino-runner,
+.dino-stage.is-idle .dino-cactus {
+  animation-play-state: paused;
+}
+
 .dino-sky {
   position: absolute;
   inset: 0;
