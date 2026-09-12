@@ -386,7 +386,9 @@
         photoSlide.style.display = 'none';
       }
 
-      photoSlide.classList.toggle('is-zoomed', photoIndex === 1 || photoIndex === 2);
+      const isThirdSlide = photoIndex === 2;
+      photoSlide.classList.toggle('is-zoomed', isThirdSlide);
+      photoSlide.style.objectPosition = isThirdSlide ? 'center 18%' : 'center';
       photoCaption.textContent = photoCaptions[photoIndex] || 'Edit this caption';
 
       photoDots.forEach((dot, dotIndex) => {
