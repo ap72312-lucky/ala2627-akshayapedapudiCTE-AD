@@ -56,8 +56,20 @@ body::before {
 }
 
 @keyframes glitter-drift {
-  to {
-    background-position: 12% 22%, 70% 30%, 46% 68%;
+  0% {
+    background-position: 8% 18%, 74% 34%, 42% 72%;
+  }
+
+  33% {
+    background-position: 46% 18%, 42% 34%, 42% 38%;
+  }
+
+  66% {
+    background-position: 82% 18%, 12% 34%, 42% 12%;
+  }
+
+  100% {
+    background-position: 8% 18%, 74% 34%, 42% 72%;
   }
 }
 
