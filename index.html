@@ -172,57 +172,10 @@
           </div>
           <div class="project-content">
             <h3>Whack-a-Mole</h3>
-            <p>To pass some time,why not... WHACK A FEW MOLES!!</p>
+            <p>To pass some time, why not... WHACK A FEW MOLES!!</p>
             <button class="project-link mole-button" type="button">Start game</button>
           </div>
         </article>
-      </div>
-    </section>
-
-    <section class="dino-showcase glass-panel" aria-labelledby="dino-title">
-      <div class="dino-showcase__header">
-        <div>
-          <p class="section-label"><span>03</span> Arcade mode</p>
-          <h2 id="dino-title">Dino Dash</h2>
-        </div>
-        <div class="dino-score" aria-label="Current high score">
-          <span>HI 0248</span>
-          <span>0316</span>
-        </div>
-      </div>
-
-      <div class="dino-stage" aria-label="Mini Dino Dash game scene">
-        <div class="dino-sky" aria-hidden="true">
-          <div class="dino-sun"></div>
-          <div class="dino-cloud dino-cloud--one"></div>
-          <div class="dino-cloud dino-cloud--two"></div>
-        </div>
-
-        <div class="dino-runner" aria-hidden="true">
-          <span class="dino-body"></span>
-          <span class="dino-tail"></span>
-          <span class="dino-leg dino-leg--front"></span>
-          <span class="dino-leg dino-leg--back"></span>
-          <span class="dino-eye"></span>
-        </div>
-
-        <div class="dino-cactus dino-cactus--one" aria-hidden="true"></div>
-        <div class="dino-cactus dino-cactus--two" aria-hidden="true"></div>
-        <div class="dino-ground" aria-hidden="true"></div>
-      </div>
-
-      <div class="dino-controls">
-        <button class="dino-jump-button" type="button">Jump</button>
-        <div class="dino-metrics" aria-label="Game stats">
-          <div>
-            <span class="dino-metric-label">Speed</span>
-            <strong>09x</strong>
-          </div>
-          <div>
-            <span class="dino-metric-label">Best</span>
-            <strong>316</strong>
-          </div>
-        </div>
       </div>
     </section>
 
@@ -374,30 +327,6 @@
     });
 
     chooseTarget();
-
-    const dinoRunner = document.querySelector('.dino-runner');
-    const dinoJumpButton = document.querySelector('.dino-jump-button');
-    let isDinoJumping = false;
-
-    function triggerDinoJump() {
-      if (isDinoJumping) return;
-      isDinoJumping = true;
-      dinoRunner.classList.remove('dino-jump');
-      void dinoRunner.offsetWidth;
-      dinoRunner.classList.add('dino-jump');
-      window.setTimeout(() => {
-        dinoRunner.classList.remove('dino-jump');
-        isDinoJumping = false;
-      }, 700);
-    }
-
-    dinoJumpButton.addEventListener('click', triggerDinoJump);
-    document.addEventListener('keydown', (event) => {
-      if (event.code === 'Space' || event.code === 'ArrowUp') {
-        event.preventDefault();
-        triggerDinoJump();
-      }
-    });
 
     const moleButtons = document.querySelectorAll('.mole-hole');
     const moleScore = document.querySelector('.mole-score');
