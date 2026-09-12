@@ -146,9 +146,10 @@
     let bestScore = Number(localStorage.getItem(storageKey) || 0);
     let lastTime = 0;
     let speedMultiplier = 1;
+    let cactusPositions = [];
 
     function formatScore(value) {
-      return String(value).padStart(4, '0');
+      return String(Math.floor(value)).padStart(4, '0');
     }
 
     function renderScores() {
@@ -157,27 +158,13 @@
       speedEl.textContent = `${speedMultiplier.toFixed(1)}x`;
     }
 
-    function updateSpeed() {
-      const cactusSpeed = Math.max(1.2, 3.8 - score * 0.018);
-      const groundSpeed = Math.max(0.5, 1.15 - score * 0.006);
-      const cloudSpeed = Math.max(8, 18 - score * 0.04);
-
-      stage.style.setProperty('--cactus-speed', `${cactusSpeed.toFixed(2)}s`);
-      stage.style.setProperty('--ground-speed', `${groundSpeed.toFixed(2)}s`);
-      stage.style.setProperty('--cloud-speed', `${cloudSpeed.toFixed(2)}s`);
-      cactusNodes.forEach((cactus) => {
-        cactus.style.animationDuration = `${cactusSpeed.toFixed(2)}s`;
-      });
-      speedMultiplier = Math.max(1, 1 + score * 0.025);
-      renderScores();
-    }
-
     function resetCacti() {
+      const stageWidth = stage.clientWidth;
+      cactusPositions = [stageWidth + 80, stageWidth + 360];
       cactusNodes.forEach((cactus, index) => {
         cactus.style.animation = 'none';
-        cactus.offsetHeight;
-        cactus.style.animation = `dino-cactus-rush var(--cactus-speed) linear infinite`;
-        cactus.style.animationDelay = index === 0 ? '0s' : '-2.1s';
+        cactus.style.left = `${cactusPositions[index]}px`;
+        cactus.style.right = 'auto';
       });
     }
 
@@ -193,7 +180,6 @@
       stage.classList.add('is-running');
       stage.classList.remove('is-idle');
       resetCacti();
-      updateSpeed();
       dinoJumpButton.disabled = false;
       dinoStartButton.textContent = 'End';
 
@@ -213,7 +199,7 @@
       dinoStartButton.textContent = 'Start';
 
       if (score > bestScore) {
-        bestScore = score;
+        bestScore = Math.floor(score);
         localStorage.setItem(storageKey, String(bestScore));
       }
 
@@ -246,6 +232,21 @@
       });
     }
 
+    function moveCacti(delta) {
+      const distance = delta * (0.22 + speedMultiplier * 0.05);
+      const stageWidth = stage.clientWidth;
+
+      cactusPositions = cactusPositions.map((position, index) => {
+        let nextPosition = position - distance;
+        if (nextPosition < -80) {
+          const otherPosition = cactusPositions[index === 0 ? 1 : 0];
+          nextPosition = Math.max(stageWidth + 120, otherPosition + 180 + Math.random() * 140);
+        }
+        cactusNodes[index].style.left = `${nextPosition}px`;
+        return nextPosition;
+      });
+    }
+
     function gameLoop(timestamp) {
       if (!isGameRunning) return;
 
@@ -253,8 +254,10 @@
       const delta = timestamp - lastTime;
       lastTime = timestamp;
 
-      score += delta * 0.012;
-      updateSpeed();
+      score += delta * 0.01;
+      speedMultiplier = Math.min(2.5, 1 + score * 0.02);
+      moveCacti(delta);
+      renderScores();
 
       if (checkCollision()) {
         endGame();
@@ -280,7 +283,7 @@
     document.addEventListener('keydown', (event) => {
       if (event.code !== 'Space') return;
       event.preventDefault();
-      if (isGameRunning) dinoJumpButton.click();
+      if (isGameRunning) triggerDinoJump();
     });
 
     stage.classList.add('is-idle');
