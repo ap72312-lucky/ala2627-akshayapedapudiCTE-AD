@@ -5,7 +5,7 @@
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
   <meta name="color-scheme" content="light">
-  <title>Low Poly Card Motion</title>
+  <title>Lucky's LPCML</title>
   <link rel="stylesheet" href="styles.css">
 </head>
 
@@ -83,9 +83,11 @@
           <p class="section-label"><span>03</span> Arcade mode</p>
           <h2 id="dino-title">Dino Dash</h2>
         </div>
-        <div class="dino-score" aria-label="Current high score">
-          <span>HI 0248</span>
-          <span>0316</span>
+        <div class="dino-score" aria-live="polite" aria-label="Current and best score">
+          <span>CS</span>
+          <strong class="dino-current-score">0000</strong>
+          <span>Best</span>
+          <strong class="dino-best-score">0000</strong>
         </div>
       </div>
 
@@ -110,15 +112,16 @@
       </div>
 
       <div class="dino-controls">
-        <button class="dino-jump-button" type="button">Jump</button>
+        <button class="dino-start-button" type="button">Start</button>
+        <button class="dino-jump-button" type="button" disabled>Jump</button>
         <div class="dino-metrics" aria-label="Game stats">
           <div>
             <span class="dino-metric-label">Speed</span>
-            <strong>09x</strong>
+            <strong class="dino-speed">1.0x</strong>
           </div>
           <div>
             <span class="dino-metric-label">Best</span>
-            <strong>316</strong>
+            <strong class="dino-best-run">0000</strong>
           </div>
         </div>
       </div>
@@ -128,12 +131,97 @@
   </main>
 
   <script>
+    const stage = document.querySelector('.dino-stage');
     const dinoRunner = document.querySelector('.dino-runner');
+    const dinoStartButton = document.querySelector('.dino-start-button');
     const dinoJumpButton = document.querySelector('.dino-jump-button');
+    const currentScoreEl = document.querySelector('.dino-current-score');
+    const bestScoreEl = document.querySelector('.dino-best-score');
+    const bestRunEl = document.querySelector('.dino-best-run');
+    const speedEl = document.querySelector('.dino-speed');
+    const cactusNodes = document.querySelectorAll('.dino-cactus');
+    const storageKey = 'dino-best-score';
+
     let isDinoJumping = false;
+    let isGameRunning = false;
+    let gameFrame = null;
+    let score = 0;
+    let bestScore = Number(localStorage.getItem(storageKey) || 0);
+    let lastTime = 0;
+    let speedMultiplier = 1;
+
+    function formatScore(value) {
+      return String(value).padStart(4, '0');
+    }
+
+    function renderScores() {
+      currentScoreEl.textContent = formatScore(score);
+      bestScoreEl.textContent = formatScore(bestScore);
+      bestRunEl.textContent = formatScore(bestScore);
+      speedEl.textContent = `${speedMultiplier.toFixed(1)}x`;
+    }
+
+    function updateSpeed() {
+      const cactusSpeed = Math.max(1.2, 3.8 - score * 0.018);
+      const groundSpeed = Math.max(0.5, 1.15 - score * 0.006);
+      const cloudSpeed = Math.max(8, 18 - score * 0.04);
+
+      stage.style.setProperty('--cactus-speed', `${cactusSpeed.toFixed(2)}s`);
+      stage.style.setProperty('--ground-speed', `${groundSpeed.toFixed(2)}s`);
+      stage.style.setProperty('--cloud-speed', `${cloudSpeed.toFixed(2)}s`);
+      cactusNodes.forEach((cactus) => {
+        cactus.style.animationDuration = `${cactusSpeed.toFixed(2)}s`;
+      });
+      speedMultiplier = Math.max(1, 1 + score * 0.025);
+      renderScores();
+    }
+
+    function resetCacti() {
+      cactusNodes.forEach((cactus, index) => {
+        cactus.style.animation = 'none';
+        cactus.offsetHeight;
+        cactus.style.animation = `dino-cactus-rush var(--cactus-speed) linear infinite`;
+        cactus.style.animationDelay = index === 0 ? '0s' : '-2.1s';
+      });
+    }
+
+    function startGame() {
+      if (isGameRunning) return;
+
+      score = 0;
+      lastTime = 0;
+      speedMultiplier = 1;
+      isGameRunning = true;
+      stage.classList.add('is-running');
+      stage.classList.remove('is-idle');
+      resetCacti();
+      updateSpeed();
+      dinoJumpButton.disabled = false;
+      dinoStartButton.textContent = 'Restart';
+
+      if (gameFrame) cancelAnimationFrame(gameFrame);
+      gameFrame = requestAnimationFrame(gameLoop);
+    }
+
+    function endGame() {
+      isGameRunning = false;
+      if (gameFrame) cancelAnimationFrame(gameFrame);
+      gameFrame = null;
+      stage.classList.remove('is-running');
+      stage.classList.add('is-idle');
+      dinoJumpButton.disabled = true;
+      dinoStartButton.textContent = 'Start';
+
+      if (score > bestScore) {
+        bestScore = score;
+        localStorage.setItem(storageKey, String(bestScore));
+      }
+
+      renderScores();
+    }
 
     function triggerDinoJump() {
-      if (isDinoJumping) return;
+      if (!isGameRunning || isDinoJumping) return;
       isDinoJumping = true;
       dinoRunner.classList.remove('dino-jump');
       void dinoRunner.offsetWidth;
@@ -144,13 +232,56 @@
       }, 700);
     }
 
+    function checkCollision() {
+      const runnerRect = dinoRunner.getBoundingClientRect();
+      const stageRect = stage.getBoundingClientRect();
+
+      return Array.from(cactusNodes).some((cactus) => {
+        const cactusRect = cactus.getBoundingClientRect();
+        const overlapX = runnerRect.right > cactusRect.left + 6 && runnerRect.left < cactusRect.right - 6;
+        const overlapY = runnerRect.bottom > cactusRect.top + 6 && runnerRect.top < cactusRect.bottom - 6;
+        return overlapX && overlapY && runnerRect.bottom > stageRect.top;
+      });
+    }
+
+    function gameLoop(timestamp) {
+      if (!isGameRunning) return;
+
+      if (!lastTime) lastTime = timestamp;
+      const delta = timestamp - lastTime;
+      lastTime = timestamp;
+
+      score += delta * 0.012;
+      updateSpeed();
+
+      if (checkCollision()) {
+        endGame();
+        return;
+      }
+
+      if (score > bestScore) {
+        bestScore = Math.floor(score);
+        localStorage.setItem(storageKey, String(bestScore));
+      }
+
+      gameFrame = requestAnimationFrame(gameLoop);
+    }
+
+    dinoStartButton.addEventListener('click', startGame);
     dinoJumpButton.addEventListener('click', triggerDinoJump);
     document.addEventListener('keydown', (event) => {
       if (event.code === 'Space' || event.code === 'ArrowUp') {
         event.preventDefault();
+        if (!isGameRunning) {
+          startGame();
+          return;
+        }
         triggerDinoJump();
       }
     });
+
+    stage.classList.add('is-idle');
+    renderScores();
   </script>
 </body>
 
