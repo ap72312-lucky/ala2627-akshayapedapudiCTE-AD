@@ -156,15 +156,27 @@
         </article>
         <article class="project-card project-secondary glass-panel">
           <div class="project-number">04 / ARCADE FAVORITE</div>
-          <div class="code-visual" aria-hidden="true"><span>&gt; CROSSY_ROAD</span><span class="indent">cross:
-              traffic;</span><span class="indent-two">move: forward;</span><span class="indent-two">score:
-              higher;</span><span>&gt; READY</span>
+          <div class="mole-visual" aria-label="Whack-a-Mole mini game">
+            <div class="mole-scoreboard">
+              <span>Score</span>
+              <strong class="mole-score">0</strong>
+            </div>
+            <div class="mole-grid" aria-label="Mole board">
+              <button class="mole-hole" type="button" aria-label="Whack mole"></button>
+              <button class="mole-hole" type="button" aria-label="Whack mole"></button>
+              <button class="mole-hole" type="button" aria-label="Whack mole"></button>
+              <button class="mole-hole" type="button" aria-label="Whack mole"></button>
+              <button class="mole-hole" type="button" aria-label="Whack mole"></button>
+              <button class="mole-hole" type="button" aria-label="Whack mole"></button>
+              <button class="mole-hole" type="button" aria-label="Whack mole"></button>
+              <button class="mole-hole" type="button" aria-label="Whack mole"></button>
+              <button class="mole-hole" type="button" aria-label="Whack mole"></button>
+            </div>
           </div>
           <div class="project-content">
-            <h3>Crossy Road</h3>
-            <p>Help the chicken cross the road, dodge traffic, and see how high you can get your score.</p>
-            <a href="https://poki.com/en/g/crossy-road" class="project-link" target="_blank"
-              rel="noopener noreferrer">Play Crossy Road <span aria-hidden="true">↗</span></a>
+            <h3>Whack-a-Mole</h3>
+            <p>Tap the popping critters as fast as you can to rack up points without leaving the page.</p>
+            <button class="project-link mole-button" type="button">Start game</button>
           </div>
         </article>
       </div>
@@ -388,6 +400,63 @@
         event.preventDefault();
         triggerDinoJump();
       }
+    });
+
+    const moleButtons = document.querySelectorAll('.mole-hole');
+    const moleScore = document.querySelector('.mole-score');
+    const moleStartButton = document.querySelector('.mole-button');
+    let moleScoreValue = 0;
+    let moleTimer = null;
+    let activeMole = null;
+    let gameRunning = false;
+
+    function clearMole() {
+      moleButtons.forEach((button) => button.classList.remove('is-active'));
+      activeMole = null;
+    }
+
+    function popMole() {
+      if (!gameRunning) return;
+      clearMole();
+      const randomIndex = Math.floor(Math.random() * moleButtons.length);
+      const selectedButton = moleButtons[randomIndex];
+      selectedButton.classList.add('is-active');
+      activeMole = selectedButton;
+    }
+
+    function startMoleGame() {
+      if (gameRunning) return;
+      gameRunning = true;
+      moleScoreValue = 0;
+      moleScore.textContent = String(moleScoreValue);
+      moleStartButton.textContent = 'Playing...';
+      clearMole();
+      moleTimer = window.setInterval(popMole, 700);
+    }
+
+    function stopMoleGame() {
+      gameRunning = false;
+      window.clearInterval(moleTimer);
+      clearMole();
+      moleStartButton.textContent = 'Play again';
+    }
+
+    moleButtons.forEach((button) => {
+      button.addEventListener('click', () => {
+        if (!gameRunning || !button.classList.contains('is-active')) return;
+        moleScoreValue += 1;
+        moleScore.textContent = String(moleScoreValue);
+        button.classList.remove('is-active');
+        activeMole = null;
+      });
+    });
+
+    moleStartButton.addEventListener('click', () => {
+      if (gameRunning) {
+        stopMoleGame();
+        return;
+      }
+      startMoleGame();
     });
   </script>
 
