@@ -209,9 +209,9 @@ h1 {
 }
 
 .card--lift:hover {
-  transform: translateY(-14px);
+  transform: translate3d(0, -14px, 42px) rotateX(2deg) rotateY(-2deg);
   border-color: var(--cyan);
-  box-shadow: 0 28px 50px rgba(0, 0, 0, .38), 0 0 35px rgba(124, 231, 226, .13);
+  box-shadow: 0 48px 90px rgba(0, 0, 0, .24), 0 0 48px rgba(124, 231, 226, .24);
 }
 
 .ufo-image {
