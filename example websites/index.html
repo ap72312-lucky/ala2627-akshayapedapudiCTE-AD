@@ -147,6 +147,7 @@
     let lastTime = 0;
     let speedMultiplier = 1;
     let cactusPositions = [];
+    let jumpTimer = null;
 
     function formatScore(value) {
       return String(Math.floor(value)).padStart(4, '0');
@@ -175,6 +176,7 @@
       lastTime = 0;
       speedMultiplier = 1;
       isDinoJumping = false;
+      if (jumpTimer) clearTimeout(jumpTimer);
       dinoRunner.classList.remove('dino-jump');
       isGameRunning = true;
       stage.classList.add('is-running');
@@ -190,6 +192,7 @@
     function endGame() {
       isGameRunning = false;
       isDinoJumping = false;
+      if (jumpTimer) clearTimeout(jumpTimer);
       dinoRunner.classList.remove('dino-jump');
       if (gameFrame) cancelAnimationFrame(gameFrame);
       gameFrame = null;
@@ -209,12 +212,13 @@
     }
 
     function triggerDinoJump() {
-      if (!isGameRunning || isDinoJumping) return;
+      if (!isGameRunning) return;
       isDinoJumping = true;
+      if (jumpTimer) clearTimeout(jumpTimer);
       dinoRunner.classList.remove('dino-jump');
       void dinoRunner.offsetWidth;
       dinoRunner.classList.add('dino-jump');
-      window.setTimeout(() => {
+      jumpTimer = window.setTimeout(() => {
         dinoRunner.classList.remove('dino-jump');
         isDinoJumping = false;
       }, 800);
