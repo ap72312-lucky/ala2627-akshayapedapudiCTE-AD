@@ -192,19 +192,19 @@ h1 {
 .card p {
   max-width: 260px;
   margin: 0 0 23px;
-  color: var(--muted);
+  color: #000;
   line-height: 1.55;
 }
 
 .card__hint {
-  color: #fff;
+  color: #6b7280;
   font: .7rem 'DM Mono', monospace;
   letter-spacing: .05em;
   text-transform: uppercase;
 }
 
 .card__hint b {
-  color: var(--cyan);
+  color: var(--yellow);
   font-size: 1rem;
 }
 
@@ -346,7 +346,7 @@ h1 {
 .reveal-layers {
   position: absolute;
   top: 50%;
-  left: calc(50% + 24px);
+  left: calc(50% + 48px);
   z-index: 1;
   width: 86px;
   height: 142px;
