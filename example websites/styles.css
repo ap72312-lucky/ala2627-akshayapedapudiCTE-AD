@@ -343,6 +343,57 @@ h1 {
   border-color: var(--cyan);
 }
 
+.reveal-layers {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  z-index: 1;
+  width: 86px;
+  height: 142px;
+  pointer-events: none;
+  transform: translate(-50%, -50%);
+  transform-style: preserve-3d;
+}
+
+.reveal-layer {
+  position: absolute;
+  inset: 0;
+  border: 3px solid rgba(255, 255, 255, .8);
+  box-shadow: 0 12px 20px rgba(38, 48, 74, .2);
+  transition: transform .65s var(--ease), box-shadow .65s var(--ease);
+}
+
+.reveal-layer--red {
+  z-index: 3;
+  background: #ef233c;
+}
+
+.reveal-layer--blue {
+  z-index: 2;
+  background: #1677ff;
+}
+
+.reveal-layer--yellow {
+  z-index: 1;
+  background: #f4c430;
+}
+
+.card--reveal:hover .reveal-layer--red {
+  transform: translateX(-78px) rotate(-7deg);
+  box-shadow: 0 18px 25px rgba(38, 48, 74, .25);
+}
+
+.card--reveal:hover .reveal-layer--blue {
+  transform: translateY(-10px);
+  transition-delay: .08s;
+}
+
+.card--reveal:hover .reveal-layer--yellow {
+  transform: translateX(78px) rotate(7deg);
+  box-shadow: 0 18px 25px rgba(38, 48, 74, .25);
+  transition-delay: .16s;
+}
+
 .card--flip {
   transform-style: preserve-3d;
 }
