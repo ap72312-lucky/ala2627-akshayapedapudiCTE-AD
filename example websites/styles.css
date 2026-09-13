@@ -94,7 +94,7 @@ body::after {
 
 .eyebrow {
   margin: 0 0 18px;
-  color: var(--cyan);
+  color: #808080;
   font-size: .72rem;
 }
 
@@ -144,7 +144,7 @@ h1 {
   transition: transform .55s var(--ease), border-color .35s, box-shadow .55s var(--ease);
 }
 
-.card>*:not(.poly) {
+.card>* {
   position: relative;
   z-index: 1;
 }
@@ -192,86 +192,11 @@ h1 {
   font-size: 1rem;
 }
 
-.poly {
-  position: absolute;
-  z-index: -1;
-  pointer-events: none;
-  transition: transform .8s var(--ease), opacity .5s;
-}
-
-.poly--one {
-  width: 190px;
-  height: 170px;
-  right: -48px;
-  top: 42px;
-  background: rgba(124, 231, 226, .2);
-  clip-path: polygon(50% 0, 100% 25%, 72% 100%, 8% 67%);
-  transform: rotate(12deg);
-}
-
-.poly--two {
-  width: 220px;
-  height: 180px;
-  right: -60px;
-  top: -20px;
-  background: rgba(255, 122, 168, .18);
-  clip-path: polygon(15% 0, 100% 15%, 80% 85%, 0 100%);
-}
-
-.poly--three {
-  width: 260px;
-  height: 210px;
-  right: -85px;
-  bottom: -65px;
-  background: rgba(248, 212, 119, .16);
-  clip-path: polygon(0 30%, 55% 0, 100% 55%, 63% 100%);
-  transform: rotate(-16deg);
-}
-
-.poly--four {
-  width: 180px;
-  height: 220px;
-  right: -5px;
-  top: 60px;
-  background: rgba(124, 231, 226, .16);
-  clip-path: polygon(50% 0, 100% 40%, 70% 100%, 0 75%);
-}
-
-.poly--five {
-  width: 245px;
-  height: 190px;
-  right: -80px;
-  top: 55px;
-  background: rgba(255, 122, 168, .15);
-  clip-path: polygon(0 12%, 74% 0, 100% 70%, 40% 100%);
-}
-
-.poly--six {
-  width: 210px;
-  height: 200px;
-  right: -30px;
-  bottom: -55px;
-  background: rgba(248, 212, 119, .14);
-  clip-path: polygon(28% 0, 100% 35%, 72% 100%, 0 72%);
-}
-
 .icon {
   width: 47px;
   height: 47px;
   margin: 35px 0 0;
   border: 1px solid rgba(255, 255, 255, .65);
-}
-
-.icon--sun {
-  border-radius: 50%;
-  box-shadow: 0 0 0 8px rgba(124, 231, 226, .08), 0 0 30px rgba(124, 231, 226, .3);
-}
-
-.icon--orbit {
-  border-radius: 50%;
-  transform: rotate(35deg);
-  border-left-color: var(--pink);
-  border-right-color: var(--cyan);
 }
 
 .icon--beam {
@@ -281,32 +206,10 @@ h1 {
   opacity: .85;
 }
 
-.icon--layers {
-  transform: skewY(-15deg);
-  border-color: var(--cyan);
-  box-shadow: 7px -7px 0 -1px var(--pink), 14px -14px 0 -2px var(--yellow);
-}
-
-.icon--cube {
-  transform: rotate(45deg) scale(.75);
-  border-color: var(--pink);
-}
-
-.icon--signal {
-  border-radius: 50%;
-  border-width: 3px;
-  border-top-color: transparent;
-  border-bottom-color: transparent;
-}
-
 .card--lift:hover {
   transform: translateY(-14px);
   border-color: var(--cyan);
   box-shadow: 0 28px 50px rgba(0, 0, 0, .38), 0 0 35px rgba(124, 231, 226, .13);
-}
-
-.card--lift:hover .poly--one {
-  transform: rotate(30deg) scale(1.14);
 }
 
 .ufo-image {
@@ -341,10 +244,6 @@ h1 {
 .card--float:hover {
   animation-play-state: paused;
   transform: translateY(-8px) rotate(-1deg);
-}
-
-.card--float:hover .poly--two {
-  transform: translate(-15px, 10px) rotate(12deg);
 }
 
 .card--sheen::after {
@@ -406,11 +305,6 @@ h1 {
   }
 }
 
-.card--reveal:hover .poly--four {
-  transform: translate(45px, -25px) rotate(24deg);
-  opacity: .7;
-}
-
 .card--reveal:hover {
   border-color: var(--cyan);
 }
@@ -423,19 +317,10 @@ h1 {
   transform: rotateX(7deg) rotateY(-9deg) translateY(-8px);
 }
 
-.card--flip:hover .icon--cube {
-  transform: rotate(135deg) scale(.85);
-  transition: transform .7s var(--ease);
-}
-
 .card--pulse:focus-within,
 .card--pulse:hover {
   border-color: var(--yellow);
   box-shadow: 0 0 0 5px rgba(248, 212, 119, .11), 0 20px 45px rgba(0, 0, 0, .3);
-}
-
-.card--pulse:hover .icon--signal {
-  animation: signal .9s ease-in-out infinite;
 }
 
 .heart-image {
