@@ -179,7 +179,7 @@ h1 {
 .tag {
   padding: 6px 8px;
   border: 1px solid rgba(38, 48, 74, .16);
-  color: var(--cyan);
+  color: #1677ff;
   font-size: .62rem;
 }
 
