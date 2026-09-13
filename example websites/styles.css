@@ -192,20 +192,6 @@ h1 {
   font-size: 1rem;
 }
 
-.icon {
-  width: 47px;
-  height: 47px;
-  margin: 35px 0 0;
-  border: 1px solid rgba(255, 255, 255, .65);
-}
-
-.icon--beam {
-  clip-path: polygon(50% 0, 100% 100%, 0 100%);
-  border: 0;
-  background: var(--yellow);
-  opacity: .85;
-}
-
 .card--lift:hover {
   transform: translateY(-14px);
   border-color: var(--cyan);
@@ -244,6 +230,38 @@ h1 {
 .card--float:hover {
   animation-play-state: paused;
   transform: translateY(-8px) rotate(-1deg);
+}
+
+.balloon-image {
+  position: absolute;
+  top: calc(100% + 42px);
+  left: 68%;
+  z-index: 2;
+  font-size: 2.2rem;
+  filter: drop-shadow(0 5px 5px rgba(72, 54, 100, .2));
+  animation: balloon-rise 7s linear infinite;
+}
+
+.card--float:hover .balloon-image,
+.card--float:focus-within .balloon-image {
+  animation-play-state: paused;
+}
+
+@keyframes balloon-rise {
+
+  0% {
+    top: calc(100% + 42px);
+    transform: translateX(-50%) rotate(-5deg);
+  }
+
+  50% {
+    transform: translateX(-50%) rotate(5deg);
+  }
+
+  100% {
+    top: -72px;
+    transform: translateX(-50%) rotate(-5deg);
+  }
 }
 
 .card--sheen::after {
