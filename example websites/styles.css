@@ -41,22 +41,22 @@ body::after {
 
 body::before {
   background:
-    radial-gradient(circle at 12% 18%, rgba(255, 255, 255, .96) 0 7px, rgba(255, 107, 157, .85) 8px 15px, rgba(255, 107, 157, .22) 16px 28px, transparent 29px),
-    radial-gradient(circle at 84% 22%, rgba(255, 255, 255, .94) 0 6px, rgba(101, 217, 255, .86) 7px 14px, rgba(101, 217, 255, .18) 15px 26px, transparent 27px),
-    radial-gradient(circle at 22% 76%, rgba(255, 255, 255, .95) 0 8px, rgba(255, 211, 90, .8) 9px 17px, rgba(255, 211, 90, .18) 18px 30px, transparent 31px),
-    radial-gradient(circle at 76% 76%, rgba(255, 255, 255, .94) 0 7px, rgba(167, 123, 255, .85) 8px 15px, rgba(167, 123, 255, .18) 16px 28px, transparent 29px);
-  filter: blur(.3px) saturate(1.2);
+    radial-gradient(circle at 12% 18%, rgba(255, 255, 255, .98) 0 6px, rgba(255, 196, 211, .92) 7px 17px, rgba(255, 196, 211, .28) 18px 34px, transparent 35px),
+    radial-gradient(circle at 84% 22%, rgba(255, 255, 255, .98) 0 5px, rgba(183, 232, 245, .94) 6px 16px, rgba(183, 232, 245, .24) 17px 32px, transparent 33px),
+    radial-gradient(circle at 22% 76%, rgba(255, 255, 255, .98) 0 7px, rgba(255, 231, 173, .9) 8px 19px, rgba(255, 231, 173, .25) 20px 37px, transparent 38px),
+    radial-gradient(circle at 76% 76%, rgba(255, 255, 255, .98) 0 6px, rgba(211, 194, 241, .92) 7px 17px, rgba(211, 194, 241, .25) 18px 35px, transparent 36px);
+  filter: blur(.6px) saturate(.82);
   animation: orb-drift 28s ease-in-out infinite alternate;
 }
 
 body::after {
   background:
-    radial-gradient(circle at 38% 12%, rgba(255, 255, 255, .9) 0 5px, rgba(110, 231, 183, .84) 6px 12px, rgba(110, 231, 183, .15) 13px 24px, transparent 25px),
-    radial-gradient(circle at 62% 35%, rgba(255, 255, 255, .88) 0 6px, rgba(255, 140, 90, .82) 7px 14px, rgba(255, 140, 90, .15) 15px 27px, transparent 28px),
-    radial-gradient(circle at 44% 92%, rgba(255, 255, 255, .92) 0 5px, rgba(95, 168, 255, .82) 6px 12px, rgba(95, 168, 255, .15) 13px 24px, transparent 25px),
-    radial-gradient(circle at 92% 58%, rgba(255, 255, 255, .88) 0 5px, rgba(242, 107, 255, .8) 6px 12px, rgba(242, 107, 255, .14) 13px 25px, transparent 26px);
-  opacity: .85;
-  filter: blur(.5px) saturate(1.15);
+    radial-gradient(circle at 38% 12%, rgba(255, 255, 255, .96) 0 4px, rgba(194, 239, 216, .9) 5px 14px, rgba(194, 239, 216, .22) 15px 29px, transparent 30px),
+    radial-gradient(circle at 62% 35%, rgba(255, 255, 255, .96) 0 5px, rgba(255, 211, 194, .9) 6px 16px, rgba(255, 211, 194, .22) 17px 32px, transparent 33px),
+    radial-gradient(circle at 44% 92%, rgba(255, 255, 255, .96) 0 4px, rgba(190, 220, 248, .9) 5px 14px, rgba(190, 220, 248, .22) 15px 29px, transparent 30px),
+    radial-gradient(circle at 92% 58%, rgba(255, 255, 255, .96) 0 4px, rgba(239, 204, 241, .88) 5px 14px, rgba(239, 204, 241, .2) 15px 30px, transparent 31px);
+  opacity: .78;
+  filter: blur(.8px) saturate(.82);
   animation: orb-drift 34s ease-in-out infinite alternate-reverse;
 }
 

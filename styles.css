@@ -26,18 +26,13 @@ body {
   margin: 0;
   min-width: 320px;
   overflow-x: hidden;
-  background: linear-gradient(to bottom,
-      #f2b6c6 0%,
-      #f6c9b8 12%,
-      #f8e5a7 24%,
-      #c9e5b5 36%,
-      #a9dfe0 49%,
-      #d8c7ed 62%,
-      #fff9f5 75%,
-      #d5d5d5 88%,
-      #555 96%,
-      #242424 100%);
-  background-attachment: fixed;
+  background: linear-gradient(180deg,
+      #ffffff 0%,
+      #f0f0f0 18%,
+      #b7b7b7 38%,
+      #767676 58%,
+      #2a2a2a 78%,
+      #101010 100%);
   color: var(--ink);
   font: 16px/1.6 Georgia, "Times New Roman", serif;
 }
@@ -48,12 +43,13 @@ body::before {
   inset: 0;
   z-index: 0;
   pointer-events: none;
-  opacity: .38;
-  background-image:
-    radial-gradient(circle, #1f1d22 0 2.1px, transparent 3px),
-    radial-gradient(circle, #fff 0 1.2px, transparent 1.9px);
-  background-position: 0 0, 0 64px;
-  background-size: 24px 128px;
+  background:
+    radial-gradient(circle at 12% 18%, rgba(255, 255, 255, .98) 0 6px, rgba(255, 196, 211, .92) 7px 17px, rgba(255, 196, 211, .28) 18px 34px, transparent 35px),
+    radial-gradient(circle at 84% 22%, rgba(255, 255, 255, .98) 0 5px, rgba(183, 232, 245, .94) 6px 16px, rgba(183, 232, 245, .24) 17px 32px, transparent 33px),
+    radial-gradient(circle at 22% 76%, rgba(255, 255, 255, .98) 0 7px, rgba(255, 231, 173, .9) 8px 19px, rgba(255, 231, 173, .25) 20px 37px, transparent 38px),
+    radial-gradient(circle at 76% 76%, rgba(255, 255, 255, .98) 0 6px, rgba(211, 194, 241, .92) 7px 17px, rgba(211, 194, 241, .25) 18px 35px, transparent 36px);
+  filter: blur(.6px) saturate(.82);
+  animation: orb-drift 28s ease-in-out infinite alternate;
 }
 
 body::after {
@@ -62,10 +58,24 @@ body::after {
   inset: 0;
   z-index: 0;
   pointer-events: none;
-  opacity: .32;
-  background-image: radial-gradient(circle, #8a8a8a 0 1.7px, transparent 2.5px);
-  background-position: 0 32px;
-  background-size: 24px 128px;
+  background:
+    radial-gradient(circle at 38% 12%, rgba(255, 255, 255, .96) 0 4px, rgba(194, 239, 216, .9) 5px 14px, rgba(194, 239, 216, .22) 15px 29px, transparent 30px),
+    radial-gradient(circle at 62% 35%, rgba(255, 255, 255, .96) 0 5px, rgba(255, 211, 194, .9) 6px 16px, rgba(255, 211, 194, .22) 17px 32px, transparent 33px),
+    radial-gradient(circle at 44% 92%, rgba(255, 255, 255, .96) 0 4px, rgba(190, 220, 248, .9) 5px 14px, rgba(190, 220, 248, .22) 15px 29px, transparent 30px),
+    radial-gradient(circle at 92% 58%, rgba(255, 255, 255, .96) 0 4px, rgba(239, 204, 241, .88) 5px 14px, rgba(239, 204, 241, .2) 15px 30px, transparent 31px);
+  opacity: .78;
+  filter: blur(.8px) saturate(.82);
+  animation: orb-drift 34s ease-in-out infinite alternate-reverse;
+}
+
+@keyframes orb-drift {
+  0% {
+    transform: translate3d(-1.5vw, 0, 0) scale(.96);
+  }
+
+  100% {
+    transform: translate3d(1.7vw, -1.2vh, 0) scale(1.04);
+  }
 }
 
 a,
