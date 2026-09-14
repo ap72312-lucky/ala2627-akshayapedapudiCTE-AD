@@ -23,7 +23,7 @@ body {
   background:
     radial-gradient(circle, rgba(255, 255, 255, .62) 0 1px, transparent 1.8px) 0 0 / 37px 43px,
     radial-gradient(circle, rgba(255, 255, 255, .38) 0 1px, transparent 1.7px) 12px 18px / 61px 67px,
-    linear-gradient(180deg, #f4b9c6 0%, #f9d9df 20%, #fff 49%, #dcecf8 76%, #b8d8f1 100%);
+    linear-gradient(180deg, #d7798d 0%, #e7aebc 20%, #fff 49%, #b3d1e8 76%, #6e9fd1 100%);
   background-attachment: fixed;
   font-family: 'Space Grotesk', sans-serif;
 }
