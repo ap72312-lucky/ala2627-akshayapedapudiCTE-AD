@@ -20,18 +20,17 @@ body {
   min-width: 320px;
   margin: 0;
   color: var(--ink);
-  background: linear-gradient(180deg,
-      #ffffff 0%,
-      #f0f0f0 18%,
-      #b7b7b7 38%,
-      #767676 58%,
-      #2a2a2a 78%,
-      #101010 100%);
+  background:
+    radial-gradient(circle, rgba(255, 255, 255, .62) 0 1px, transparent 1.8px) 0 0 / 37px 43px,
+    radial-gradient(circle, rgba(255, 255, 255, .38) 0 1px, transparent 1.7px) 12px 18px / 61px 67px,
+    linear-gradient(180deg, #f4b9c6 0%, #f9d9df 20%, #fff 49%, #dcecf8 76%, #b8d8f1 100%);
+  background-attachment: fixed;
   font-family: 'Space Grotesk', sans-serif;
 }
 
 body::before,
 body::after {
+  display: none;
   position: fixed;
   inset: 0;
   z-index: 0;
