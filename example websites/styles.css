@@ -717,7 +717,7 @@ h1 {
 
 .section-label {
   margin: 0 0 10px;
-  color: var(--cyan);
+  color: #1677ff;
   font: .72rem 'DM Mono', monospace;
   letter-spacing: .12em;
   text-transform: uppercase;
