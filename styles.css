@@ -802,18 +802,16 @@ h2 em {
 
 .low-poly-visual {
   background:
-    url('.vscode/images/ALA%20Defenders%20Logo') center / auto 575px no-repeat,
     radial-gradient(circle, rgba(255, 255, 255, .62) 0 1px, transparent 1.8px) 0 0 / 37px 43px,
     radial-gradient(circle, rgba(255, 255, 255, .38) 0 1px, transparent 1.7px) 12px 18px / 61px 67px,
     linear-gradient(180deg, #d7798d 0%, #e7aebc 20%, #fff 49%, #b3d1e8 76%, #6e9fd1 100%);
-  background-position: center, 0 0, 12px 18px, 0 0;
-  background-repeat: no-repeat, repeat, repeat, no-repeat;
+  background-position: 0 0, 12px 18px, 0 0;
+  background-repeat: repeat, repeat, no-repeat;
   box-shadow: inset 0 0 0 1px rgba(255, 255, 255, .12), 0 16px 28px rgba(20, 25, 36, .18);
 }
 
 .low-poly-visual::before,
 .low-poly-visual::after {
-  display: none;
   content: "";
   position: absolute;
   inset: 0;
@@ -821,21 +819,14 @@ h2 em {
 }
 
 .low-poly-visual::before {
-  background:
-    radial-gradient(circle at 8% 14%, #fff 0 3px, #ff6b9d 4px 14px, rgba(255, 107, 157, .28) 15px 30px, transparent 31px),
-    radial-gradient(circle at 90% 18%, #fff 0 2px, #65d9ff 3px 9px, rgba(101, 217, 255, .25) 10px 24px, transparent 25px),
-    radial-gradient(circle at 20% 80%, #fff 0 4px, #ffd35a 5px 15px, rgba(255, 211, 90, .22) 16px 31px, transparent 32px),
-    radial-gradient(circle at 82% 74%, #fff 0 3px, #a77bff 4px 12px, rgba(167, 123, 255, .23) 13px 28px, transparent 29px);
-  animation: low-poly-orbs 28s linear infinite alternate;
+  background: url('.vscode/images/ALA%20Defenders%20Logo') center 12px / auto 575px no-repeat;
+  filter: grayscale(1) contrast(2.4) brightness(1.15);
+  mix-blend-mode: multiply;
+  opacity: .82;
 }
 
 .low-poly-visual::after {
-  background:
-    radial-gradient(circle at 38% 12%, #fff 0 2px, #6ee7b7 3px 7px, rgba(110, 231, 183, .24) 8px 19px, transparent 20px),
-    radial-gradient(circle at 62% 35%, #fff 0 3px, #ff8c5a 4px 11px, rgba(255, 140, 90, .22) 12px 26px, transparent 27px),
-    radial-gradient(circle at 44% 92%, #fff 0 3px, #5fa8ff 4px 10px, rgba(95, 168, 255, .23) 11px 24px, transparent 25px),
-    radial-gradient(circle at 96% 58%, #fff 0 2px, #f26bff 3px 8px, rgba(242, 107, 255, .2) 9px 21px, transparent 22px);
-  animation: low-poly-orbs 35s linear -10s infinite alternate-reverse;
+  display: none;
 }
 
 @keyframes low-poly-orbs {
