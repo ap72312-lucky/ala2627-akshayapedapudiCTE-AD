@@ -820,6 +820,7 @@ h2 em {
 
 .low-poly-visual::before {
   background: url('.vscode/images/ALA%20Defenders%20Logo') center 12px / auto 575px no-repeat;
+  clip-path: ellipse(112px 124px at 50% 54%);
   filter: grayscale(1) contrast(2.4) brightness(1.15);
   mix-blend-mode: multiply;
   opacity: .82;
