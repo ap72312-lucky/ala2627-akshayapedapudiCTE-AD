@@ -801,12 +801,16 @@ h2 em {
 }
 
 .low-poly-visual {
-  background: #fff;
+  background:
+    radial-gradient(circle, rgba(255, 255, 255, .62) 0 1px, transparent 1.8px) 0 0 / 37px 43px,
+    radial-gradient(circle, rgba(255, 255, 255, .38) 0 1px, transparent 1.7px) 12px 18px / 61px 67px,
+    linear-gradient(180deg, #d7798d 0%, #e7aebc 20%, #fff 49%, #b3d1e8 76%, #6e9fd1 100%);
   box-shadow: inset 0 0 0 1px rgba(255, 255, 255, .12), 0 16px 28px rgba(20, 25, 36, .18);
 }
 
 .low-poly-visual::before,
 .low-poly-visual::after {
+  display: none;
   content: "";
   position: absolute;
   inset: 0;
