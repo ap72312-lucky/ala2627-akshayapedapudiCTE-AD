@@ -1,0 +1,128 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>Week 8 — Make it do something | App &amp; Software Design</title>
+<meta name="description" content="Week 8: your first JavaScript — one project, four days, one pull.">
+<link rel="stylesheet" href="../assets/ala.css">
+<style>
+*{box-sizing:border-box}
+body{margin:0;background:var(--ss-void);color:var(--ss-bone);
+  font:16px/1.65 var(--ss-body);padding:0 0 5rem}
+.wrap{max-width:64rem;margin:0 auto;padding:0 1.15rem}
+a.back{display:inline-block;margin:1.3rem 0 0;font-family:var(--ss-display);
+  text-transform:uppercase;letter-spacing:.2em;font-size:.7rem;color:var(--ala-red);
+  text-decoration:none}
+a.back:hover{text-decoration:underline}
+.mast{position:relative;overflow:hidden;border-bottom:3px solid var(--ala-red);
+  background:linear-gradient(160deg,rgba(255,255,255,.05),rgba(255,255,255,.012));
+  padding:1.6rem 0 2.2rem;margin:0 0 2rem}
+.mast::before{content:"";position:absolute;right:-3%;top:-30%;width:36%;height:180%;
+  background:url('../assets/ala-monogram.png') no-repeat center/contain;opacity:.055}
+.mast .wrap{position:relative;z-index:1}
+.wk{font-family:var(--ss-display);text-transform:uppercase;letter-spacing:.28em;
+  font-size:.7rem;color:var(--ala-red);margin:1.1rem 0 .55rem}
+h1{font-family:var(--ss-display);text-transform:uppercase;font-weight:500;
+  font-size:clamp(1.9rem,5.6vw,3.4rem);line-height:1;letter-spacing:.02em;margin:0 0 .5rem}
+.lede{font-family:'Aleo',Georgia,serif;color:var(--ala-steel);margin:0;max-width:42rem;
+  font-size:clamp(1rem,1.8vw,1.2rem)}
+h2.sec{font-family:var(--ss-display);text-transform:uppercase;letter-spacing:.24em;
+  font-size:.74rem;color:var(--ala-steel-dim);margin:2.2rem 0 1rem;display:flex;
+  align-items:center;gap:.9rem}
+h2.sec::after{content:"";flex:1;height:1px;background:var(--ala-navy-athletic)}
+.days{display:grid;grid-template-columns:repeat(auto-fit,minmax(14rem,1fr));gap:11px}
+a.day{display:block;text-decoration:none;color:inherit;border:1px solid var(--ala-navy-athletic);
+  border-left:3px solid var(--ala-red);border-radius:14px;padding:1rem 1.1rem 1.1rem;
+  background:rgba(255,255,255,.022);transition:border-color .16s,transform .16s,background .16s}
+a.day:hover{transform:translateY(-2px);background:rgba(212,0,41,.06);border-color:var(--ala-red)}
+a.day .d{font-family:var(--ss-mono);font-size:.7rem;letter-spacing:.13em;text-transform:uppercase;
+  color:var(--ala-red);font-weight:700;margin:0 0 .4rem}
+a.day h3{font-size:1.06rem;margin:0 0 .3rem;line-height:1.25}
+a.day p{margin:0;font-size:.88rem;color:var(--ala-steel-dim)}
+a.day .go{display:block;margin-top:.7rem;font-family:var(--ss-display);text-transform:uppercase;
+  letter-spacing:.14em;font-size:.66rem;color:var(--ala-silver)}
+.term{border:1px solid var(--ala-navy-athletic);border-radius:14px;overflow:hidden;margin:0 0 1rem;position:relative}
+.term .bar{background:rgba(255,255,255,.04);padding:.55rem .95rem;font-family:var(--ss-mono);
+  font-size:.71rem;letter-spacing:.1em;text-transform:uppercase;color:var(--ala-steel-dim);
+  border-bottom:1px solid var(--ala-navy-athletic)}
+.term pre{margin:0;padding:1rem 1.1rem;background:#050D1B;overflow-x:auto;
+  font:.85rem/1.7 var(--ss-mono);color:var(--ala-paper)}
+.term .c{color:var(--ala-steel-dim)}.term .hl{color:var(--ala-red);font-weight:700}
+.term .cp{position:absolute;top:.4rem;right:.5rem;cursor:pointer;border:1px solid var(--ala-navy-athletic);
+  background:#0b1830;color:var(--ala-silver);font:600 .68rem/1 var(--ss-mono);letter-spacing:.08em;
+  text-transform:uppercase;padding:.4rem .6rem;border-radius:6px}
+.note{border:1px solid var(--ala-navy-athletic);border-left:3px solid var(--ala-silver);
+  border-radius:13px;padding:1rem 1.15rem;color:var(--ala-steel);font-size:.94rem;margin:0 0 1rem}
+.note b{color:var(--ala-paper)}
+a.dlz{display:inline-block;margin:.2rem 0 0;padding:.65rem 1rem;border-radius:10px;border:1px solid var(--ala-silver);
+  color:var(--ala-paper);text-decoration:none;font-family:var(--ss-display);text-transform:uppercase;
+  letter-spacing:.12em;font-size:.72rem}
+a.dlz:hover{background:rgba(255,255,255,.06)}
+footer{margin-top:2.6rem;padding-top:1.1rem;border-top:1px solid var(--ala-navy-athletic);
+  color:var(--ala-steel-dim);font-size:.83rem}
+</style>
+</head>
+<body>
+<header class="mast"><div class="wrap">
+  <a class="back" href="../">&larr; All coursework</a>
+  <p class="wk">Week 8 &middot; 15&ndash;18 September</p>
+  <h1>Make it do something</h1>
+  <p class="lede">Unit 03 &mdash; your first JavaScript. One project, four days: by Friday a click on
+  your page does a thing only your site does, and you built it.</p>
+</div></header>
+
+<div class="wrap">
+  <h2 class="sec">Get the whole week &mdash; once</h2>
+  <div class="term"><div class="bar">Terminal &middot; in your Codespace &middot; Tuesday only</div>
+<button class="cp" type="button" data-copy="npx degit coltonsharp-dev/ALA2627-ASD-Coursework/week-08 week-08&#10;cd week-08/my-site&#10;python -m http.server 8000">Copy</button>
+<pre><span class="c"># the whole week in one go — all four days and your project</span>
+npx degit coltonsharp-dev/ALA2627-ASD-Coursework/<span class="hl">week-08</span> week-08
+cd week-08/my-site
+python -m http.server 8000</pre></div>
+  <div class="note"><b>That is the only pull this week.</b> Wednesday to Friday there is nothing to
+  pull &mdash; your project is already in <b>week-08/my-site</b>. Open it, start the preview with the last
+  line, and keep going.</div>
+  <div class="note">Terminal not co-operating? Download the project instead and keep going &mdash; do not
+  lose a period to a command.<br>
+  <a class="dlz" href="week-08-project.zip" download>Download the project (.zip)</a></div>
+
+  <h2 class="sec">The four days</h2>
+  <div class="days">
+    <a class="day" href="day-1/"><p class="d">Tue 15 Sep &middot; Day 1</p>
+      <h3>Make it yours, and say hello from JavaScript</h3>
+      <p>Get the week, make the project yours, and make the console talk.</p>
+      <span class="go">Open &rarr;</span></a>
+    <a class="day" href="day-2/"><p class="d">Wed 16 Sep &middot; Day 2</p>
+      <h3>Add a button and wire the click</h3>
+      <p>Three lines: find it, listen for it, change the page.</p>
+      <span class="go">Open &rarr;</span></a>
+    <a class="day" href="day-3/"><p class="d">Thu 17 Sep &middot; Day 3</p>
+      <h3>Make the click do YOUR thing</h3>
+      <p>A variable that remembers and a function that changes it.</p>
+      <span class="go">Open &rarr;</span></a>
+    <a class="day" href="day-4/"><p class="d">Fri 18 Sep &middot; Day 4</p>
+      <h3>Level up and ship it</h3>
+      <p>One upgrade you can explain, then turn in your live link.</p>
+      <span class="go">Open &rarr;</span></a>
+  </div>
+
+  <h2 class="sec">Turning it in</h2>
+  <div class="note"><b>Friday: your live link.</b> It is your own site's address with
+  <b>/week-08/my-site/</b> on the end. Open it in a new tab first &mdash; a link ending in
+  <b>github.dev</b> is your private preview and nobody else can open it.</div>
+
+  <footer>App &amp; Software Design &middot; American Leadership Academy, Vistancia<br>
+  Everything on these pages runs in your browser. Nothing you type here is sent anywhere.</footer>
+</div>
+<script>
+document.querySelectorAll(".cp").forEach(function(b){
+  b.addEventListener("click", function(){
+    var t = b.getAttribute("data-copy");
+    if (navigator.clipboard) navigator.clipboard.writeText(t).then(function(){
+      b.textContent = "Copied"; setTimeout(function(){ b.textContent = "Copy"; }, 1600); });
+  });
+});
+</script>
+</body>
+</html>
