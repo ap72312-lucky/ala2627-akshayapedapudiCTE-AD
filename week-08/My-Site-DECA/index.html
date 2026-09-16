@@ -71,18 +71,29 @@
 
     <section class="card game-card">
       <h2>DECA Tetris</h2>
-      <p class="game-copy">Stack colorful blocks, clear lines, and keep the board alive.</p>
+      <a href="https://www.youtube.com/watch?v=VCrxWHTCNo8" target="_blank" rel="noopener noreferrer">Background
+        Music</a>
 
       <div class="game-topline">
         <div class="score-box">
           <span>Score</span>
           <strong id="score">0</strong>
         </div>
-        <button id="reset-game" type="button" class="small-btn">Reset</button>
+        <div class="game-controls">
+          <button id="start-stop-game" type="button" class="small-btn">Start</button>
+          <button id="reset-game" type="button" class="small-btn">Reset</button>
+        </div>
       </div>
 
       <div id="game-board" class="game-board" aria-label="Tetris board"></div>
       <p id="game-status" class="game-status">Use arrow keys to play.</p>
+      <ul class="key-guide" aria-label="Tetris key controls">
+        <li><strong>← / →</strong> Move</li>
+        <li><strong>↑</strong> Rotate</li>
+        <li><strong>↓</strong> Soft drop / double tap = hard drop</li>
+        <li><strong>Space</strong> Hard drop</li>
+        <li><strong>F</strong> Freeze / resume</li>
+      </ul>
     </section>
   </main>
 

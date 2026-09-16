@@ -29,6 +29,7 @@ const TETROMINOES = [
 
 const boardEl = document.querySelector("#game-board");
 const resetButton = document.querySelector("#reset-game");
+const startStopButton = document.querySelector("#start-stop-game");
 const scoreEl = document.querySelector("#score");
 const statusEl = document.querySelector("#game-status");
 
@@ -37,6 +38,7 @@ let currentPiece = null;
 let score = 0;
 let gameOver = false;
 let dropTimer = null;
+let isRunning = true;
 
 function createBoard() {
   return Array.from({ length: ROWS }, () => Array(COLS).fill(null));
@@ -224,18 +226,58 @@ function resetGame() {
   board = createBoard();
   score = 0;
   gameOver = false;
+  isRunning = true;
   updateScore();
-  setStatus("Use arrow keys to play.");
+  setStatus("Use arrow keys to play. Press F to freeze.");
   spawnPiece();
   renderBoard();
 
   clearInterval(dropTimer);
   dropTimer = setInterval(stepDown, BASE_SPEED);
+  startStopButton.textContent = "Stop";
+}
+
+function stopGame() {
+  isRunning = false;
+  clearInterval(dropTimer);
+  setStatus("Game frozen. Press F or Start to continue.");
+  startStopButton.textContent = "Start";
+}
+
+function startGame() {
+  if (gameOver) {
+    resetGame();
+    return;
+  }
+
+  if (!isRunning) {
+    isRunning = true;
+    setStatus("Use arrow keys to play. Press F to freeze.");
+    dropTimer = setInterval(stepDown, BASE_SPEED);
+    startStopButton.textContent = "Stop";
+  }
 }
 
 let lastDownPressTime = 0;
 
 document.addEventListener("keydown", (event) => {
+  const controlKeys = ["ArrowLeft", "ArrowRight", "ArrowDown", "ArrowUp", " "];
+  if (controlKeys.includes(event.key)) {
+    event.preventDefault();
+  }
+
+  const freezeKey = event.key.toLowerCase();
+  if (freezeKey === "f") {
+    if (isRunning) {
+      stopGame();
+    } else {
+      startGame();
+    }
+    return;
+  }
+
+  if (!isRunning || gameOver) return;
+
   if (event.key === "ArrowLeft") {
     movePiece(-1);
   } else if (event.key === "ArrowRight") {
@@ -251,6 +293,16 @@ document.addEventListener("keydown", (event) => {
   } else if (event.key === "ArrowUp") {
     rotatePiece();
     renderBoard();
+  } else if (event.key === " ") {
+    hardDrop();
+  }
+});
+
+startStopButton.addEventListener("click", () => {
+  if (isRunning) {
+    stopGame();
+  } else {
+    startGame();
   }
 });
 

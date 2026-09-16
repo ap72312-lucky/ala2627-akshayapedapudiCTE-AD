@@ -164,6 +164,12 @@ body {
   margin-bottom: 14px;
 }
 
+.game-controls {
+  display: flex;
+  gap: 8px;
+  align-items: center;
+}
+
 .score-box {
   display: inline-flex;
   flex-direction: column;
@@ -230,6 +236,22 @@ body {
   color: #f9f1d2;
   font-weight: 600;
   text-align: center;
+}
+
+.key-guide {
+  margin: 12px 0 0;
+  padding-left: 18px;
+  color: #f9f1d2;
+  font-size: 0.82rem;
+  line-height: 1.6;
+}
+
+.key-guide li {
+  margin-bottom: 4px;
+}
+
+.key-guide strong {
+  color: #f4c95d;
 }
 
 .bottom {
