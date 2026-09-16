@@ -37,6 +37,10 @@ body {
   background-attachment: fixed;
 }
 
+body.scroll-locked {
+  overflow: hidden;
+}
+
 .top {
   background: linear-gradient(135deg, var(--main) 0%, #16315f 100%);
   color: white;

@@ -39,6 +39,7 @@ let score = 0;
 let gameOver = false;
 let dropTimer = null;
 let isRunning = true;
+let scrollLocked = false;
 
 function createBoard() {
   return Array.from({ length: ROWS }, () => Array(COLS).fill(null));
@@ -228,7 +229,7 @@ function resetGame() {
   gameOver = false;
   isRunning = true;
   updateScore();
-  setStatus("Use arrow keys to play. Press F to freeze.");
+  setStatus("Use arrow keys to play. Press F to lock scrolling.");
   spawnPiece();
   renderBoard();
 
@@ -240,7 +241,7 @@ function resetGame() {
 function stopGame() {
   isRunning = false;
   clearInterval(dropTimer);
-  setStatus("Game frozen. Press F or Start to continue.");
+  setStatus("Game paused. Press Start to continue.");
   startStopButton.textContent = "Start";
 }
 
@@ -252,27 +253,29 @@ function startGame() {
 
   if (!isRunning) {
     isRunning = true;
-    setStatus("Use arrow keys to play. Press F to freeze.");
+    setStatus("Use arrow keys to play. Press F to lock scrolling.");
     dropTimer = setInterval(stepDown, BASE_SPEED);
     startStopButton.textContent = "Stop";
   }
+}
+
+function toggleScrollLock() {
+  scrollLocked = !scrollLocked;
+  document.body.classList.toggle("scroll-locked", scrollLocked);
+  setStatus(scrollLocked ? "Scroll locked. Use F to unlock." : "Scroll unlocked.");
 }
 
 let lastDownPressTime = 0;
 
 document.addEventListener("keydown", (event) => {
   const controlKeys = ["ArrowLeft", "ArrowRight", "ArrowDown", "ArrowUp", " "];
-  if (controlKeys.includes(event.key)) {
+  if (scrollLocked && controlKeys.includes(event.key)) {
     event.preventDefault();
   }
 
-  const freezeKey = event.key.toLowerCase();
-  if (freezeKey === "f") {
-    if (isRunning) {
-      stopGame();
-    } else {
-      startGame();
-    }
+  if (event.key.toLowerCase() === "f") {
+    event.preventDefault();
+    toggleScrollLock();
     return;
   }
 
