@@ -30,7 +30,11 @@ body {
   line-height: 1.6;
   letter-spacing: 0.01em;
   color: var(--text);
-  background: linear-gradient(180deg, #f9f5eb 0%, #f1ebdb 100%);
+  background-image: url("https://pbs.twimg.com/media/EWNda2oX0AEPlYG.jpg");
+  background-size: cover;
+  background-position: center;
+  background-repeat: no-repeat;
+  background-attachment: fixed;
 }
 
 .top {
