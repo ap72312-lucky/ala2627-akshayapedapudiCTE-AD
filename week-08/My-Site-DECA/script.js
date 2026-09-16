@@ -13,47 +13,44 @@ button.addEventListener("click", function () {
   button.textContent = isVisible ? "Hide links" : "Show links";
 });
 
-// ─────────────── DAY 3 / DAY 4 · Mini-game addition ───────────────
-const BOARD_SIZE = 3;
-const pieceLibrary = [
-  { name: "dot", color: "#f4c95d", cells: [[0, 0]] },
-  { name: "line2", color: "#ff6b6b", cells: [[0, 0], [0, 1]] },
-  { name: "line3", color: "#4ecdc4", cells: [[0, 0], [0, 1], [0, 2]] },
-  { name: "square2", color: "#7bdff2", cells: [[0, 0], [0, 1], [1, 0], [1, 1]] },
-  { name: "L", color: "#ff9f1c", cells: [[0, 0], [1, 0], [2, 0], [2, 1]] },
-  { name: "zig", color: "#a78bfa", cells: [[0, 0], [0, 1], [1, 1], [1, 2]] },
-  { name: "tall", color: "#34d399", cells: [[0, 0], [1, 0], [2, 0], [1, 1]] },
-  { name: "corner", color: "#fb7185", cells: [[0, 0], [1, 0], [1, 1], [2, 1]] }
+// ─────────────── Tetris mini-game ───────────────
+const COLS = 10;
+const ROWS = 16;
+const BASE_SPEED = 550;
+const TETROMINOES = [
+  { name: "I", color: "#f4c95d", matrix: [[1, 1, 1, 1]] },
+  { name: "O", color: "#f8fafc", matrix: [[1, 1], [1, 1]] },
+  { name: "T", color: "#1d4ed8", matrix: [[0, 1, 0], [1, 1, 1]] },
+  { name: "S", color: "#93c5fd", matrix: [[0, 1, 1], [1, 1, 0]] },
+  { name: "Z", color: "#dbeafe", matrix: [[1, 1, 0], [0, 1, 1]] },
+  { name: "J", color: "#60a5fa", matrix: [[1, 0, 0], [1, 1, 1]] },
+  { name: "L", color: "#facc15", matrix: [[0, 0, 1], [1, 1, 1]] }
 ];
 
 const boardEl = document.querySelector("#game-board");
-const piecePanelEl = document.querySelector("#piece-panel");
 const resetButton = document.querySelector("#reset-game");
 const scoreEl = document.querySelector("#score");
 const statusEl = document.querySelector("#game-status");
 
 let board = [];
-let pieces = [];
-let selectedPieceIndex = null;
+let currentPiece = null;
 let score = 0;
+let gameOver = false;
+let dropTimer = null;
 
-function createRandomPiece() {
-  const template = pieceLibrary[Math.floor(Math.random() * pieceLibrary.length)];
+function createBoard() {
+  return Array.from({ length: ROWS }, () => Array(COLS).fill(null));
+}
+
+function randomPiece() {
+  const template = TETROMINOES[Math.floor(Math.random() * TETROMINOES.length)];
   return {
     name: template.name,
     color: template.color,
-    cells: template.cells.map(([row, col]) => [row, col])
+    matrix: template.matrix.map((row) => [...row]),
+    x: Math.floor(COLS / 2) - Math.ceil(template.matrix[0].length / 2),
+    y: 0
   };
-}
-
-function createBoard() {
-  board = Array(BOARD_SIZE * BOARD_SIZE).fill(0);
-}
-
-function refillPieces() {
-  while (pieces.length < 3) {
-    pieces.push(createRandomPiece());
-  }
 }
 
 function updateScore() {
@@ -64,206 +61,198 @@ function setStatus(message) {
   statusEl.textContent = message;
 }
 
-function canPlacePiece(piece, startRow, startCol) {
-  return piece.cells.every(([rowOffset, colOffset]) => {
-    const row = startRow + rowOffset;
-    const col = startCol + colOffset;
+function collides(piece, offsetX = 0, offsetY = 0, testMatrix = piece.matrix) {
+  for (let row = 0; row < testMatrix.length; row += 1) {
+    for (let col = 0; col < testMatrix[row].length; col += 1) {
+      if (!testMatrix[row][col]) continue;
 
-    if (row < 0 || row >= BOARD_SIZE || col < 0 || col >= BOARD_SIZE) {
-      return false;
+      const nextX = piece.x + col + offsetX;
+      const nextY = piece.y + row + offsetY;
+
+      if (nextX < 0 || nextX >= COLS || nextY >= ROWS) {
+        return true;
+      }
+
+      if (nextY >= 0 && board[nextY][nextX]) {
+        return true;
+      }
     }
-
-    return board[row * BOARD_SIZE + col] === 0;
-  });
+  }
+  return false;
 }
 
-function clearCompleteLines() {
-  const cellsToClear = new Set();
-
-  for (let row = 0; row < BOARD_SIZE; row += 1) {
-    const startIndex = row * BOARD_SIZE;
-    const rowIsFull = Array.from({ length: BOARD_SIZE }, (_, col) => board[startIndex + col]).every(Boolean);
-
-    if (rowIsFull) {
-      for (let col = 0; col < BOARD_SIZE; col += 1) {
-        cellsToClear.add(startIndex + col);
+function mergePiece() {
+  currentPiece.matrix.forEach((row, rowIndex) => {
+    row.forEach((value, colIndex) => {
+      if (!value) return;
+      const boardRow = currentPiece.y + rowIndex;
+      const boardCol = currentPiece.x + colIndex;
+      if (boardRow >= 0) {
+        board[boardRow][boardCol] = currentPiece.color;
       }
-    }
-  }
-
-  for (let col = 0; col < BOARD_SIZE; col += 1) {
-    const colIsFull = Array.from({ length: BOARD_SIZE }, (_, row) => board[row * BOARD_SIZE + col]).every(Boolean);
-
-    if (colIsFull) {
-      for (let row = 0; row < BOARD_SIZE; row += 1) {
-        cellsToClear.add(row * BOARD_SIZE + col);
-      }
-    }
-  }
-
-  if (cellsToClear.size > 0) {
-    cellsToClear.forEach((index) => {
-      board[index] = 0;
     });
+  });
+}
 
-    score += cellsToClear.size * 15;
+function clearLines() {
+  let linesCleared = 0;
+
+  for (let row = ROWS - 1; row >= 0; row -= 1) {
+    if (board[row].every(Boolean)) {
+      board.splice(row, 1);
+      board.unshift(Array(COLS).fill(null));
+      linesCleared += 1;
+      row += 1;
+    }
+  }
+
+  if (linesCleared > 0) {
+    score += linesCleared * 100;
     updateScore();
-    setStatus(`Blast! ${cellsToClear.size} blocks cleared.`);
+    setStatus(`Nice! ${linesCleared} line${linesCleared > 1 ? "s" : ""} cleared.`);
   }
 }
 
-function canPlaceAnyPiece() {
-  return pieces.some((piece) => {
-    for (let row = 0; row < BOARD_SIZE; row += 1) {
-      for (let col = 0; col < BOARD_SIZE; col += 1) {
-        if (canPlacePiece(piece, row, col)) {
-          return true;
-        }
-      }
+function spawnPiece() {
+  currentPiece = randomPiece();
+
+  if (collides(currentPiece, 0, 0)) {
+    gameOver = true;
+    setStatus("Game over! Press reset to play again.");
+    clearInterval(dropTimer);
+    renderBoard();
+    return;
+  }
+}
+
+function rotateMatrix(matrix) {
+  return matrix[0].map((_, index) => matrix.map((row) => row[index]).reverse());
+}
+
+function rotatePiece() {
+  if (gameOver) return;
+
+  const rotated = rotateMatrix(currentPiece.matrix);
+  const originalX = currentPiece.x;
+
+  if (!collides(currentPiece, 0, 0, rotated)) {
+    currentPiece.matrix = rotated;
+    return;
+  }
+
+  const kicks = [-1, 1, -2, 2];
+  for (const offset of kicks) {
+    if (!collides(currentPiece, offset, 0, rotated)) {
+      currentPiece.x += offset;
+      currentPiece.matrix = rotated;
+      return;
     }
-    return false;
-  });
+  }
+
+  currentPiece.x = originalX;
+}
+
+function movePiece(direction) {
+  if (gameOver) return;
+
+  if (!collides(currentPiece, direction, 0)) {
+    currentPiece.x += direction;
+    renderBoard();
+  }
+}
+
+function stepDown() {
+  if (gameOver) return;
+
+  if (!collides(currentPiece, 0, 1)) {
+    currentPiece.y += 1;
+    renderBoard();
+    return;
+  }
+
+  mergePiece();
+  clearLines();
+  spawnPiece();
+  renderBoard();
+}
+
+function hardDrop() {
+  if (gameOver) return;
+
+  while (!collides(currentPiece, 0, 1)) {
+    currentPiece.y += 1;
+  }
+
+  mergePiece();
+  clearLines();
+  spawnPiece();
+  renderBoard();
 }
 
 function renderBoard() {
   boardEl.innerHTML = "";
 
-  for (let row = 0; row < BOARD_SIZE; row += 1) {
-    for (let col = 0; col < BOARD_SIZE; col += 1) {
-      const cell = document.createElement("button");
-      cell.type = "button";
-      cell.className = "board-cell";
-      cell.setAttribute("aria-label", `Board row ${row + 1}, column ${col + 1}`);
+  const displayBoard = board.map((row) => [...row]);
 
-      const index = row * BOARD_SIZE + col;
-      const value = board[index];
-
-      const miniGrid = document.createElement("div");
-      miniGrid.className = "board-cell-grid";
-
-      for (let miniRow = 0; miniRow < 3; miniRow += 1) {
-        for (let miniCol = 0; miniCol < 3; miniCol += 1) {
-          const miniCell = document.createElement("span");
-          miniCell.className = "board-cell-mini";
-          const miniIndex = miniRow * 3 + miniCol;
-
-          const filled = value && ((miniRow === 0 && miniCol === 0) || (miniRow === 1 && miniCol === 1) || (miniRow === 2 && miniCol === 2));
-
-          if (filled) {
-            miniCell.classList.add("filled");
-            miniCell.style.setProperty("--cell-color", value);
-          }
-
-          miniGrid.appendChild(miniCell);
-        }
-      }
-
-      cell.appendChild(miniGrid);
-
-      if (value) {
-        cell.classList.add("filled");
-      }
-
-      cell.addEventListener("click", () => {
-        if (selectedPieceIndex === null) {
-          setStatus("Pick a block first.");
-          return;
-        }
-
-        const piece = pieces[selectedPieceIndex];
-
-        if (!canPlacePiece(piece, row, col)) {
-          setStatus("That shape cannot go there.");
-          return;
-        }
-
-        piece.cells.forEach(([rowOffset, colOffset]) => {
-          const currentRow = row + rowOffset;
-          const currentCol = col + colOffset;
-          board[currentRow * BOARD_SIZE + currentCol] = piece.color;
-        });
-
-        score += piece.cells.length * 10;
-        updateScore();
-
-        pieces.splice(selectedPieceIndex, 1);
-        selectedPieceIndex = null;
-        clearCompleteLines();
-        refillPieces();
-        renderBoard();
-        renderPiecePanel();
-
-        if (!canPlaceAnyPiece()) {
-          setStatus("Game over! No more moves left.");
-        } else {
-          setStatus("Nice move! Pick another block.");
+  if (currentPiece) {
+    currentPiece.matrix.forEach((row, rowIndex) => {
+      row.forEach((value, colIndex) => {
+        if (!value) return;
+        const boardRow = currentPiece.y + rowIndex;
+        const boardCol = currentPiece.x + colIndex;
+        if (boardRow >= 0 && boardRow < ROWS && boardCol >= 0 && boardCol < COLS) {
+          displayBoard[boardRow][boardCol] = currentPiece.color;
         }
       });
-
-      boardEl.appendChild(cell);
-    }
-  }
-}
-
-function renderPiecePanel() {
-  piecePanelEl.innerHTML = "";
-
-  pieces.forEach((piece, index) => {
-    const pieceButton = document.createElement("button");
-    pieceButton.type = "button";
-    pieceButton.className = "piece-button";
-    if (selectedPieceIndex === index) {
-      pieceButton.classList.add("selected");
-    }
-
-    const mini = document.createElement("div");
-    mini.className = "piece-mini";
-
-    const maxRow = Math.max(...piece.cells.map(([row]) => row));
-    const maxCol = Math.max(...piece.cells.map(([, col]) => col));
-
-    for (let row = 0; row <= maxRow; row += 1) {
-      for (let col = 0; col <= maxCol; col += 1) {
-        const cell = document.createElement("span");
-        cell.className = "piece-mini-cell";
-
-        const filled = piece.cells.some(([cellRow, cellCol]) => cellRow === row && cellCol === col);
-        if (filled) {
-          cell.classList.add("filled");
-          cell.style.setProperty("--piece-color", piece.color);
-        }
-
-        mini.appendChild(cell);
-      }
-    }
-
-    pieceButton.appendChild(mini);
-    pieceButton.addEventListener("click", () => {
-      if (selectedPieceIndex === index) {
-        selectedPieceIndex = null;
-        setStatus("Selection cleared.");
-      } else {
-        selectedPieceIndex = index;
-        setStatus("Now choose a space on the board.");
-      }
-      renderPiecePanel();
     });
+  }
 
-    piecePanelEl.appendChild(pieceButton);
+  displayBoard.forEach((row) => {
+    row.forEach((cell) => {
+      const square = document.createElement("div");
+      square.className = "board-cell";
+      if (cell) {
+        square.classList.add("filled");
+        square.style.setProperty("--cell-color", cell);
+      }
+      boardEl.appendChild(square);
+    });
   });
 }
 
 function resetGame() {
+  board = createBoard();
   score = 0;
-  selectedPieceIndex = null;
-  createBoard();
-  pieces = [];
-  refillPieces();
+  gameOver = false;
   updateScore();
+  setStatus("Use arrow keys to play.");
+  spawnPiece();
   renderBoard();
-  renderPiecePanel();
-  setStatus("Select a block to begin.");
+
+  clearInterval(dropTimer);
+  dropTimer = setInterval(stepDown, BASE_SPEED);
 }
+
+let lastDownPressTime = 0;
+
+document.addEventListener("keydown", (event) => {
+  if (event.key === "ArrowLeft") {
+    movePiece(-1);
+  } else if (event.key === "ArrowRight") {
+    movePiece(1);
+  } else if (event.key === "ArrowDown") {
+    const now = Date.now();
+    if (now - lastDownPressTime < 250) {
+      hardDrop();
+    } else {
+      stepDown();
+    }
+    lastDownPressTime = now;
+  } else if (event.key === "ArrowUp") {
+    rotatePiece();
+    renderBoard();
+  }
+});
 
 resetButton.addEventListener("click", resetGame);
 resetGame();
