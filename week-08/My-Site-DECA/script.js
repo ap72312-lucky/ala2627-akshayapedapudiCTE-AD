@@ -5,7 +5,7 @@
 // TODO: make JavaScript print a message in the console.
 //       Your message shows in the Console panel at the bottom of your page.
 //       Remove the two slashes at the start of the next line, then save and reload.
-// console.log("script.js is connected");
+ console.log("script.js is connected");
 
 
 // ─────────────── DAY 2 · Wire the click ───────────────
