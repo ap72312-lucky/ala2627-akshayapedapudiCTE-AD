@@ -14,7 +14,7 @@ button.addEventListener("click", function () {
 });
 
 // ─────────────── DAY 3 / DAY 4 · Mini-game addition ───────────────
-const BOARD_SIZE = 8;
+const BOARD_SIZE = 3;
 const pieceLibrary = [
   { name: "dot", color: "#f4c95d", cells: [[0, 0]] },
   { name: "line2", color: "#ff6b6b", cells: [[0, 0], [0, 1]] },
@@ -138,9 +138,30 @@ function renderBoard() {
       const index = row * BOARD_SIZE + col;
       const value = board[index];
 
+      const miniGrid = document.createElement("div");
+      miniGrid.className = "board-cell-grid";
+
+      for (let miniRow = 0; miniRow < 3; miniRow += 1) {
+        for (let miniCol = 0; miniCol < 3; miniCol += 1) {
+          const miniCell = document.createElement("span");
+          miniCell.className = "board-cell-mini";
+          const miniIndex = miniRow * 3 + miniCol;
+
+          const filled = value && ((miniRow === 0 && miniCol === 0) || (miniRow === 1 && miniCol === 1) || (miniRow === 2 && miniCol === 2));
+
+          if (filled) {
+            miniCell.classList.add("filled");
+            miniCell.style.setProperty("--cell-color", value);
+          }
+
+          miniGrid.appendChild(miniCell);
+        }
+      }
+
+      cell.appendChild(miniGrid);
+
       if (value) {
         cell.classList.add("filled");
-        cell.style.setProperty("--cell-color", value);
       }
 
       cell.addEventListener("click", () => {

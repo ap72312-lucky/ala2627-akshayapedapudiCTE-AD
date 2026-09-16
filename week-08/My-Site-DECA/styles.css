@@ -197,12 +197,15 @@ body {
 
 .game-board {
   display: grid;
-  grid-template-columns: repeat(8, minmax(0, 1fr));
-  gap: 6px;
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+  gap: 8px;
   background: rgba(11, 21, 42, 0.75);
   padding: 10px;
   border-radius: 14px;
   margin-bottom: 16px;
+  width: min(220px, 100%);
+  margin-left: auto;
+  margin-right: auto;
 }
 
 .board-cell {
@@ -214,15 +217,29 @@ body {
   box-shadow: inset 0 0 0 1px rgba(255, 255, 255, 0.5);
   cursor: pointer;
   transition: transform 0.12s ease;
+  padding: 4px;
 }
 
 .board-cell:hover {
   transform: scale(1.04);
 }
 
-.board-cell.filled {
+.board-cell-grid {
+  width: 100%;
+  height: 100%;
+  display: grid;
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+  gap: 3px;
+}
+
+.board-cell-mini {
+  background: rgba(255, 255, 255, 0.7);
+  border-radius: 4px;
+}
+
+.board-cell-mini.filled {
   background: var(--cell-color, #f4c95d);
-  box-shadow: inset 0 0 0 2px rgba(255, 255, 255, 0.4);
+  box-shadow: inset 0 0 0 1px rgba(255, 255, 255, 0.35);
 }
 
 .piece-panel {
