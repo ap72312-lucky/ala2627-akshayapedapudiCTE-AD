@@ -312,3 +312,184 @@ startStopButton.addEventListener("click", () => {
 resetButton.addEventListener("click", resetGame);
 resetGame();
 
+// ─────────────── Pac-Man mini-game ───────────────
+const pacmanLayout = [
+  "111111111111111",
+  "100000100000001",
+  "101110101011101",
+  "100000000000001",
+  "101011111010101",
+  "100010001000001",
+  "111010101011111",
+  "100010001000001",
+  "101011111010101",
+  "100000000000001",
+  "111111111111111"
+];
+const pacmanBoard = document.querySelector("#pacman-board");
+const pacmanScoreEl = document.querySelector("#pacman-score");
+const pacmanStatusEl = document.querySelector("#pacman-status");
+const pacmanStartButton = document.querySelector("#pacman-start");
+const pacmanResetButton = document.querySelector("#pacman-reset");
+const pacmanCells = [];
+const pacmanDirections = {
+  w: [-1, 0],
+  a: [0, -1],
+  s: [1, 0],
+  d: [0, 1]
+};
+
+let pacman = { row: 1, col: 1 };
+let ghosts = [
+  { row: 9, col: 13, className: "ghost-red" },
+  { row: 9, col: 1, className: "ghost-blue" }
+];
+let pacmanPellets = new Set();
+let pacmanScore = 0;
+let pacmanRunning = false;
+let pacmanTimer = null;
+
+function isPacmanWall(row, col) {
+  return pacmanLayout[row][col] === "1";
+}
+
+function setPacmanStatus(message) {
+  pacmanStatusEl.textContent = message;
+}
+
+function renderPacman() {
+  pacmanCells.forEach((cell, index) => {
+    const row = Math.floor(index / 15);
+    const col = index % 15;
+    cell.className = "pacman-cell";
+
+    if (isPacmanWall(row, col)) {
+      cell.classList.add("wall");
+    } else if (pacmanPellets.has(`${row},${col}`)) {
+      cell.classList.add("pellet");
+    }
+
+    if (pacman.row === row && pacman.col === col) {
+      cell.classList.add("player");
+    }
+
+    ghosts.forEach((ghost) => {
+      if (ghost.row === row && ghost.col === col) {
+        cell.classList.add(ghost.className);
+      }
+    });
+  });
+}
+
+function movePacman(rowChange, colChange) {
+  if (!pacmanRunning) return;
+
+  const nextRow = pacman.row + rowChange;
+  const nextCol = pacman.col + colChange;
+  if (isPacmanWall(nextRow, nextCol)) return;
+
+  pacman.row = nextRow;
+  pacman.col = nextCol;
+  const pelletKey = `${nextRow},${nextCol}`;
+
+  if (pacmanPellets.delete(pelletKey)) {
+    pacmanScore += 10;
+    pacmanScoreEl.textContent = String(pacmanScore);
+  }
+
+  const hitGhost = ghosts.some((ghost) => ghost.row === pacman.row && ghost.col === pacman.col);
+  if (hitGhost) {
+    pacmanRunning = false;
+    clearInterval(pacmanTimer);
+    setPacmanStatus("Caught! Press Reset to try again.");
+  } else if (pacmanPellets.size === 0) {
+    pacmanRunning = false;
+    clearInterval(pacmanTimer);
+    setPacmanStatus("You cleared the maze! Great job.");
+  }
+
+  renderPacman();
+}
+
+function moveGhosts() {
+  ghosts.forEach((ghost) => {
+    const choices = Object.values(pacmanDirections).filter(([rowChange, colChange]) => {
+      return !isPacmanWall(ghost.row + rowChange, ghost.col + colChange);
+    });
+    const [rowChange, colChange] = choices[Math.floor(Math.random() * choices.length)];
+    ghost.row += rowChange;
+    ghost.col += colChange;
+  });
+
+  if (ghosts.some((ghost) => ghost.row === pacman.row && ghost.col === pacman.col)) {
+    pacmanRunning = false;
+    clearInterval(pacmanTimer);
+    setPacmanStatus("Caught! Press Reset to try again.");
+  }
+
+  renderPacman();
+}
+
+function resetPacman() {
+  pacman = { row: 1, col: 1 };
+  ghosts = [
+    { row: 9, col: 13, className: "ghost-red" },
+    { row: 9, col: 1, className: "ghost-blue" }
+  ];
+  pacmanPellets = new Set();
+  pacmanScore = 0;
+  pacmanScoreEl.textContent = "0";
+
+  for (let row = 0; row < pacmanLayout.length; row += 1) {
+    for (let col = 0; col < pacmanLayout[row].length; col += 1) {
+      if (!isPacmanWall(row, col) && !(row === pacman.row && col === pacman.col)) {
+        pacmanPellets.add(`${row},${col}`);
+      }
+    }
+  }
+
+  pacmanRunning = true;
+  setPacmanStatus("Use W A S D to play.");
+  clearInterval(pacmanTimer);
+  pacmanTimer = setInterval(moveGhosts, 900);
+  pacmanStartButton.textContent = "Stop";
+  renderPacman();
+}
+
+function buildPacmanBoard() {
+  pacmanBoard.innerHTML = "";
+  pacmanCells.length = 0;
+
+  for (let index = 0; index < 15 * 11; index += 1) {
+    const cell = document.createElement("div");
+    cell.className = "pacman-cell";
+    pacmanCells.push(cell);
+    pacmanBoard.appendChild(cell);
+  }
+}
+
+document.addEventListener("keydown", (event) => {
+  const direction = pacmanDirections[event.key.toLowerCase()];
+  if (!direction) return;
+  event.preventDefault();
+  movePacman(direction[0], direction[1]);
+});
+
+pacmanStartButton.addEventListener("click", () => {
+  if (pacmanRunning) {
+    pacmanRunning = false;
+    clearInterval(pacmanTimer);
+    setPacmanStatus("Game paused. Press Start to continue.");
+    pacmanStartButton.textContent = "Start";
+  } else {
+    pacmanRunning = true;
+    setPacmanStatus("Use W A S D to play.");
+    pacmanTimer = setInterval(moveGhosts, 900);
+    pacmanStartButton.textContent = "Stop";
+  }
+});
+
+pacmanResetButton.addEventListener("click", resetPacman);
+buildPacmanBoard();
+resetPacman();
+
