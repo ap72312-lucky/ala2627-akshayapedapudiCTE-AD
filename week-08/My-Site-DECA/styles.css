@@ -4,10 +4,14 @@
 /* ── DAY 1 · TODO 5: your colours ─────────────────────────────────────────
    Change these two to colours YOU picked. Everything on the page uses them. */
 :root {
-  --main: #1d3160;     /* the background of the header and the button */
-  --accent: #f5c842;   /* the colour that pops */
-  --text: #13182a;
-  --paper: #f7f8fb;
+  --main: #0d1b3d;
+  /* deep dark blue */
+  --accent: #f4c95d;
+  /* rich gold */
+  --text: #122033;
+  --paper: #f6f3ea;
+  --card: #ffffff;
+  --muted: #4a5870;
 
   /* the spacing scale: use only these three */
   --space-s: 8px;
@@ -16,34 +20,49 @@
 }
 
 /* ── the page ───────────────────────────────────────────────────────────── */
-* { box-sizing: border-box; }
+* {
+  box-sizing: border-box;
+}
 
 body {
   margin: 0;
-  font-family: system-ui, -apple-system, "Segoe UI", sans-serif;
+  font-family: "Segoe UI", "Trebuchet MS", sans-serif;
   line-height: 1.6;
+  letter-spacing: 0.01em;
   color: var(--text);
-  background: var(--paper);
+  background: linear-gradient(180deg, #f9f5eb 0%, #f1ebdb 100%);
 }
 
 .top {
-  background: var(--main);
+  background: linear-gradient(135deg, var(--main) 0%, #16315f 100%);
   color: white;
   padding: var(--space-l) var(--space-m);
   text-align: center;
+  box-shadow: 0 6px 20px rgba(13, 27, 61, 0.25);
 }
 
 .kicker {
   margin: 0;
   color: var(--accent);
   font-weight: 700;
-  letter-spacing: 0.1em;
+  letter-spacing: 0.12em;
   text-transform: uppercase;
-  font-size: 0.8rem;
+  font-size: 0.78rem;
 }
 
-.top h1 { margin: var(--space-s) 0; font-size: clamp(2rem, 6vw, 3.2rem); line-height: 1.1; }
-.tagline { margin: 0; opacity: 0.85; }
+.top h1 {
+  margin: var(--space-s) 0;
+  font-size: clamp(2rem, 6vw, 3.2rem);
+  line-height: 1.1;
+  font-family: Georgia, "Times New Roman", serif;
+  letter-spacing: 0.03em;
+}
+
+.tagline {
+  margin: 0;
+  opacity: 0.9;
+  font-size: 1.05rem;
+}
 
 /* ── the cards: flexbox from Week 7 ─────────────────────────────────────── */
 .cards {
@@ -57,37 +76,62 @@ body {
 
 .card {
   flex: 1 1 260px;
-  background: white;
+  background: var(--card);
   border-radius: 14px;
   padding: var(--space-m);
-  box-shadow: 0 2px 10px rgba(0, 0, 0, 0.08);
+  box-shadow: 0 8px 22px rgba(13, 27, 61, 0.10);
+  border: 1px solid rgba(13, 27, 61, 0.08);
 }
 
-.card h2 { margin-top: 0; }
+.card h2 {
+  margin-top: 0;
+  color: var(--main);
+  font-family: Georgia, "Times New Roman", serif;
+  letter-spacing: 0.02em;
+}
 
-.feature { border-top: 6px solid var(--accent); }
+.feature {
+  border-top: 6px solid var(--accent);
+}
 
 /* ── the button, with its states ────────────────────────────────────────── */
 #action {
   font: inherit;
   font-weight: 700;
   color: white;
-  background: var(--main);
+  background: linear-gradient(135deg, var(--main) 0%, #1a3d73 100%);
   border: 0;
   border-radius: 10px;
   padding: var(--space-s) var(--space-m);
   cursor: pointer;
+  box-shadow: 0 4px 12px rgba(13, 27, 61, 0.2);
+  transition: transform 0.2s ease, box-shadow 0.2s ease;
 }
 
-/* DAY 4: give your button a hover state and a focus state here */
+#action:hover {
+  transform: translateY(-1px);
+  box-shadow: 0 6px 16px rgba(13, 27, 61, 0.25);
+}
+
+#action:focus {
+  outline: 3px solid var(--accent);
+  outline-offset: 3px;
+}
 
 #output {
+  display: none;
   font-size: 1.2rem;
   font-weight: 700;
+  color: var(--main);
+}
+
+#output.visible {
+  display: block;
 }
 
 .bottom {
   text-align: center;
   padding: var(--space-m);
-  opacity: 0.7;
+  color: var(--muted);
+  opacity: 0.9;
 }
