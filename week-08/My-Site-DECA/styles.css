@@ -74,24 +74,35 @@ body {
   flex-wrap: wrap;
   gap: var(--space-m);
   padding: var(--space-l) var(--space-m);
-  max-width: 1000px;
+  max-width: 1200px;
+  min-height: 70vh;
   margin: 0 auto;
+  align-items: stretch;
 }
 
 .card {
-  flex: 1 1 260px;
-  background: var(--card);
-  border-radius: 14px;
+  flex: 1 1 300px;
+  background: linear-gradient(180deg, #f4c95d 0%, #d9a93d 25%, #6f8fc9 55%, #0d1b3d 100%);
+  border-radius: 18px;
   padding: var(--space-m);
-  box-shadow: 0 8px 22px rgba(13, 27, 61, 0.10);
-  border: 1px solid rgba(13, 27, 61, 0.08);
+  box-shadow: 0 8px 22px rgba(13, 27, 61, 0.18);
+  border: 1px solid rgba(255, 255, 255, 0.2);
+  color: white;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
 }
 
 .card h2 {
   margin-top: 0;
-  color: var(--main);
+  color: #fffaf0;
   font-family: Georgia, "Times New Roman", serif;
   letter-spacing: 0.02em;
+}
+
+.card p,
+.card a {
+  color: white;
 }
 
 .feature {
