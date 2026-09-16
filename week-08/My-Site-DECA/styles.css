@@ -82,7 +82,7 @@ body {
 
 .card {
   flex: 1 1 300px;
-  background: linear-gradient(180deg, #f4c95d 0%, #d9a93d 25%, #6f8fc9 55%, #0d1b3d 100%);
+  background: linear-gradient(180deg, #d9a936 0%, #c68f1d 25%, #8ea9d8 55%, #1b3d7a 100%);
   border-radius: 18px;
   padding: var(--space-m);
   box-shadow: 0 8px 22px rgba(13, 27, 61, 0.18);
@@ -147,6 +147,7 @@ body {
 .bottom {
   text-align: center;
   padding: var(--space-m);
-  color: var(--muted);
-  opacity: 0.9;
+  background: rgba(13, 27, 61, 0.8);
+  color: #f8f3df;
+  opacity: 1;
 }
