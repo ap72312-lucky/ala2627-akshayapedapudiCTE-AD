@@ -54,6 +54,7 @@ body::before {
     radial-gradient(circle, #fff 0 1.2px, transparent 1.9px);
   background-position: 0 0, 0 64px;
   background-size: 24px 128px;
+  animation: dots-drift 22s ease-in-out infinite alternate;
 }
 
 body::after {
@@ -66,6 +67,17 @@ body::after {
   background-image: radial-gradient(circle, #8a8a8a 0 1.7px, transparent 2.5px);
   background-position: 0 32px;
   background-size: 24px 128px;
+  animation: dots-drift 29s ease-in-out infinite alternate-reverse;
+}
+
+@keyframes dots-drift {
+  0% {
+    transform: translate3d(-1.5vw, 0, 0);
+  }
+
+  100% {
+    transform: translate3d(1.7vw, -1.2vh, 0);
+  }
 }
 
 a,
