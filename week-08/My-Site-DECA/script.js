@@ -314,21 +314,18 @@ resetGame();
 
 const musicToggle = document.querySelector("#music-toggle");
 const musicPlayer = document.querySelector("#music-player");
-const musicUrl = "https://www.youtube.com/embed/VCrxWHTCNo8?autoplay=1&loop=1&playlist=VCrxWHTCNo8";
 
 musicToggle.addEventListener("click", () => {
   const isPlaying = musicToggle.getAttribute("aria-pressed") === "true";
 
   if (isPlaying) {
-    musicPlayer.src = "";
-    musicPlayer.hidden = true;
+    musicPlayer.contentWindow.postMessage('{"event":"command","func":"pauseVideo","args":[]}', "*");
     musicToggle.textContent = "Play background music";
     musicToggle.setAttribute("aria-pressed", "false");
     return;
   }
 
-  musicPlayer.src = musicUrl;
-  musicPlayer.hidden = false;
+  musicPlayer.contentWindow.postMessage('{"event":"command","func":"playVideo","args":[]}', "*");
   musicToggle.textContent = "Stop background music";
   musicToggle.setAttribute("aria-pressed", "true");
 });
