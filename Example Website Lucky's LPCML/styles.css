@@ -93,7 +93,7 @@ body::after {
 
 .eyebrow {
   margin: 0 0 18px;
-  color: #808080;
+  color: #000000;
   font-size: .72rem;
 }
 
@@ -178,7 +178,7 @@ h1 {
 .tag {
   padding: 6px 8px;
   border: 1px solid rgba(38, 48, 74, .16);
-  color: #1677ff;
+  color: #2a2a2b;
   font-size: .62rem;
 }
 
@@ -716,7 +716,7 @@ h1 {
 
 .section-label {
   margin: 0 0 10px;
-  color: #1677ff;
+  color: #363636;
   font: .72rem 'DM Mono', monospace;
   letter-spacing: .12em;
   text-transform: uppercase;
@@ -1038,7 +1038,7 @@ h1 {
 
 .footer {
   margin-top: 44px;
-  color: rgba(255, 255, 255, .4);
+  color: rgb(0, 0, 0);
   font-size: .64rem;
 }
 
