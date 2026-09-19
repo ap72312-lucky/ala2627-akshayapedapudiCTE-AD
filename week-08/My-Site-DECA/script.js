@@ -312,3 +312,24 @@ startStopButton.addEventListener("click", () => {
 resetButton.addEventListener("click", resetGame);
 resetGame();
 
+const musicToggle = document.querySelector("#music-toggle");
+const musicPlayer = document.querySelector("#music-player");
+const musicUrl = "https://www.youtube.com/embed/VCrxWHTCNo8?autoplay=1&loop=1&playlist=VCrxWHTCNo8";
+
+musicToggle.addEventListener("click", () => {
+  const isPlaying = musicToggle.getAttribute("aria-pressed") === "true";
+
+  if (isPlaying) {
+    musicPlayer.src = "";
+    musicPlayer.hidden = true;
+    musicToggle.textContent = "Play background music";
+    musicToggle.setAttribute("aria-pressed", "false");
+    return;
+  }
+
+  musicPlayer.src = musicUrl;
+  musicPlayer.hidden = false;
+  musicToggle.textContent = "Stop background music";
+  musicToggle.setAttribute("aria-pressed", "true");
+});
+
