@@ -1,3 +1,8 @@
 <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 64 64">
-  <text x="32" y="52" text-anchor="middle" font-size="56">🍀</text>
+  <path d="M32 37c-3 8-3 14-1 21" fill="none" stroke="#246b3a" stroke-linecap="round" stroke-width="5"/>
+  <circle cx="22" cy="23" r="13" fill="#39a852"/>
+  <circle cx="42" cy="23" r="13" fill="#39a852"/>
+  <circle cx="22" cy="39" r="13" fill="#39a852"/>
+  <circle cx="42" cy="39" r="13" fill="#39a852"/>
+  <circle cx="32" cy="31" r="8" fill="#2d8f47"/>
 </svg>
