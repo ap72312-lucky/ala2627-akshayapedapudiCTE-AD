@@ -823,26 +823,9 @@ h2 em {
 }
 
 .deca-visual {
-  display: flex;
-  flex-direction: column;
-  justify-content: center;
-  gap: 4px;
   background-image: url("https://pbs.twimg.com/media/EWNda2oX0AEPlYG.jpg");
   background-size: cover;
   background-position: center;
-  color: #fff;
-  text-align: center;
-  text-shadow: 0 2px 8px rgba(0, 0, 0, .55);
-}
-
-.deca-visual span {
-  color: #f4c95d;
-  font: 700 1rem/1 "Trebuchet MS", sans-serif;
-  letter-spacing: .16em;
-}
-
-.deca-visual strong {
-  font: 700 clamp(2.5rem, 7vw, 4.5rem)/.9 Georgia, "Times New Roman", serif;
 }
 
 .low-poly-visual::before,
