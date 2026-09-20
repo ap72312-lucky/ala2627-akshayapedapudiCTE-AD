@@ -16,7 +16,7 @@ button.addEventListener("click", function () {
 // ─────────────── Tetris mini-game ───────────────
 const COLS = 10;
 const ROWS = 16;
-const BASE_SPEED = 550;
+const BASE_SPEED = 900;
 const TETROMINOES = [
   { name: "I", color: "#f4c95d", matrix: [[1, 1, 1, 1]] },
   { name: "O", color: "#f8fafc", matrix: [[1, 1], [1, 1]] },
