@@ -4,12 +4,10 @@
 /* ── DAY 1 · TODO 5: your colours ─────────────────────────────────────────
    Change these two to colours YOU picked. Everything on the page uses them. */
 :root {
-  --main: #0d1b3d;
-  /* deep dark blue */
-  --accent: #f4c95d;
-  /* rich gold */
-  --text: #122033;
-  --paper: #f6f3ea;
+  --main: #123b83;
+  --accent: #ff2d72;
+  --text: #18224b;
+  --paper: #f4f8ff;
   --card: #ffffff;
   --muted: #4a5870;
 
@@ -30,7 +28,7 @@ body {
   line-height: 1.6;
   letter-spacing: 0.01em;
   color: var(--text);
-  background-image: url("https://pbs.twimg.com/media/EWNda2oX0AEPlYG.jpg");
+  background-image: linear-gradient(135deg, rgba(16, 190, 181, 0.16), rgba(255, 45, 114, 0.12)), url("https://pbs.twimg.com/media/EWNda2oX0AEPlYG.jpg");
   background-size: cover;
   background-position: center;
   background-repeat: no-repeat;
@@ -42,11 +40,21 @@ body.scroll-locked {
 }
 
 .top {
-  background: linear-gradient(135deg, var(--main) 0%, #16315f 100%);
+  background: linear-gradient(135deg, #09b9b0 0%, #168ee4 48%, #e62b83 100%);
   color: white;
   padding: var(--space-l) var(--space-m);
   text-align: center;
   box-shadow: 0 6px 20px rgba(13, 27, 61, 0.25);
+}
+
+.theme-logo {
+  display: block;
+  width: min(100%, 320px);
+  max-height: 210px;
+  object-fit: contain;
+  margin: 0 auto var(--space-m);
+  border-radius: 12px;
+  box-shadow: 0 10px 24px rgba(10, 39, 103, 0.22);
 }
 
 .kicker {
@@ -86,7 +94,7 @@ body.scroll-locked {
 
 .card {
   flex: 1 1 300px;
-  background: linear-gradient(180deg, #d9a936 0%, #c68f1d 25%, #8ea9d8 55%, #1b3d7a 100%);
+  background: linear-gradient(145deg, #08b9ad 0%, #148fdf 48%, #734ab0 100%);
   border-radius: 18px;
   padding: var(--space-m);
   box-shadow: 0 8px 22px rgba(13, 27, 61, 0.18);
@@ -110,7 +118,7 @@ body.scroll-locked {
 }
 
 .feature {
-  border-top: 6px solid var(--accent);
+  border-top: 6px solid #ff2d72;
 }
 
 /* ── the button, with its states ────────────────────────────────────────── */
