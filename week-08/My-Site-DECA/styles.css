@@ -28,7 +28,8 @@ body {
   line-height: 1.6;
   letter-spacing: 0.01em;
   color: var(--text);
-  background-image: linear-gradient(135deg, rgba(16, 190, 181, 0.16), rgba(255, 45, 114, 0.12)), url("https://pbs.twimg.com/media/EWNda2oX0AEPlYG.jpg");
+  background-color: #101b4d;
+  background-image: linear-gradient(135deg, rgba(6, 184, 174, 0.3), rgba(17, 102, 210, 0.2) 48%, rgba(239, 30, 111, 0.32)), url("https://cdn.prod.website-files.com/635c470cc81318fc3e9c1e0e/646cfd47a565e463d9c08190_DECA-Zoom%20Backgrouncfd-02.png");
   background-size: cover;
   background-position: center;
   background-repeat: no-repeat;
