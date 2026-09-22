@@ -2,7 +2,7 @@
 // Work on ONE day's section at a time. Save (commit and push) at every save point.
 
 // ─────────────── DAY 1 · Say hello ───────────────
-console.log("Hello, World!");
+console.log("Watermark-> Akshaya Pedapudi");
 
 // ─────────────── DAY 2 · Wire the click ───────────────
 const button = document.querySelector("#action");
