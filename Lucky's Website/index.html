@@ -216,9 +216,15 @@
         </article>
         <article class="project-card project-secondary glass-panel">
           <div class="project-number">06 / COLOR PICKER</div>
-          <div class="code-visual glitter-surface" aria-hidden="true"><span>&lt;aside&gt;</span><span
-              class="indent">card: true;</span><span class="indent-two">align-right: yes;</span><span
-              class="indent">}</span><span>&lt;/aside&gt;</span>
+          <div class="color-picker-visual" aria-label="Color picker preview">
+            <div class="color-picker-preview">
+              <div class="color-picker-chip"></div>
+            </div>
+            <input class="color-picker-slider" type="range" min="0" max="360" value="220" aria-label="Choose a color">
+            <div class="color-picker-labels">
+              <span>Soft</span>
+              <span>Bold</span>
+            </div>
           </div>
           <div class="project-content">
             <h3>Color Picker</h3>
@@ -246,7 +252,24 @@
 
   <script>
     const glitterSurface = document.querySelector('.glitter-surface');
+    const colorSlider = document.querySelector('.color-picker-slider');
+    const colorChip = document.querySelector('.color-picker-chip');
     let lastSpark = 0;
+
+    function updateColorChip() {
+      if (!colorSlider || !colorChip) return;
+      const hue = Number(colorSlider.value);
+      document.documentElement.style.setProperty('--theme-hue', hue);
+      const start = `hsl(${hue} 88% 70%)`;
+      const end = `hsl(${(hue + 42) % 360} 80% 62%)`;
+      colorChip.style.background = `linear-gradient(135deg, ${start}, ${end})`;
+      colorChip.style.boxShadow = `0 12px 24px hsla(${hue} 80% 62% / 0.45), inset 0 0 0 6px rgba(255, 255, 255, 0.28)`;
+    }
+
+    if (colorSlider && colorChip) {
+      colorSlider.addEventListener('input', updateColorChip);
+      updateColorChip();
+    }
 
     function leaveGlitter(event) {
       const point = event.touches ? event.touches[0] : event;
