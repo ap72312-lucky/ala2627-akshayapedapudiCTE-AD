@@ -288,6 +288,21 @@
     }
 
     function applySelectedTheme(hue) {
+      if (hue === 0) {
+        document.documentElement.style.setProperty('--theme-hue', '0');
+        document.documentElement.style.setProperty('--page-rose', '#f7f7f7');
+        document.documentElement.style.setProperty('--page-peach', '#d9d9d9');
+        document.documentElement.style.setProperty('--page-butter', '#aaaaaa');
+        document.documentElement.style.setProperty('--page-mint', '#7a7a7a');
+        document.documentElement.style.setProperty('--page-sky', '#4d4d4d');
+        document.documentElement.style.setProperty('--page-lavender', '#2a2a2a');
+        document.documentElement.style.setProperty('--page-cream', '#101010');
+        document.documentElement.style.setProperty('--theme-accent', 'hsl(0 0% 75%)');
+        document.documentElement.style.setProperty('--theme-accent-strong', 'hsl(0 0% 50%)');
+        document.documentElement.style.setProperty('--theme-accent-soft', 'hsl(0 0% 90%)');
+        return;
+      }
+
       document.documentElement.style.setProperty('--theme-hue', String(hue));
       document.documentElement.style.setProperty('--page-rose', `hsl(${hue - 18} 78% 84%)`);
       document.documentElement.style.setProperty('--page-peach', `hsl(${hue + 10} 72% 82%)`);
@@ -302,6 +317,24 @@
     }
 
     function updatePickerVisual(hue) {
+      if (hue === 0) {
+        if (colorChip) {
+          colorChip.style.background = 'linear-gradient(135deg, #ffffff 0%, #a9a9a9 42%, #111111 100%)';
+          colorChip.style.boxShadow = '0 12px 24px rgba(0, 0, 0, 0.4), inset 0 0 0 6px rgba(255, 255, 255, 0.28)';
+        }
+
+        if (colorSlider) {
+          colorSlider.style.background = 'linear-gradient(90deg, #ffffff 0%, #c2c2c2 28%, #7a7a7a 54%, #2b2b2b 76%, #111111 100%)';
+        }
+
+        colorDots.forEach((dot) => {
+          const isSelected = Number(dot.dataset.hue) === hue;
+          dot.classList.toggle('is-selected', isSelected);
+        });
+
+        return;
+      }
+
       const start = `hsl(${hue} 88% 70%)`;
       const end = `hsl(${(hue + 42) % 360} 80% 62%)`;
 
@@ -343,21 +376,21 @@
       colorSlider.addEventListener('input', (event) => {
         const hue = Number(event.target.value);
         lastThemeHue = hue;
+        isThemeActive = true;
         updatePickerVisual(hue);
-        if (isThemeActive) {
-          applySelectedTheme(hue);
-        }
+        applySelectedTheme(hue);
+        updateThemeState();
       });
 
       colorDots.forEach((dot) => {
         dot.addEventListener('click', () => {
           const hue = Number(dot.dataset.hue);
           lastThemeHue = hue;
+          isThemeActive = true;
           colorSlider.value = String(hue);
           updatePickerVisual(hue);
-          if (isThemeActive) {
-            applySelectedTheme(hue);
-          }
+          applySelectedTheme(hue);
+          updateThemeState();
         });
       });
 
