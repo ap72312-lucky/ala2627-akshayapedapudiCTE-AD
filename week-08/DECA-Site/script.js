@@ -227,15 +227,14 @@ function resetGame() {
   board = createBoard();
   score = 0;
   gameOver = false;
-  isRunning = true;
+  isRunning = false;
   updateScore();
-  setStatus("Use arrow keys to play. Press F to lock scrolling.");
+  setStatus("Press Start to play.");
   spawnPiece();
   renderBoard();
 
   clearInterval(dropTimer);
-  dropTimer = setInterval(stepDown, BASE_SPEED);
-  startStopButton.textContent = "Stop";
+  startStopButton.textContent = "Start";
 }
 
 function stopGame() {
@@ -248,7 +247,6 @@ function stopGame() {
 function startGame() {
   if (gameOver) {
     resetGame();
-    return;
   }
 
   if (!isRunning) {
