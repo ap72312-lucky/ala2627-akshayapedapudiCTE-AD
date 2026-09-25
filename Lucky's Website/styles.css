@@ -841,51 +841,154 @@ h2 em {
   background-position: center;
 }
 
+.color-picker-toggle-wrap {
+  display: flex;
+  justify-content: center;
+  margin: 16px 20px 0;
+}
+
+.color-picker-toggle {
+  position: relative;
+  width: 118px;
+  height: 36px;
+  border: 0;
+  border-radius: 999px;
+  background: #dfe3e8;
+  color: #1d1d1d;
+  padding: 0 16px 0 42px;
+  cursor: pointer;
+  font: 700 .68rem/1 "Trebuchet MS", sans-serif;
+  letter-spacing: .12em;
+  text-transform: uppercase;
+  transition: background .2s ease, transform .15s ease, box-shadow .2s ease;
+  box-shadow: inset 0 0 0 1px rgba(48, 48, 48, .12), 0 8px 18px rgba(0, 0, 0, .1);
+}
+
+.color-picker-toggle::before {
+  content: "";
+  position: absolute;
+  top: 4px;
+  left: 6px;
+  width: 28px;
+  height: 28px;
+  border-radius: 50%;
+  background: #fff;
+  box-shadow: 0 4px 12px rgba(0, 0, 0, .18);
+  transition: transform .2s ease, left .2s ease;
+}
+
+.color-picker-toggle[data-mode="start"] {
+  background: linear-gradient(135deg, rgba(255, 255, 255, .8), rgba(214, 226, 255, .9));
+  color: #1d1d1d;
+  padding-left: 18px;
+  padding-right: 42px;
+}
+
+.color-picker-toggle[data-mode="start"]::before {
+  left: calc(100% - 34px);
+}
+
+.color-picker-toggle:hover {
+  transform: translateY(-1px);
+}
+
 .color-picker-visual {
   display: grid;
   place-items: center;
-  gap: 14px;
+  gap: 16px;
   height: 250px;
   margin: 20px;
   padding: 22px 18px;
   border-radius: 4px;
-  background: linear-gradient(135deg, #1a1a1a 0%, #2b2b2b 100%);
+  background: linear-gradient(135deg, #121212 0%, #1d1d1d 100%);
   box-shadow: inset 0 0 0 1px rgba(255, 255, 255, .08);
 }
 
 .color-picker-preview {
-  width: min(220px, 100%);
+  width: min(260px, 100%);
   height: 96px;
   display: grid;
   place-items: center;
-  border-radius: 18px;
+  border-radius: 20px;
   background: rgba(255, 255, 255, .05);
   border: 1px solid rgba(255, 255, 255, .1);
 }
 
 .color-picker-chip {
-  width: 72px;
-  height: 72px;
+  width: 78px;
+  height: 78px;
   border-radius: 50%;
   background: linear-gradient(135deg, #8ec5ff, #6a7bff);
   box-shadow: 0 12px 24px rgba(110, 138, 255, .45), inset 0 0 0 6px rgba(255, 255, 255, .28);
-  transition: background .2s ease;
+  transition: background .2s ease, box-shadow .2s ease;
+}
+
+.color-picker-slider-wrap {
+  width: min(260px, 100%);
 }
 
 .color-picker-slider {
-  width: min(220px, 100%);
-  accent-color: #8ec5ff;
+  width: 100%;
+  height: 26px;
+  appearance: none;
+  -webkit-appearance: none;
+  border-radius: 999px;
+  background: linear-gradient(90deg,
+      #ff4d4d 0%,
+      #ff9f43 16%,
+      #ffd93d 32%,
+      #4ad66d 48%,
+      #4da3ff 64%,
+      #7c5cff 80%,
+      #ff5ebc 100%);
+  box-shadow: inset 0 0 0 2px rgba(255, 255, 255, .14), 0 8px 18px rgba(0, 0, 0, .2);
   cursor: pointer;
 }
 
-.color-picker-labels {
+.color-picker-slider::-webkit-slider-thumb {
+  -webkit-appearance: none;
+  appearance: none;
+  width: 30px;
+  height: 30px;
+  border-radius: 50%;
+  background: #fff;
+  border: 4px solid rgba(255, 255, 255, .7);
+  box-shadow: 0 0 0 3px rgba(0, 0, 0, .14), 0 6px 16px rgba(0, 0, 0, .28);
+}
+
+.color-picker-slider::-moz-range-thumb {
+  width: 30px;
+  height: 30px;
+  border: 4px solid rgba(255, 255, 255, .7);
+  border-radius: 50%;
+  background: #fff;
+  box-shadow: 0 0 0 3px rgba(0, 0, 0, .14), 0 6px 16px rgba(0, 0, 0, .28);
+}
+
+.color-picker-dots {
   display: flex;
-  justify-content: space-between;
-  width: min(220px, 100%);
-  color: rgba(255, 255, 255, .72);
-  font: 700 .6rem/1 "Trebuchet MS", sans-serif;
-  letter-spacing: .12em;
-  text-transform: uppercase;
+  justify-content: center;
+  flex-wrap: wrap;
+  gap: 10px;
+  width: min(260px, 100%);
+}
+
+.color-dot {
+  width: 16px;
+  height: 16px;
+  padding: 0;
+  border: 2px solid rgba(255, 255, 255, .2);
+  border-radius: 50%;
+  background: var(--dot-color);
+  box-shadow: 0 0 0 1px rgba(0, 0, 0, .18);
+  cursor: pointer;
+  transition: transform .15s ease, border-color .15s ease;
+}
+
+.color-dot:hover,
+.color-dot.is-selected {
+  transform: scale(1.2);
+  border-color: rgba(255, 255, 255, .9);
 }
 
 .low-poly-visual::before,

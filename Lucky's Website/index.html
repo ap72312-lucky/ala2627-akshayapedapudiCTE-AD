@@ -216,14 +216,26 @@
         </article>
         <article class="project-card project-secondary glass-panel">
           <div class="project-number">06 / COLOR PICKER</div>
+          <div class="color-picker-toggle-wrap">
+            <button class="color-picker-toggle" type="button" data-mode="stop">Stop</button>
+          </div>
           <div class="color-picker-visual" aria-label="Color picker preview">
             <div class="color-picker-preview">
               <div class="color-picker-chip"></div>
             </div>
-            <input class="color-picker-slider" type="range" min="0" max="360" value="220" aria-label="Choose a color">
-            <div class="color-picker-labels">
-              <span>Soft</span>
-              <span>Bold</span>
+            <div class="color-picker-slider-wrap">
+              <input class="color-picker-slider" type="range" min="0" max="360" value="220" aria-label="Choose a color">
+            </div>
+            <div class="color-picker-dots" aria-label="Popular colors">
+              <button class="color-dot is-selected" type="button" data-hue="0" style="--dot-color: #ff4d4d" aria-label="Red"></button>
+              <button class="color-dot" type="button" data-hue="30" style="--dot-color: #ff9f43" aria-label="Orange"></button>
+              <button class="color-dot" type="button" data-hue="55" style="--dot-color: #ffd93d" aria-label="Yellow"></button>
+              <button class="color-dot" type="button" data-hue="110" style="--dot-color: #4ad66d" aria-label="Green"></button>
+              <button class="color-dot" type="button" data-hue="160" style="--dot-color: #38c7b8" aria-label="Teal"></button>
+              <button class="color-dot" type="button" data-hue="210" style="--dot-color: #4da3ff" aria-label="Blue"></button>
+              <button class="color-dot" type="button" data-hue="250" style="--dot-color: #7c5cff" aria-label="Indigo"></button>
+              <button class="color-dot" type="button" data-hue="300" style="--dot-color: #ff5ebc" aria-label="Pink"></button>
+              <button class="color-dot" type="button" data-hue="330" style="--dot-color: #ff7b7b" aria-label="Rose"></button>
             </div>
           </div>
           <div class="project-content">
@@ -254,21 +266,70 @@
     const glitterSurface = document.querySelector('.glitter-surface');
     const colorSlider = document.querySelector('.color-picker-slider');
     const colorChip = document.querySelector('.color-picker-chip');
+    const colorDots = document.querySelectorAll('.color-dot');
+    const colorToggle = document.querySelector('.color-picker-toggle');
     let lastSpark = 0;
+    let isThemeActive = true;
+    let lastThemeHue = Number(colorSlider?.value || 220);
 
-    function updateColorChip() {
-      if (!colorSlider || !colorChip) return;
-      const hue = Number(colorSlider.value);
-      document.documentElement.style.setProperty('--theme-hue', hue);
-      const start = `hsl(${hue} 88% 70%)`;
-      const end = `hsl(${(hue + 42) % 360} 80% 62%)`;
-      colorChip.style.background = `linear-gradient(135deg, ${start}, ${end})`;
-      colorChip.style.boxShadow = `0 12px 24px hsla(${hue} 80% 62% / 0.45), inset 0 0 0 6px rgba(255, 255, 255, 0.28)`;
+    function applyThemeState() {
+      const hue = lastThemeHue;
+      document.documentElement.style.setProperty('--theme-hue', isThemeActive ? hue : 220);
+
+      const start = `hsl(${isThemeActive ? hue : 220} 88% 70%)`;
+      const end = `hsl(${(isThemeActive ? hue : 220) + 42} 80% 62%)`;
+
+      if (colorChip) {
+        colorChip.style.background = `linear-gradient(135deg, ${start}, ${end})`;
+        colorChip.style.boxShadow = `0 12px 24px hsla(${isThemeActive ? hue : 220} 80% 62% / 0.45), inset 0 0 0 6px rgba(255, 255, 255, 0.28)`;
+      }
+
+      if (colorSlider) {
+        colorSlider.style.background = `linear-gradient(90deg,
+          hsl(${(isThemeActive ? hue : 220) - 18} 92% 64%) 0%,
+          hsl(${(isThemeActive ? hue : 220) + 12} 92% 64%) 18%,
+          hsl(${(isThemeActive ? hue : 220) + 42} 92% 64%) 38%,
+          hsl(${(isThemeActive ? hue : 220) + 82} 92% 64%) 58%,
+          hsl(${(isThemeActive ? hue : 220) + 122} 92% 64%) 78%,
+          hsl(${(isThemeActive ? hue : 220) + 182} 92% 64%) 100%)`;
+      }
+
+      colorDots.forEach((dot) => {
+        const isSelected = Number(dot.dataset.hue) === hue;
+        dot.classList.toggle('is-selected', isSelected);
+      });
+
+      if (colorToggle) {
+        colorToggle.textContent = isThemeActive ? 'Stop' : 'Start';
+        colorToggle.dataset.mode = isThemeActive ? 'stop' : 'start';
+      }
+    }
+
+    function updateColorTheme(hue) {
+      lastThemeHue = Number(hue);
+      applyThemeState();
     }
 
     if (colorSlider && colorChip) {
-      colorSlider.addEventListener('input', updateColorChip);
-      updateColorChip();
+      colorSlider.addEventListener('input', (event) => {
+        const hue = Number(event.target.value);
+        updateColorTheme(hue);
+      });
+
+      colorDots.forEach((dot) => {
+        dot.addEventListener('click', () => {
+          const hue = Number(dot.dataset.hue);
+          colorSlider.value = String(hue);
+          updateColorTheme(hue);
+        });
+      });
+
+      colorToggle?.addEventListener('click', () => {
+        isThemeActive = !isThemeActive;
+        applyThemeState();
+      });
+
+      updateColorTheme(Number(colorSlider.value));
     }
 
     function leaveGlitter(event) {
