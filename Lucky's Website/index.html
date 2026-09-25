@@ -217,7 +217,7 @@
         <article class="project-card project-secondary glass-panel">
           <div class="project-number">06 / COLOR PICKER</div>
           <div class="color-picker-toggle-wrap">
-            <button class="color-picker-toggle" type="button" data-mode="stop">Stop</button>
+            <button class="color-picker-toggle" type="button" data-mode="start">Start</button>
           </div>
           <div class="color-picker-visual" aria-label="Color picker preview">
             <div class="color-picker-preview">
@@ -227,8 +227,9 @@
               <input class="color-picker-slider" type="range" min="0" max="360" value="220" aria-label="Choose a color">
             </div>
             <div class="color-picker-dots" aria-label="Popular colors">
-              <button class="color-dot is-selected" type="button" data-hue="0" style="--dot-color: #ff4d4d" aria-label="Red"></button>
-              <button class="color-dot" type="button" data-hue="30" style="--dot-color: #ff9f43" aria-label="Orange"></button>
+              <button class="color-dot" type="button" data-hue="0" style="--dot-color: #111111" aria-label="Black"></button>
+              <button class="color-dot" type="button" data-hue="25" style="--dot-color: #ff4d4d" aria-label="Red"></button>
+              <button class="color-dot" type="button" data-hue="38" style="--dot-color: #ff9f43" aria-label="Orange"></button>
               <button class="color-dot" type="button" data-hue="55" style="--dot-color: #ffd93d" aria-label="Yellow"></button>
               <button class="color-dot" type="button" data-hue="110" style="--dot-color: #4ad66d" aria-label="Green"></button>
               <button class="color-dot" type="button" data-hue="160" style="--dot-color: #38c7b8" aria-label="Teal"></button>
@@ -269,67 +270,105 @@
     const colorDots = document.querySelectorAll('.color-dot');
     const colorToggle = document.querySelector('.color-picker-toggle');
     let lastSpark = 0;
-    let isThemeActive = true;
+    let isThemeActive = false;
     let lastThemeHue = Number(colorSlider?.value || 220);
 
-    function applyThemeState() {
-      const hue = lastThemeHue;
-      document.documentElement.style.setProperty('--theme-hue', isThemeActive ? hue : 220);
+    function applyOriginalTheme() {
+      document.documentElement.style.setProperty('--page-rose', '#f2b6c6');
+      document.documentElement.style.setProperty('--page-peach', '#f6c9b8');
+      document.documentElement.style.setProperty('--page-butter', '#f8e5a7');
+      document.documentElement.style.setProperty('--page-mint', '#c9e5b5');
+      document.documentElement.style.setProperty('--page-sky', '#a9dfe0');
+      document.documentElement.style.setProperty('--page-lavender', '#d8c7ed');
+      document.documentElement.style.setProperty('--page-cream', '#fff9f5');
+      document.documentElement.style.setProperty('--theme-hue', '220');
+      document.documentElement.style.setProperty('--theme-accent', 'hsl(220 74% 64%)');
+      document.documentElement.style.setProperty('--theme-accent-strong', 'hsl(220 72% 56%)');
+      document.documentElement.style.setProperty('--theme-accent-soft', 'hsl(220 82% 82%)');
+    }
 
-      const start = `hsl(${isThemeActive ? hue : 220} 88% 70%)`;
-      const end = `hsl(${(isThemeActive ? hue : 220) + 42} 80% 62%)`;
+    function applySelectedTheme(hue) {
+      document.documentElement.style.setProperty('--theme-hue', String(hue));
+      document.documentElement.style.setProperty('--page-rose', `hsl(${hue - 18} 78% 84%)`);
+      document.documentElement.style.setProperty('--page-peach', `hsl(${hue + 10} 72% 82%)`);
+      document.documentElement.style.setProperty('--page-butter', `hsl(${hue + 24} 78% 82%)`);
+      document.documentElement.style.setProperty('--page-mint', `hsl(${hue + 32} 62% 78%)`);
+      document.documentElement.style.setProperty('--page-sky', `hsl(${hue + 16} 72% 82%)`);
+      document.documentElement.style.setProperty('--page-lavender', `hsl(${hue + 42} 60% 84%)`);
+      document.documentElement.style.setProperty('--page-cream', `hsl(${hue + 5} 84% 96%)`);
+      document.documentElement.style.setProperty('--theme-accent', `hsl(${hue} 74% 64%)`);
+      document.documentElement.style.setProperty('--theme-accent-strong', `hsl(${hue} 72% 56%)`);
+      document.documentElement.style.setProperty('--theme-accent-soft', `hsl(${hue} 82% 82%)`);
+    }
+
+    function updatePickerVisual(hue) {
+      const start = `hsl(${hue} 88% 70%)`;
+      const end = `hsl(${(hue + 42) % 360} 80% 62%)`;
 
       if (colorChip) {
         colorChip.style.background = `linear-gradient(135deg, ${start}, ${end})`;
-        colorChip.style.boxShadow = `0 12px 24px hsla(${isThemeActive ? hue : 220} 80% 62% / 0.45), inset 0 0 0 6px rgba(255, 255, 255, 0.28)`;
+        colorChip.style.boxShadow = `0 12px 24px hsla(${hue} 80% 62% / 0.45), inset 0 0 0 6px rgba(255, 255, 255, 0.28)`;
       }
 
       if (colorSlider) {
         colorSlider.style.background = `linear-gradient(90deg,
-          hsl(${(isThemeActive ? hue : 220) - 18} 92% 64%) 0%,
-          hsl(${(isThemeActive ? hue : 220) + 12} 92% 64%) 18%,
-          hsl(${(isThemeActive ? hue : 220) + 42} 92% 64%) 38%,
-          hsl(${(isThemeActive ? hue : 220) + 82} 92% 64%) 58%,
-          hsl(${(isThemeActive ? hue : 220) + 122} 92% 64%) 78%,
-          hsl(${(isThemeActive ? hue : 220) + 182} 92% 64%) 100%)`;
+          hsl(${hue - 18} 92% 64%) 0%,
+          hsl(${hue + 12} 92% 64%) 18%,
+          hsl(${hue + 42} 92% 64%) 38%,
+          hsl(${hue + 82} 92% 64%) 58%,
+          hsl(${hue + 122} 92% 64%) 78%,
+          hsl(${hue + 182} 92% 64%) 100%)`;
       }
 
       colorDots.forEach((dot) => {
         const isSelected = Number(dot.dataset.hue) === hue;
         dot.classList.toggle('is-selected', isSelected);
       });
+    }
 
+    function updateThemeState() {
       if (colorToggle) {
         colorToggle.textContent = isThemeActive ? 'Stop' : 'Start';
         colorToggle.dataset.mode = isThemeActive ? 'stop' : 'start';
       }
-    }
 
-    function updateColorTheme(hue) {
-      lastThemeHue = Number(hue);
-      applyThemeState();
+      if (isThemeActive) {
+        applySelectedTheme(lastThemeHue);
+      } else {
+        applyOriginalTheme();
+      }
     }
 
     if (colorSlider && colorChip) {
       colorSlider.addEventListener('input', (event) => {
         const hue = Number(event.target.value);
-        updateColorTheme(hue);
+        lastThemeHue = hue;
+        updatePickerVisual(hue);
+        if (isThemeActive) {
+          applySelectedTheme(hue);
+        }
       });
 
       colorDots.forEach((dot) => {
         dot.addEventListener('click', () => {
           const hue = Number(dot.dataset.hue);
+          lastThemeHue = hue;
           colorSlider.value = String(hue);
-          updateColorTheme(hue);
+          updatePickerVisual(hue);
+          if (isThemeActive) {
+            applySelectedTheme(hue);
+          }
         });
       });
 
       colorToggle?.addEventListener('click', () => {
         isThemeActive = !isThemeActive;
-        applyThemeState();
+        updateThemeState();
       });
 
-      updateColorTheme(Number(colorSlider.value));
+      applyOriginalTheme();
+      updatePickerVisual(Number(colorSlider.value));
+      updateThemeState();
     }
 
     function leaveGlitter(event) {
