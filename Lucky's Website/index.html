@@ -563,6 +563,7 @@
       const pet = petPhotos[photoIndex];
       photoSlide.src = pet.src;
       photoSlide.alt = pet.alt;
+      photoSlide.classList.toggle('is-zoomed', photoIndex === 2);
       photoCaption.textContent = pet.name;
       photoDescription.textContent = pet.description;
       photoDate.textContent = pet.date;

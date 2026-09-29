@@ -653,7 +653,9 @@ h2 em {
   letter-spacing: -.04em;
 }
 
-.photo-gallery-header h3 em { color: var(--theme-accent-strong); }
+.photo-gallery-header h3 em {
+  color: hsl(0, 0%, 53%);
+}
 
 .photo-nav {
   display: flex;
@@ -695,7 +697,12 @@ h2 em {
   object-position: center;
   display: block;
   background: #ede8e4;
-  transition: opacity .2s ease;
+  transition: opacity .2s ease, transform .3s ease;
+  transform-origin: center 40%;
+}
+
+.photo-slide.is-zoomed {
+  transform: scale(1.7);
 }
 
 .photo-count {
@@ -703,7 +710,7 @@ h2 em {
   right: 12px;
   bottom: 12px;
   padding: 7px 10px;
-  border: 1px solid rgba(255,255,255,.38);
+  border: 1px solid rgba(255, 255, 255, .38);
   border-radius: 999px;
   background: rgba(30, 28, 27, .58);
   color: white;
@@ -713,7 +720,10 @@ h2 em {
   backdrop-filter: blur(8px);
 }
 
-.photo-count span { opacity: .6; padding: 0 3px; }
+.photo-count span {
+  opacity: .6;
+  padding: 0 3px;
+}
 
 .photo-caption-wrap {
   display: flex;
@@ -768,17 +778,29 @@ h2 em {
 }
 
 .photo-dot.is-active {
-  background: var(--theme-accent-strong);
+  background: vhsl(0deg 0% 63.93%);
   box-shadow: 0 0 0 4px color-mix(in srgb, var(--theme-accent-strong), transparent 82%);
   transform: scale(1.12);
 }
 
-.photo-arrow:focus-visible, .photo-dot:focus-visible { outline: 3px solid var(--theme-accent-strong); outline-offset: 3px; }
+.photo-arrow:focus-visible,
+.photo-dot:focus-visible {
+  outline: 3px solid var(--theme-accent-strong);
+  outline-offset: 3px;
+}
 
 @media (max-width: 540px) {
-  .photo-gallery { padding: 18px 16px 14px; }
-  .photo-frame { height: min(78vw, 340px); }
-  .photo-date { max-width: 42%; }
+  .photo-gallery {
+    padding: 18px 16px 14px;
+  }
+
+  .photo-frame {
+    height: min(78vw, 340px);
+  }
+
+  .photo-date {
+    max-width: 42%;
+  }
 }
 
 .section-label {
