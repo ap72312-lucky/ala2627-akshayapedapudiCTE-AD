@@ -116,24 +116,31 @@
         <p class="large-copy">I am working toward strong grades while building confidence in English, Math, History, and
           Technology. I care about understanding how things work so I can be of use for myself and people around me.</p>
 
-        <section class="photo-gallery" aria-label="Photo gallery">
+        <section class="photo-gallery" aria-labelledby="pets-title">
           <div class="photo-gallery-header">
-            <p class="section-label"><span>02</span>MY PETS!💖</p>
+            <div>
+              <p class="section-label"><span>02</span> LIFE WITH PETS</p>
+              <h3 id="pets-title">Small moments,<br><em>big love.</em></h3>
+            </div>
             <div class="photo-nav" aria-label="Photo gallery controls">
-              <button class="photo-arrow photo-arrow-prev" type="button" aria-label="Previous photo">↩</button>
-              <button class="photo-arrow photo-arrow-next" type="button" aria-label="Next photo">↪</button>
+              <button class="photo-arrow photo-arrow-prev" type="button" aria-label="Previous pet photo">←</button>
+              <button class="photo-arrow photo-arrow-next" type="button" aria-label="Next pet photo">→</button>
             </div>
           </div>
           <div class="photo-frame">
-            <img class="photo-slide" src="" alt="Gallery photo">
+            <img class="photo-slide" src="pet-photos/poly-and-mia.jpg" alt="Poly and Mia, a green-and-yellow budgie and a blue-and-white budgie, perched together on a hand." width="1920" height="1080">
+            <span class="photo-count" aria-hidden="true">01 <span>/</span> 05</span>
           </div>
-          <p class="photo-caption">Edit this caption</p>
-          <div class="photo-dots" aria-label="Slide position">
-            <button class="photo-dot is-active" type="button" aria-label="View slide 1"></button>
-            <button class="photo-dot" type="button" aria-label="View slide 2"></button>
-            <button class="photo-dot" type="button" aria-label="View slide 3"></button>
-            <button class="photo-dot" type="button" aria-label="View slide 4"></button>
-            <button class="photo-dot" type="button" aria-label="View slide 5"></button>
+          <div class="photo-caption-wrap" aria-live="polite" aria-atomic="true">
+            <div><h4 class="photo-caption">Poly &amp; Mia</h4><p class="photo-description">Two little perches, one very sweet pair.</p></div>
+            <p class="photo-date">2016 — 2018</p>
+          </div>
+          <div class="photo-dots" role="group" aria-label="Choose a pet photo">
+            <button class="photo-dot is-active" type="button" aria-label="View Poly and Mia" aria-current="true"></button>
+            <button class="photo-dot" type="button" aria-label="View Cloudy"></button>
+            <button class="photo-dot" type="button" aria-label="View Snowy"></button>
+            <button class="photo-dot" type="button" aria-label="View Sunny"></button>
+            <button class="photo-dot" type="button" aria-label="View Baila"></button>
           </div>
         </section>
       </div>
@@ -534,49 +541,38 @@
 
     chooseTarget();
 
-    const photoPaths = [
-      '../.vscode/images/two-birds-Poly&Mia1.jpg',
-      '../.vscode/images/white-bunny-Cloudy2.png',
-      '../.vscode/images/white-dog-Snowy3.jpg',
-      '../.vscode/images/yellow-bird-Sunny4.jpg',
-      '../.vscode/images/black-dog-and-human-Baila&Me.jpg'
-    ];
-    const photoCaptions = [
-      'Mia & Poly🦜🦜2016-2018',
-      'Cloudy🐇Aug 2021-Oct 2021',
-      'Snowy🐩Dec 2022-Feb 2023',
-      'Sunny🦜July 2023-Oct 2023',
-      'Me & Baila👧🏻🐕July 12, 2025-Feb 20, 2026'
+    const petPhotos = [
+      { src: 'pet-photos/poly-and-mia.jpg', name: 'Poly & Mia', description: 'Two little perches, one very sweet pair.', date: '2016 — 2018', alt: 'Poly and Mia, a green-and-yellow budgie and a blue-and-white budgie, perched together on a hand.' },
+      { src: 'pet-photos/cloudy.jpg', name: 'Cloudy', description: 'A soft, floppy-eared friend with a curious look.', date: 'August — October 2021', alt: 'Cloudy, a white lop-eared rabbit, sitting in a pen.' },
+      { src: 'pet-photos/snowy.jpg', name: 'Snowy', description: 'A bright smile and a little red harness.', date: 'December 2022 — February 2023', alt: 'Snowy, a fluffy white dog wearing a red harness and sitting indoors.' },
+      { src: 'pet-photos/sunny.jpg', name: 'Sunny', description: 'A sunny little budgie, perched close by.', date: 'July — October 2023', alt: 'Sunny, a yellow-and-green budgie perched on a hand.' },
+      { src: 'pet-photos/baila-and-lucky.jpg', name: 'Baila', description: 'A favorite selfie with my big, fluffy sidekick.', date: 'July 12, 2025 — February 20, 2026', alt: 'Lucky smiling beside Baila, a fluffy black dog, outdoors.' }
     ];
     const photoSlide = document.querySelector('.photo-slide');
     const photoCaption = document.querySelector('.photo-caption');
+    const photoDescription = document.querySelector('.photo-description');
+    const photoDate = document.querySelector('.photo-date');
+    const photoCount = document.querySelector('.photo-count');
     const photoDots = document.querySelectorAll('.photo-dot');
     const photoPrev = document.querySelector('.photo-arrow-prev');
     const photoNext = document.querySelector('.photo-arrow-next');
     let photoIndex = 0;
 
     function updatePhotoSlide(index) {
-      if (!photoPaths.length) return;
-      photoIndex = (index + photoPaths.length) % photoPaths.length;
-      const activePath = photoPaths[photoIndex];
-
-      if (activePath) {
-        photoSlide.src = activePath;
-        photoSlide.alt = `Gallery photo ${photoIndex + 1}`;
-        photoSlide.style.display = 'block';
-      } else {
-        photoSlide.removeAttribute('src');
-        photoSlide.alt = 'Photo slot waiting for upload';
-        photoSlide.style.display = 'none';
-      }
-
-      const isThirdSlide = photoIndex === 2;
-      photoSlide.classList.toggle('is-zoomed', isThirdSlide);
-      photoSlide.style.objectPosition = isThirdSlide ? 'center 18%' : 'center';
-      photoCaption.textContent = photoCaptions[photoIndex] || 'Edit this caption';
+      photoIndex = (index + petPhotos.length) % petPhotos.length;
+      const pet = petPhotos[photoIndex];
+      photoSlide.src = pet.src;
+      photoSlide.alt = pet.alt;
+      photoCaption.textContent = pet.name;
+      photoDescription.textContent = pet.description;
+      photoDate.textContent = pet.date;
+      photoCount.innerHTML = `${String(photoIndex + 1).padStart(2, '0')} <span>/</span> ${String(petPhotos.length).padStart(2, '0')}`;
 
       photoDots.forEach((dot, dotIndex) => {
-        dot.classList.toggle('is-active', dotIndex === photoIndex);
+        const isActive = dotIndex === photoIndex;
+        dot.classList.toggle('is-active', isActive);
+        if (isActive) dot.setAttribute('aria-current', 'true');
+        else dot.removeAttribute('aria-current');
       });
     }
 
