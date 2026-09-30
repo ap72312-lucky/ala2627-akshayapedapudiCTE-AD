@@ -20,7 +20,7 @@
   --page-lavender: hsl(calc(var(--theme-hue) + 42) 60% 84%);
   --page-cream: hsl(calc(var(--theme-hue) + 5) 84% 96%);
   --glass: rgba(255, 255, 255, 0.58);
-  --line: rgba(48, 48, 48, 0.16);
+  --line: rgba(0, 0, 0, 0.5);
   --max: 1180px;
 }
 
@@ -768,7 +768,7 @@ h2 em {
   height: 9px;
   border: 0;
   border-radius: 50%;
-  background: rgba(48, 48, 48, .24);
+  background: rgb(0, 0, 0);
   cursor: pointer;
   transition: transform .2s ease, background-color .2s ease, box-shadow .2s ease;
 }
@@ -779,7 +779,7 @@ h2 em {
 
 .photo-dot.is-active {
   background: vhsl(0deg 0% 63.93%);
-  box-shadow: 0 0 0 4px color-mix(in srgb, var(--theme-accent-strong), transparent 82%);
+  box-shadow: 0 0 0 4px color-mix(in srgb, var(--line), transparent 82%);
   transform: scale(1.12);
 }
 
@@ -1183,7 +1183,7 @@ h2 em {
   margin: 20px;
   padding: 18px 16px 14px;
   border-radius: 4px;
-  background: linear-gradient(180deg, #d1f1c8 0%, #8bc78d 48%, #4a7b59 100%);
+  background: linear-gradient(180deg, #daf1d4 0%, #a9e4ab 48%, #1e6935 100%);
   overflow: hidden;
 }
 
