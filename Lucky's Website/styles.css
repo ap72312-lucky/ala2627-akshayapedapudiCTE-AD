@@ -51,7 +51,7 @@ body {
       #242424 100%);
   background-attachment: fixed;
   color: var(--ink);
-  font: 16px/1.6 Georgia, "Times New Roman", serif;
+  font: 16px/1.6 Georgia, "", serif;
 }
 
 body::before {
