@@ -994,7 +994,7 @@ h2 em {
   width: 78px;
   height: 78px;
   border-radius: 50%;
-  background: linear-gradient(135deg, #8ec5ff, #6a7bff);
+  background: linear-gradient(135deg, #ffffff, #000000);
   box-shadow: 0 12px 24px rgba(110, 138, 255, .45), inset 0 0 0 6px rgba(255, 255, 255, .28);
   transition: background .2s ease, box-shadow .2s ease;
 }
