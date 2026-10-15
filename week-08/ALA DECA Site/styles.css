@@ -117,13 +117,8 @@ body.scroll-locked {
   color: white;
 }
 
-.feature {
-  border-top: 6px solid #ff2d72;
-}
-
 .terms-card {
   justify-content: flex-start;
-  border-top: 6px solid #f4c95d;
 }
 
 .terms-carousel {
