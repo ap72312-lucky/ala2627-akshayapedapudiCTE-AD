@@ -40,15 +40,33 @@
     <section class="card">
       <h2>What is DECA?</h2>
       <p>DECA, an abbreviation of Distributive Education Clubs of America, is a global student organization that
-        prepares high school and college students for careers in <span style="color: #f5c842;">business &
-          management</span>, <span style="color: #e63946;">marketing</span>, <span
-          style="color: #22c55e;">finance</span>, and <span style="color: #2563eb;">hospitality</span></p>
+        prepares high school and college students for careers in <span style="color: #9299a3;">Entrepreneurship</span>,
+        <span style="color: #ef4444;">Marketing</span>, <span style="color: #facc15;">Business Management +
+          Administration</span>, <span style="color: #22c55e;">Finance</span>, and <span
+          style="color: #3b82f6;">Hospitality + Tourism</span>
+      </p>
+    </section>
+
+    <section class="card terms-card" aria-labelledby="terms-title">
+      <h2 id="terms-title">DECA Terms</h2>
+      <div id="terms-carousel" class="terms-carousel" aria-label="DECA terms flashcards">
+        <span id="term-category" class="term-category"></span>
+        <article class="term-face" aria-live="polite" aria-atomic="true">
+          <h3 id="term-name"></h3>
+          <p id="term-definition"></p>
+        </article>
+        <div class="term-navigation">
+          <button id="term-prev" class="term-arrow" type="button" aria-label="Previous term">←</button>
+          <span id="term-count" class="term-count" aria-live="polite"></span>
+          <button id="term-next" class="term-arrow" type="button" aria-label="Next term">→</button>
+        </div>
+      </div>
     </section>
 
     <section class="card feature">
       <h2>Links to DECA.</h2>
       <!-- DAY 2: this is your button. Its id, "action", is how JavaScript finds it. -->
-      <button id="action" type="button">🍀</button>
+      <button id="action" type="button">🔷</button>
       <!-- DAY 2: JavaScript writes into this paragraph. Its id is "output". -->
       <p id="output">
         <a href="https://www.deca.org/" target="_blank" rel="noopener noreferrer">Main Hub</a><br>
@@ -64,6 +82,9 @@
         <a href="https://www.decadirect.org/articles/navigating-decas-competitive-events-featured-resources"
           target="_blank" rel="noopener noreferrer">DECA Direct</a><br>
         <a href="https://www.azdeca.org/" target="_blank" rel="noopener noreferrer">Arizona DECA</a><br>
+        <a href="https://decaprep.com/" target="_blank" rel="noopener noreferrer">Deca Prep</a><br>
+        <a href="https://cdn.prod.website-files.com/635c470cc81318fc3e9c1e0e/65ba75b6da39a06fd17dc805_DECA-Fact%20Sheet-2024-01.pdf"
+          target="_blank" rel="noopener noreferrer">Deca Fact Sheet</a><br>
       </p>
     </section>
 
@@ -119,9 +140,34 @@
           <span>Mon</span><span>Tue</span><span>Wed</span><span>Thu</span><span>Fri</span><span>Sat</span><span>Sun</span>
         </div>
         <div id="calendar-days" class="calendar-days" aria-label="Calendar dates"></div>
+        <div class="calendar-key" aria-label="DECA event category key">
+          <span class="calendar-key-item"><span class="calendar-key-swatch key-general"></span><span
+              class="key-label-general">General</span></span>
+          <span class="calendar-key-item"><span class="calendar-key-swatch key-marketing"></span><span
+              class="key-label-marketing">Marketing</span></span>
+          <span class="calendar-key-item"><span class="calendar-key-swatch key-business"></span><span
+              class="key-label-business">Business Management + Administration</span></span>
+          <span class="calendar-key-item"><span class="calendar-key-swatch key-hospitality"></span><span
+              class="key-label-hospitality">Hospitality + Tourism</span></span>
+          <span class="calendar-key-item"><span class="calendar-key-swatch key-finance"></span><span
+              class="key-label-finance">Finance</span></span>
+          <span class="calendar-key-item"><span class="calendar-key-swatch key-entrepreneurship"></span><span
+              class="key-label-entrepreneurship">Entrepreneurship</span></span>
+          <span class="calendar-key-item"><span class="calendar-key-swatch key-holiday"></span><span
+              class="key-label-holiday">Holidays</span></span>
+        </div>
         <form id="event-form" class="event-form" hidden>
           <label for="event-title">Event name</label>
           <input id="event-title" name="title" type="text" maxlength="80" placeholder="e.g. Chapter meeting" required>
+          <label for="event-category">Category</label>
+          <select id="event-category" name="category" required>
+            <option value="general">General</option>
+            <option value="marketing">Marketing</option>
+            <option value="business">Business Management + Administration</option>
+            <option value="hospitality">Hospitality + Tourism</option>
+            <option value="finance">Finance</option>
+            <option value="entrepreneurship">Entrepreneurship</option>
+          </select>
           <label for="event-date">Date</label>
           <input id="event-date" name="date" type="date" required>
           <div class="event-form-actions">

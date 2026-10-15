@@ -13,6 +13,58 @@ button.addEventListener("click", function () {
   button.textContent = isVisible ? "Hide links" : "Show links";
 });
 
+// ─────────────── DECA terms flashcards ───────────────
+const decaTerms = [
+  { category: "Organization basics", term: "DECA", definition: "A career and technical student organization that prepares emerging leaders and entrepreneurs in marketing, finance, hospitality, and management. It was originally “Distributive Education Clubs of America.”" },
+  { category: "Organization basics", term: "CTSO (Career and Technical Student Organization)", definition: "A student organization tied to career and technical education classes. DECA is one of several." },
+  { category: "Organization basics", term: "Chapter", definition: "The local DECA group at a school." },
+  { category: "Organization basics", term: "Association", definition: "The state-level organization, such as Arizona DECA." },
+  { category: "Organization basics", term: "Career Cluster", definition: "A category of related careers that events are grouped into (Marketing, Finance, Hospitality & Tourism, Business Management & Administration, Entrepreneurship, and Personal Financial Literacy)." },
+  { category: "Conferences", term: "SCDC (State Career Development Conference)", definition: "The state competition where students qualify for internationals." },
+  { category: "Conferences", term: "ICDC (International Career Development Conference)", definition: "The international competition for state qualifiers." },
+  { category: "Conferences", term: "Qualifying", definition: "Earning a high enough placement at one level to advance to the next." },
+  { category: "Competition terms", term: "Competitive Event", definition: "A specific contest a student enters, like Principles of Marketing or Sports and Entertainment Marketing." },
+  { category: "Competition terms", term: "Role-Play", definition: "An event where you act as a business professional responding to a scenario, usually with a short prep time followed by a presentation to a judge." },
+  { category: "Competition terms", term: "Case Study", definition: "A longer, more in-depth business problem you analyze and present solutions for." },
+  { category: "Competition terms", term: "Judge", definition: "A business professional who scores your presentation." },
+  { category: "Competition terms", term: "Performance Indicators (PIs)", definition: "The specific skills and knowledge a judge is looking for in your role-play." },
+  { category: "Competition terms", term: "21st Century Skills", definition: "Broader skills judges also score, like communication, critical thinking, and collaboration." },
+  { category: "Competition terms", term: "Rubric / Score Sheet", definition: "The scoring guide judges use to rate a presentation." },
+  { category: "Competition terms", term: "Exam", definition: "The multiple-choice test that is part of most competitive events and often counts toward your total score." },
+  { category: "Competition terms", term: "Prep Time", definition: "The short period before a role-play when you read the scenario and plan your response." },
+  { category: "Competition terms", term: "Written Event", definition: "An event that requires submitting a written report or project before presenting it." },
+  { category: "Competition terms", term: "Team Event", definition: "An event where two or three students compete together." },
+  { category: "Competition terms", term: "Individual Event", definition: "An event where one student competes alone." },
+  { category: "Chapter and leadership", term: "Chapter Officer", definition: "A student elected to lead the local chapter." },
+  { category: "Chapter and leadership", term: "Advisor", definition: "The teacher who supports and oversees the chapter." },
+  { category: "Chapter and leadership", term: "Professional Attire", definition: "The dress code for competitions." }
+];
+
+const termCategory = document.querySelector("#term-category");
+const termName = document.querySelector("#term-name");
+const termDefinition = document.querySelector("#term-definition");
+const termCount = document.querySelector("#term-count");
+let currentTermIndex = 0;
+
+function showTerm(index) {
+  currentTermIndex = (index + decaTerms.length) % decaTerms.length;
+  const currentTerm = decaTerms[currentTermIndex];
+  termCategory.textContent = currentTerm.category;
+  termName.textContent = currentTerm.term;
+  termDefinition.textContent = currentTerm.definition;
+  termCount.textContent = `${currentTermIndex + 1} / ${decaTerms.length}`;
+}
+
+document.querySelector("#term-prev").addEventListener("click", function () {
+  showTerm(currentTermIndex - 1);
+});
+
+document.querySelector("#term-next").addEventListener("click", function () {
+  showTerm(currentTermIndex + 1);
+});
+
+showTerm(currentTermIndex);
+
 // ─────────────── Tetris mini-game ───────────────
 const COLS = 10;
 const ROWS = 16;
@@ -336,16 +388,113 @@ let displayedMonth = new Date(today.getFullYear(), today.getMonth(), 1);
 let selectedDate = formatCalendarDate(today);
 const eventForm = document.querySelector("#event-form");
 const eventTitleInput = document.querySelector("#event-title");
+const eventCategoryInput = document.querySelector("#event-category");
 const eventDateInput = document.querySelector("#event-date");
 const addEventToggle = document.querySelector("#add-event-toggle");
 const calendarStorageKey = "deca-calendar-events";
-let calendarEvents = [];
+const eventCategories = {
+  general: "General",
+  marketing: "Marketing",
+  business: "Business Management + Administration",
+  hospitality: "Hospitality + Tourism",
+  finance: "Finance",
+  entrepreneurship: "Entrepreneurship",
+  holiday: "Holiday"
+};
+// Organizer-managed events stay separate from visitor-added events.
+const recurringTuesdayEvents = [];
+const firstAlternatingTuesday = new Date(2026, 8, 29, 12);
+const lastSchoolTuesday = new Date(2027, 4, 18, 12);
+let tuesdayNumber = 0;
+
+for (let date = new Date(firstAlternatingTuesday); date <= lastSchoolTuesday; date.setDate(date.getDate() + 7)) {
+  const category = tuesdayNumber % 2 === 0 ? "marketing" : "finance";
+  recurringTuesdayEvents.push({
+    date: formatCalendarDate(date),
+    title: eventCategories[category],
+    category
+  });
+  tuesdayNumber += 1;
+}
+
+const fixedCalendarEvents = [
+  {
+    date: "2026-10-01", title: "Entrepreneurship", category: "entrepreneurship",
+    dateLabel: "October 1, 2026", time: "3:00–3:30 PM"
+  },
+  {
+    date: "2026-10-12", title: "Columbus Day", category: "holiday",
+    dateLabel: "October 12, 2026"
+  },
+  {
+    date: "2026-10-15", title: "Entrepreneurship", category: "entrepreneurship",
+    dateLabel: "October 15, 2026", time: "3:00–3:30 PM"
+  },
+  {
+    date: "2026-10-31", title: "Halloween", category: "holiday",
+    dateLabel: "October 31, 2026"
+  },
+  {
+    date: "2026-11-11", title: "Veterans Day", category: "holiday",
+    dateLabel: "November 11, 2026"
+  },
+  {
+    date: "2026-11-26", title: "Thanksgiving Day", category: "holiday",
+    dateLabel: "November 26, 2026"
+  },
+  {
+    date: "2026-12-24", title: "Christmas Eve", category: "holiday",
+    dateLabel: "December 24, 2026"
+  },
+  {
+    date: "2026-12-25", title: "Christmas Day", category: "holiday",
+    dateLabel: "December 25, 2026"
+  },
+  {
+    date: "2027-01-01", title: "New Year's Day", category: "holiday",
+    dateLabel: "January 1, 2027"
+  },
+  {
+    date: "2027-01-18", title: "Martin Luther King Jr. Day", category: "holiday",
+    dateLabel: "January 18, 2027"
+  },
+  {
+    date: "2027-02-14", title: "Valentine's Day", category: "holiday",
+    dateLabel: "February 14, 2027"
+  },
+  {
+    date: "2027-02-15", title: "Presidents' Day", category: "holiday",
+    dateLabel: "February 15, 2027"
+  },
+  {
+    date: "2027-05-20", title: "Last Day of School!", category: "holiday",
+    dateLabel: "May 20, 2027"
+  },
+  {
+    date: "2026-11-13", title: "Red Zone Leadership Conference", category: "general",
+    dateLabel: "November 13, 2026", location: "Glendale, AZ"
+  },
+  {
+    date: "2026-11-20", endDate: "2026-11-22", title: "Ultimate DECA Power Trip", category: "general",
+    dateLabel: "November 20–22, 2026", location: "Louisville, KY"
+  },
+  {
+    date: "2027-02-25", endDate: "2027-02-27", title: "State Career Development Conference", category: "general",
+    dateLabel: "February 25–27, 2027", location: "Phoenix"
+  },
+  {
+    date: "2027-04-16", endDate: "2027-04-21", title: "International Career Development Conference", category: "general",
+    dateLabel: "April 16–21, 2027", location: "Anaheim"
+  },
+  ...recurringTuesdayEvents
+];
+let userCalendarEvents = [];
 
 try {
-  calendarEvents = JSON.parse(localStorage.getItem(calendarStorageKey) || "[]");
-  if (!Array.isArray(calendarEvents)) calendarEvents = [];
+  userCalendarEvents = JSON.parse(localStorage.getItem(calendarStorageKey) || "[]");
+  if (!Array.isArray(userCalendarEvents)) userCalendarEvents = [];
 } catch {
-  calendarEvents = [];
+  userCalendarEvents = [];
 }
 
 function formatCalendarDate(date) {
@@ -355,8 +504,13 @@ function formatCalendarDate(date) {
   return `${year}-${month}-${day}`;
 }
 
+function eventOccursOnDate(event, date) {
+  if (!event.endDate) return event.date === date;
+  return event.date <= date && event.endDate >= date;
+}
+
 function saveCalendarEvents() {
-  localStorage.setItem(calendarStorageKey, JSON.stringify(calendarEvents));
+  localStorage.setItem(calendarStorageKey, JSON.stringify(userCalendarEvents));
 }
 
 function renderSelectedDate() {
@@ -371,7 +525,10 @@ function renderSelectedDate() {
   });
   calendarSelection.replaceChildren(title);
 
-  const eventsForDate = calendarEvents.filter((event) => event.date === selectedDate);
+  const eventsForDate = [
+    ...fixedCalendarEvents.map((event) => ({ ...event, isFixed: true })),
+    ...userCalendarEvents.map((event) => ({ ...event, isFixed: false }))
+  ].filter((event) => eventOccursOnDate(event, selectedDate));
   if (eventsForDate.length === 0) {
     const emptyMessage = document.createElement("span");
     emptyMessage.textContent = "No events yet.";
@@ -383,20 +540,47 @@ function renderSelectedDate() {
   eventList.className = "event-list";
   eventsForDate.forEach((event) => {
     const item = document.createElement("li");
+    const details = document.createElement("span");
+    details.className = "event-details";
+    const category = eventCategories[event.category] ? event.category : "general";
+    const swatch = document.createElement("span");
+    swatch.className = `event-category-swatch category-${category}`;
+    swatch.setAttribute("aria-hidden", "true");
     const name = document.createElement("span");
+    name.className = "event-title-text";
     name.textContent = event.title;
-    const deleteButton = document.createElement("button");
-    deleteButton.type = "button";
-    deleteButton.className = "event-delete";
-    deleteButton.textContent = "Remove";
-    deleteButton.setAttribute("aria-label", `Remove ${event.title}`);
-    deleteButton.addEventListener("click", () => {
-      calendarEvents = calendarEvents.filter((savedEvent) => savedEvent.id !== event.id);
-      saveCalendarEvents();
-      renderCalendar();
-      renderSelectedDate();
-    });
-    item.append(name, deleteButton);
+    const copy = document.createElement("span");
+    copy.className = "event-copy";
+    copy.appendChild(name);
+    const meta = [event.dateLabel, event.time, event.location, event.description].filter(Boolean).join(" · ");
+    if (meta) {
+      const eventMeta = document.createElement("span");
+      eventMeta.className = "event-meta";
+      eventMeta.textContent = meta;
+      copy.appendChild(eventMeta);
+    }
+    details.append(swatch, copy);
+    item.appendChild(details);
+
+    if (event.isFixed) {
+      const source = document.createElement("span");
+      source.className = "event-source";
+      source.textContent = "Main event";
+      item.appendChild(source);
+    } else {
+      const deleteButton = document.createElement("button");
+      deleteButton.type = "button";
+      deleteButton.className = "event-delete";
+      deleteButton.textContent = "Remove";
+      deleteButton.setAttribute("aria-label", `Remove ${event.title}`);
+      deleteButton.addEventListener("click", () => {
+        userCalendarEvents = userCalendarEvents.filter((savedEvent) => savedEvent.id !== event.id);
+        saveCalendarEvents();
+        renderCalendar();
+        renderSelectedDate();
+      });
+      item.appendChild(deleteButton);
+    }
     eventList.appendChild(item);
   });
   calendarSelection.appendChild(eventList);
@@ -435,9 +619,29 @@ function renderCalendar() {
     }));
 
     const dateKey = formatCalendarDate(date);
-    if (calendarEvents.some((event) => event.date === dateKey)) {
+    const eventsForDate = [
+      ...fixedCalendarEvents,
+      ...userCalendarEvents
+    ].filter((event) => eventOccursOnDate(event, dateKey));
+    if (eventsForDate.length > 0) {
+      dateButton.setAttribute("aria-label", `${dateButton.getAttribute("aria-label")}, events: ${eventsForDate.map((event) => event.title).join(", ")}`);
+    }
+
+    const markedEvents = eventsForDate.filter((event) => !event.hideDot);
+    if (markedEvents.length > 0) {
       dateButton.classList.add("has-event");
-      dateButton.setAttribute("aria-label", `${dateButton.getAttribute("aria-label")}, has events`);
+      const markers = document.createElement("span");
+      markers.className = "calendar-event-markers";
+      markers.setAttribute("aria-hidden", "true");
+      const categories = [...new Set(markedEvents.map((event) => (
+        eventCategories[event.category] ? event.category : "general"
+      )))];
+      categories.forEach((category) => {
+        const dot = document.createElement("span");
+        dot.className = `calendar-event-dot category-${category}`;
+        markers.appendChild(dot);
+      });
+      dateButton.appendChild(markers);
     }
 
     if (date.toDateString() === today.toDateString()) {
@@ -488,10 +692,11 @@ document.querySelector("#cancel-event").addEventListener("click", () => {
 eventForm.addEventListener("submit", (event) => {
   event.preventDefault();
   const title = eventTitleInput.value.trim();
+  const category = eventCategoryInput.value;
   const date = eventDateInput.value;
-  if (!title || !date) return;
+  if (!title || !date || !eventCategories[category]) return;
 
-  calendarEvents.push({ id: `${Date.now()}-${Math.random()}`, title, date });
+  userCalendarEvents.push({ id: `${Date.now()}-${Math.random()}`, title, category, date });
   selectedDate = date;
   displayedMonth = new Date(`${date}T12:00:00`);
   displayedMonth.setDate(1);
