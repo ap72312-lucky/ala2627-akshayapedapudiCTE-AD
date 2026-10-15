@@ -5,7 +5,7 @@
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
   <!-- DAY 1 · TODO 1: change the title to your topic -->
-  <title>DECA Info</title>
+  <title> ALA DECA Info</title>
   <link rel="icon" type="image/png"
     href="https://cdn.prod.website-files.com/635c470cc81318fc3e9c1e0e/69f89e221fc4f4b2e5b2adec_Theme%202026%20Collegiate-02.png">
   <link rel="stylesheet" href="styles.css">
@@ -31,7 +31,7 @@
       src="https://cdn.prod.website-files.com/635c470cc81318fc3e9c1e0e/647f9bf3d5a869aef9e26cf0_DECA-Career%20Cluster%20Wheel.webp"
       alt="DECA Next Big Thing 2026">
     <!-- DAY 1 · TODO 3: your headline, in your own words -->
-    <h1>Welcome to the DECA information center for students!</h1>
+    <h1>Welcome to the DECA information center for ALA students!</h1>
     <!-- DAY 1 · TODO 4: one line that tells a stranger what this page is about -->
     <p class="tagline">Gives you websites and links to DECA resources to avoid unnecessary googling.</p>
   </header>
@@ -74,34 +74,64 @@
         these are valuable assets to aspiring leaders.</p>
     </section>
 
-    <section class="card game-card">
-      <h2>DECA Tetris</h2>
-      <button id="music-toggle" type="button" class="small-btn" aria-pressed="false">Play background music</button>
-      <iframe id="music-player"
-        src="https://www.youtube.com/embed/VCrxWHTCNo8?enablejsapi=1&loop=1&playlist=VCrxWHTCNo8"
-        title="Background music" allow="autoplay"></iframe>
+    <div class="activities-row">
+      <section class="card game-card">
+        <h2>DECA Tetris</h2>
+        <button id="music-toggle" type="button" class="small-btn" aria-pressed="false">Play background music</button>
+        <iframe id="music-player"
+          src="https://www.youtube.com/embed/VCrxWHTCNo8?enablejsapi=1&loop=1&playlist=VCrxWHTCNo8"
+          title="Background music" allow="autoplay"></iframe>
 
-      <div class="game-topline">
-        <div class="score-box">
-          <span>Score</span>
-          <strong id="score">0</strong>
+        <div class="game-topline">
+          <div class="score-box">
+            <span>Score</span>
+            <strong id="score">0</strong>
+          </div>
+          <div class="game-controls">
+            <button id="start-stop-game" type="button" class="small-btn">Start</button>
+            <button id="reset-game" type="button" class="small-btn">Reset</button>
+          </div>
         </div>
-        <div class="game-controls">
-          <button id="start-stop-game" type="button" class="small-btn">Start</button>
-          <button id="reset-game" type="button" class="small-btn">Reset</button>
-        </div>
-      </div>
 
-      <div id="game-board" class="game-board" aria-label="Tetris board"></div>
-      <p id="game-status" class="game-status">Use arrow keys to play.</p>
-      <ul class="key-guide" aria-label="Tetris key controls">
-        <li><strong>← / →</strong> Move</li>
-        <li><strong>↑</strong> Rotate</li>
-        <li><strong>↓</strong> Soft drop / double tap = hard drop</li>
-        <li><strong>Space</strong> Hard drop</li>
-        <li><strong>F</strong> Scroll lock on / off</li>
-      </ul>
-    </section>
+        <div id="game-board" class="game-board" aria-label="Tetris board"></div>
+        <p id="game-status" class="game-status">Use arrow keys to play.</p>
+        <ul class="key-guide" aria-label="Tetris key controls">
+          <li><strong>← / →</strong> Move</li>
+          <li><strong>↑</strong> Rotate</li>
+          <li><strong>↓</strong> Soft drop / double tap = hard drop</li>
+          <li><strong>Space</strong> Hard drop</li>
+          <li><strong>F</strong> Scroll lock on / off</li>
+        </ul>
+      </section>
+
+      <section class="card calendar-card" aria-labelledby="calendar-title">
+        <div class="calendar-heading">
+          <h2 id="calendar-title">DECA Calendar</h2>
+          <button id="add-event-toggle" class="add-event-toggle" type="button" aria-expanded="false"
+            aria-controls="event-form">+</button>
+        </div>
+        <div class="calendar-toolbar">
+          <button id="calendar-prev" class="calendar-nav" type="button" aria-label="Previous month">‹</button>
+          <h3 id="calendar-month" aria-live="polite"></h3>
+          <button id="calendar-next" class="calendar-nav" type="button" aria-label="Next month">›</button>
+        </div>
+        <div class="calendar-weekdays" aria-hidden="true">
+          <span>Mon</span><span>Tue</span><span>Wed</span><span>Thu</span><span>Fri</span><span>Sat</span><span>Sun</span>
+        </div>
+        <div id="calendar-days" class="calendar-days" aria-label="Calendar dates"></div>
+        <form id="event-form" class="event-form" hidden>
+          <label for="event-title">Event name</label>
+          <input id="event-title" name="title" type="text" maxlength="80" placeholder="e.g. Chapter meeting" required>
+          <label for="event-date">Date</label>
+          <input id="event-date" name="date" type="date" required>
+          <div class="event-form-actions">
+            <button class="small-btn" type="submit">Save event</button>
+            <button id="cancel-event" class="calendar-cancel" type="button">Cancel</button>
+          </div>
+        </form>
+        <div id="calendar-selection" class="calendar-selection" aria-live="polite">Choose a date to view events.</div>
+      </section>
+    </div>
 
   </main>
 

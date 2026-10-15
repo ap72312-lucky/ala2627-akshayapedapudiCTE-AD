@@ -160,7 +160,227 @@ body.scroll-locked {
 .game-card {
   background: linear-gradient(180deg, rgba(12, 31, 61, 0.97), rgba(22, 49, 95, 0.95));
   max-width: 330px;
-  margin: 0 auto;
+  margin: 0;
+}
+
+.activities-row {
+  flex: 1 1 100%;
+  display: grid;
+  grid-template-columns: minmax(260px, 330px) minmax(320px, 1fr);
+  gap: var(--space-m);
+  align-items: stretch;
+}
+
+.activities-row .card {
+  width: 100%;
+  max-width: none;
+  margin: 0;
+}
+
+.calendar-card {
+  align-self: stretch;
+}
+
+.calendar-heading {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 12px;
+}
+
+.calendar-heading h2 {
+  margin-bottom: 12px;
+}
+
+.add-event-toggle {
+  flex: 0 0 42px;
+  width: 42px;
+  height: 42px;
+  margin-bottom: 12px;
+  border: 0;
+  border-radius: 50%;
+  color: #0d1b3d;
+  background: #d9dde3;
+  font: inherit;
+  font-size: 1.8rem;
+  font-weight: 700;
+  line-height: 1;
+  cursor: pointer;
+}
+
+.calendar-toolbar {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 12px;
+  margin-bottom: 12px;
+}
+
+.calendar-toolbar h3 {
+  margin: 0;
+  font-family: Georgia, "Times New Roman", serif;
+  font-size: 1.3rem;
+  text-align: center;
+}
+
+.calendar-nav {
+  width: 38px;
+  height: 38px;
+  border: 0;
+  border-radius: 10px;
+  color: #0d1b3d;
+  background: #d9dde3;
+  font: inherit;
+  font-size: 1.6rem;
+  line-height: 1;
+  cursor: pointer;
+}
+
+.calendar-nav:focus-visible,
+.calendar-day:focus-visible,
+.add-event-toggle:focus-visible,
+.calendar-cancel:focus-visible {
+  outline: 3px solid #fff;
+  outline-offset: 2px;
+}
+
+.calendar-weekdays,
+.calendar-days {
+  display: grid;
+  grid-template-columns: repeat(7, minmax(0, 1fr));
+  gap: 6px;
+  text-align: center;
+}
+
+.calendar-weekdays {
+  margin-bottom: 6px;
+  color: #f4c95d;
+  font-size: 0.78rem;
+  font-weight: 700;
+}
+
+.calendar-day,
+.calendar-empty {
+  min-width: 0;
+  aspect-ratio: 1;
+}
+
+.calendar-day {
+  border: 1px solid rgba(255, 255, 255, 0.24);
+  border-radius: 10px;
+  color: white;
+  background: rgba(255, 255, 255, 0.12);
+  font: inherit;
+  cursor: pointer;
+}
+
+.calendar-day:hover,
+.calendar-day.is-selected {
+  color: #0d1b3d;
+  background: #d9dde3;
+}
+
+.calendar-day.is-today {
+  border: 2px solid #d9dde3;
+  font-weight: 800;
+}
+
+.calendar-day.has-event::after {
+  display: block;
+  width: 5px;
+  height: 5px;
+  margin: 1px auto 0;
+  border-radius: 50%;
+  background: #ff2d72;
+  content: "";
+}
+
+.calendar-day.is-selected.has-event::after {
+  background: #0d1b3d;
+}
+
+.calendar-selection {
+  min-height: 42px;
+  margin: 14px 0 0;
+  padding: 10px 12px;
+  border-radius: 10px;
+  background: rgba(255, 255, 255, 0.12);
+}
+
+.selected-date-title {
+  margin: 0 0 6px;
+  font-weight: 700;
+}
+
+.event-list {
+  display: grid;
+  gap: 6px;
+  margin: 0;
+  padding: 0;
+  list-style: none;
+}
+
+.event-list li {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 8px;
+  padding: 6px 8px;
+  border-radius: 8px;
+  background: rgba(255, 255, 255, 0.12);
+}
+
+.event-delete,
+.calendar-cancel {
+  border: 0;
+  border-radius: 8px;
+  padding: 6px 9px;
+  color: #0d1b3d;
+  background: #d9dde3;
+  font: inherit;
+  font-weight: 700;
+  cursor: pointer;
+}
+
+.event-form {
+  display: grid;
+  gap: 8px;
+  margin-top: 14px;
+  padding: 12px;
+  border: 1px solid rgba(255, 255, 255, 0.24);
+  border-radius: 12px;
+  background: rgba(13, 27, 61, 0.22);
+}
+
+.event-form[hidden] {
+  display: none;
+}
+
+.event-form label {
+  font-weight: 700;
+}
+
+.event-form input {
+  width: 100%;
+  min-height: 42px;
+  border: 1px solid rgba(255, 255, 255, 0.45);
+  border-radius: 8px;
+  padding: 8px 10px;
+  color: #18224b;
+  font: inherit;
+}
+
+.event-form-actions {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 8px;
+  margin-top: 4px;
+}
+
+@media (max-width: 700px) {
+  .activities-row {
+    grid-template-columns: minmax(0, 1fr);
+  }
 }
 
 .game-copy {
@@ -207,7 +427,7 @@ body.scroll-locked {
 .small-btn {
   font: inherit;
   font-weight: 700;
-  background: linear-gradient(135deg, #f4c95d, #e7b63d);
+  background: #d9dde3;
   color: #0d1b3d;
   border: none;
   border-radius: 10px;

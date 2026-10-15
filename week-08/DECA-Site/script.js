@@ -328,3 +328,182 @@ musicToggle.addEventListener("click", () => {
   musicToggle.setAttribute("aria-pressed", "true");
 });
 
+const calendarMonth = document.querySelector("#calendar-month");
+const calendarDays = document.querySelector("#calendar-days");
+const calendarSelection = document.querySelector("#calendar-selection");
+const today = new Date();
+let displayedMonth = new Date(today.getFullYear(), today.getMonth(), 1);
+let selectedDate = formatCalendarDate(today);
+const eventForm = document.querySelector("#event-form");
+const eventTitleInput = document.querySelector("#event-title");
+const eventDateInput = document.querySelector("#event-date");
+const addEventToggle = document.querySelector("#add-event-toggle");
+const calendarStorageKey = "deca-calendar-events";
+let calendarEvents = [];
+
+try {
+  calendarEvents = JSON.parse(localStorage.getItem(calendarStorageKey) || "[]");
+  if (!Array.isArray(calendarEvents)) calendarEvents = [];
+} catch {
+  calendarEvents = [];
+}
+
+function formatCalendarDate(date) {
+  const year = date.getFullYear();
+  const month = String(date.getMonth() + 1).padStart(2, "0");
+  const day = String(date.getDate()).padStart(2, "0");
+  return `${year}-${month}-${day}`;
+}
+
+function saveCalendarEvents() {
+  localStorage.setItem(calendarStorageKey, JSON.stringify(calendarEvents));
+}
+
+function renderSelectedDate() {
+  const date = new Date(`${selectedDate}T12:00:00`);
+  const title = document.createElement("p");
+  title.className = "selected-date-title";
+  title.textContent = date.toLocaleDateString(undefined, {
+    weekday: "long",
+    month: "long",
+    day: "numeric",
+    year: "numeric"
+  });
+  calendarSelection.replaceChildren(title);
+
+  const eventsForDate = calendarEvents.filter((event) => event.date === selectedDate);
+  if (eventsForDate.length === 0) {
+    const emptyMessage = document.createElement("span");
+    emptyMessage.textContent = "No events yet.";
+    calendarSelection.appendChild(emptyMessage);
+    return;
+  }
+
+  const eventList = document.createElement("ul");
+  eventList.className = "event-list";
+  eventsForDate.forEach((event) => {
+    const item = document.createElement("li");
+    const name = document.createElement("span");
+    name.textContent = event.title;
+    const deleteButton = document.createElement("button");
+    deleteButton.type = "button";
+    deleteButton.className = "event-delete";
+    deleteButton.textContent = "Remove";
+    deleteButton.setAttribute("aria-label", `Remove ${event.title}`);
+    deleteButton.addEventListener("click", () => {
+      calendarEvents = calendarEvents.filter((savedEvent) => savedEvent.id !== event.id);
+      saveCalendarEvents();
+      renderCalendar();
+      renderSelectedDate();
+    });
+    item.append(name, deleteButton);
+    eventList.appendChild(item);
+  });
+  calendarSelection.appendChild(eventList);
+}
+
+function renderCalendar() {
+  const year = displayedMonth.getFullYear();
+  const month = displayedMonth.getMonth();
+  const firstWeekday = (new Date(year, month, 1).getDay() + 6) % 7;
+  const daysInMonth = new Date(year, month + 1, 0).getDate();
+
+  calendarMonth.textContent = displayedMonth.toLocaleDateString(undefined, {
+    month: "long",
+    year: "numeric"
+  });
+  calendarDays.replaceChildren();
+
+  for (let blank = 0; blank < firstWeekday; blank += 1) {
+    const emptyDay = document.createElement("span");
+    emptyDay.className = "calendar-empty";
+    emptyDay.setAttribute("aria-hidden", "true");
+    calendarDays.appendChild(emptyDay);
+  }
+
+  for (let day = 1; day <= daysInMonth; day += 1) {
+    const dateButton = document.createElement("button");
+    const date = new Date(year, month, day);
+    dateButton.type = "button";
+    dateButton.className = "calendar-day";
+    dateButton.textContent = String(day);
+    dateButton.setAttribute("aria-label", date.toLocaleDateString(undefined, {
+      weekday: "long",
+      month: "long",
+      day: "numeric",
+      year: "numeric"
+    }));
+
+    const dateKey = formatCalendarDate(date);
+    if (calendarEvents.some((event) => event.date === dateKey)) {
+      dateButton.classList.add("has-event");
+      dateButton.setAttribute("aria-label", `${dateButton.getAttribute("aria-label")}, has events`);
+    }
+
+    if (date.toDateString() === today.toDateString()) {
+      dateButton.classList.add("is-today");
+      dateButton.setAttribute("aria-current", "date");
+    }
+
+    if (dateKey === selectedDate) dateButton.classList.add("is-selected");
+
+    dateButton.addEventListener("click", () => {
+      selectedDate = dateKey;
+      eventDateInput.value = selectedDate;
+      renderCalendar();
+      renderSelectedDate();
+    });
+
+    calendarDays.appendChild(dateButton);
+  }
+}
+
+document.querySelector("#calendar-prev").addEventListener("click", () => {
+  displayedMonth = new Date(displayedMonth.getFullYear(), displayedMonth.getMonth() - 1, 1);
+  renderCalendar();
+});
+
+document.querySelector("#calendar-next").addEventListener("click", () => {
+  displayedMonth = new Date(displayedMonth.getFullYear(), displayedMonth.getMonth() + 1, 1);
+  renderCalendar();
+});
+
+addEventToggle.addEventListener("click", () => {
+  const willOpen = eventForm.hidden;
+  eventForm.hidden = !willOpen;
+  addEventToggle.setAttribute("aria-expanded", String(willOpen));
+  if (willOpen) {
+    eventDateInput.value = selectedDate;
+    eventTitleInput.focus();
+  }
+});
+
+document.querySelector("#cancel-event").addEventListener("click", () => {
+  eventForm.reset();
+  eventForm.hidden = true;
+  addEventToggle.setAttribute("aria-expanded", "false");
+  addEventToggle.focus();
+});
+
+eventForm.addEventListener("submit", (event) => {
+  event.preventDefault();
+  const title = eventTitleInput.value.trim();
+  const date = eventDateInput.value;
+  if (!title || !date) return;
+
+  calendarEvents.push({ id: `${Date.now()}-${Math.random()}`, title, date });
+  selectedDate = date;
+  displayedMonth = new Date(`${date}T12:00:00`);
+  displayedMonth.setDate(1);
+  saveCalendarEvents();
+  eventForm.reset();
+  eventForm.hidden = true;
+  addEventToggle.setAttribute("aria-expanded", "false");
+  renderCalendar();
+  renderSelectedDate();
+  addEventToggle.focus();
+});
+
+renderCalendar();
+renderSelectedDate();
+
