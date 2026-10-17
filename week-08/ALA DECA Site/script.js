@@ -403,17 +403,94 @@ const eventCategories = {
 };
 // Organizer-managed events stay separate from visitor-added events.
 const recurringTuesdayEvents = [];
+const recurringTuesdayOverrides = {
+  "2026-10-20": {
+    title: "Professional Development",
+    description: "Ethics, financial careers, communication, professionalism",
+    category: "finance"
+  },
+  "2026-11-03": {
+    title: "Financial-Information Management",
+    description: "Financial records, data, reports and information systems",
+    category: "finance"
+  },
+  "2026-11-17": {
+    title: "Business Law + Risk Management",
+    description: "Contracts, regulations, insurance and managing financial risk",
+    category: "finance"
+  },
+  "2026-12-01": {
+    title: "Economics + Operations",
+    description: "Interest rates, economics conditions, business operations",
+    category: "finance"
+  },
+  "2026-12-15": {
+    title: "District Final Review",
+    description: "Financial analysis-heavy review",
+    category: "finance"
+  },
+  "2026-12-29": {
+    title: "District Practice",
+    description: "100-question Finance practice exam",
+    category: "finance"
+  },
+  "2027-01-19": {
+    title: "Promotion + Selling",
+    description: "Promotional strategy and advanced selling situations",
+    category: "finance"
+  },
+  "2027-02-02": {
+    title: "Channel Management, Pricing & Market Planning",
+    description: "Distribution decisions, pricing strategies, marketing plans",
+    category: "finance"
+  },
+  "2027-02-16": {
+    title: "SCDC Final Preparation",
+    description: "Full association-level exam + error analysis",
+    category: "finance"
+  },
+  "2027-03-02": {
+    title: "ICDC Marketing-Information Management",
+    description: "Advanced research interpretation and decision making",
+    category: "finance"
+  },
+  "2027-03-16": {
+    title: "ICDC Product Management + Promotion",
+    description: "High-level product and promotional scenarios",
+    category: "finance"
+  },
+  "2027-03-30": {
+    title: "Selling + Channel Management",
+    description: "Integrated role-play situations",
+    category: "finance"
+  },
+  "2027-04-13": {
+    title: "ICDC FInal Practice",
+    description: "100-question exam + role-play",
+    category: "finance"
+  },
+  "2027-04-27": {
+    title: "Post-ICDC Review",
+    description: "What worked, what to improve, preparation for next year",
+    category: "finance"
+  }
+};
 const firstAlternatingTuesday = new Date(2026, 8, 29, 12);
 const lastSchoolTuesday = new Date(2027, 4, 18, 12);
 let tuesdayNumber = 0;
 
 for (let date = new Date(firstAlternatingTuesday); date <= lastSchoolTuesday; date.setDate(date.getDate() + 7)) {
-  const category = tuesdayNumber % 2 === 0 ? "marketing" : "finance";
-  recurringTuesdayEvents.push({
-    date: formatCalendarDate(date),
-    title: eventCategories[category],
-    category
-  });
+  const dateKey = formatCalendarDate(date);
+  const override = recurringTuesdayOverrides[dateKey];
+  const category = override?.category || (tuesdayNumber % 2 === 0 ? "marketing" : "finance");
+  if (override || category !== "finance") {
+    recurringTuesdayEvents.push({
+      date: dateKey,
+      title: override?.title || eventCategories[category],
+      ...(override?.description ? { description: override.description } : {}),
+      category
+    });
+  }
   tuesdayNumber += 1;
 }
 
@@ -439,8 +516,44 @@ const fixedCalendarEvents = [
     dateLabel: "November 11, 2026"
   },
   {
+    date: "2026-11-02", title: "District registration opens", category: "general",
+    dateLabel: "November 2, 2026"
+  },
+  {
+    date: "2026-11-02", endDate: "2026-11-24", title: "District testing window", category: "general",
+    dateLabel: "November 2–24, 2026", description: "Testing is open Monday–Friday, 7:00 AM–5:00 PM."
+  },
+  {
+    date: "2026-11-24", title: "District registration due", category: "general",
+    dateLabel: "November 24, 2026"
+  },
+  {
     date: "2026-11-26", title: "Thanksgiving Day", category: "holiday",
     dateLabel: "November 26, 2026"
+  },
+  {
+    date: "2026-12-01", title: "Arizona DECA District 2 Conference", category: "general",
+    dateLabel: "December 1, 2026", location: "Ottawa University, Surprise, AZ"
+  },
+  {
+    date: "2026-12-04", title: "Arizona DECA District 6 Conference", category: "general",
+    dateLabel: "December 4, 2026", location: "Ottawa University, Surprise, AZ"
+  },
+  {
+    date: "2026-12-08", title: "Arizona DECA District 4 Conference", category: "general",
+    dateLabel: "December 8, 2026", location: "ASU Polytechnic Campus, Mesa, AZ"
+  },
+  {
+    date: "2026-12-09", title: "Arizona DECA District 5 Conference", category: "general",
+    dateLabel: "December 9, 2026", location: "ASU Polytechnic Campus, Mesa, AZ"
+  },
+  {
+    date: "2026-12-10", title: "Arizona DECA District 1 Conference", category: "general",
+    dateLabel: "December 10, 2026", location: "ASU West Valley Campus, Glendale, AZ"
+  },
+  {
+    date: "2026-12-11", title: "Arizona DECA District 7 Conference", category: "general",
+    dateLabel: "December 11, 2026", location: "ASU West Valley Campus, Glendale, AZ"
   },
   {
     date: "2026-12-24", title: "Christmas Eve", category: "holiday",
