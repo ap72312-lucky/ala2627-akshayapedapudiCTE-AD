@@ -655,12 +655,36 @@ const fixedCalendarEvents = [
     dateLabel: "November 13, 2026", location: "Glendale, AZ"
   },
   {
+    date: "2026-11-18", title: "DECA Meeting: District Competition Preparation", category: "general",
+    description: "Professional dress and testing procedures."
+  },
+  {
     date: "2026-11-20", endDate: "2026-11-22", title: "Ultimate DECA Power Trip", category: "general",
     dateLabel: "November 20–22, 2026", location: "Louisville, KY"
   },
   {
+    date: "2026-12-16", title: "DECA Meeting: District Readiness", category: "general",
+    description: "Mock role-play demonstration."
+  },
+  {
+    date: "2027-01-13", title: "DECA Meeting: Arizona State Competition Preparation", category: "general",
+    description: "Arizona State competition preparation and event requirements."
+  },
+  {
+    date: "2027-02-17", title: "DECA Meeting: SCDC Final Meeting", category: "general",
+    description: "Schedules, dress, testing, role-plays and expectations."
+  },
+  {
     date: "2027-02-25", endDate: "2027-02-27", title: "State Career Development Conference", category: "general",
     dateLabel: "February 25–27, 2027", location: "Phoenix"
+  },
+  {
+    date: "2027-03-17", title: "DECA Meeting: ICDC Qualifier Meeting", category: "general",
+    description: "Advanced role-play and exam preparation."
+  },
+  {
+    date: "2027-04-14", title: "DECA Meeting: ICDC Final Meeting", category: "general",
+    description: "Anaheim preparation, competition expectations and logistics."
   },
   {
     date: "2027-04-16", endDate: "2027-04-21", title: "International Career Development Conference", category: "general",
