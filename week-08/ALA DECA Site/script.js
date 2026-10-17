@@ -37,14 +37,62 @@ const decaTerms = [
   { category: "Competition terms", term: "Individual Event", definition: "An event where one student competes alone." },
   { category: "Chapter and leadership", term: "Chapter Officer", definition: "A student elected to lead the local chapter." },
   { category: "Chapter and leadership", term: "Advisor", definition: "The teacher who supports and oversees the chapter." },
-  { category: "Chapter and leadership", term: "Professional Attire", definition: "The dress code for competitions." }
+  { category: "Chapter and leadership", term: "Professional Attire", definition: "The dress code for competitions." },
+  { category: "Financial statements and analysis", term: "Assets", definition: "What a business owns that has value." },
+  { category: "Financial statements and analysis", term: "Liabilities", definition: "What a business owes." },
+  { category: "Financial statements and analysis", term: "Equity", definition: "Assets minus liabilities, or the owners' stake." },
+  { category: "Financial statements and analysis", term: "Accounting equation", definition: "Assets = Liabilities + Equity." },
+  { category: "Financial statements and analysis", term: "Balance sheet", definition: "A snapshot of assets, liabilities and equity at one point in time." },
+  { category: "Financial statements and analysis", term: "Income statement", definition: "Revenue minus expenses over a period, ending in net income." },
+  { category: "Financial statements and analysis", term: "Cash flow statement", definition: "Cash moving in and out through operating, investing and financing activities." },
+  { category: "Financial statements and analysis", term: "Gross profit", definition: "Revenue minus cost of goods sold." },
+  { category: "Financial statements and analysis", term: "Net income", definition: "Profit after all expenses, interest and taxes." },
+  { category: "Financial statements and analysis", term: "Working capital", definition: "Current assets minus current liabilities." },
+  { category: "Financial statements and analysis", term: "Liquidity", definition: "How easily an asset converts to cash without losing value." },
+  { category: "Financial statements and analysis", term: "Solvency", definition: "Ability to meet long-term obligations." },
+  { category: "Key ratios", term: "Current ratio", definition: "Current assets ÷ current liabilities." },
+  { category: "Key ratios", term: "Quick ratio", definition: "(Current assets − inventory) ÷ current liabilities." },
+  { category: "Key ratios", term: "Debt-to-equity", definition: "Total liabilities ÷ total equity." },
+  { category: "Key ratios", term: "Profit margin", definition: "Net income ÷ revenue." },
+  { category: "Key ratios", term: "Return on investment (ROI)", definition: "Gain ÷ cost of the investment." },
+  { category: "Accounting basics", term: "Accrual accounting", definition: "Records revenue and expenses when earned or incurred, not when cash moves." },
+  { category: "Accounting basics", term: "Depreciation", definition: "Spreading an asset's cost over its useful life." },
+  { category: "Accounting basics", term: "Accounts receivable", definition: "Money customers owe the business." },
+  { category: "Accounting basics", term: "Accounts payable", definition: "Money the business owes suppliers." },
+  { category: "Accounting basics", term: "Double-entry bookkeeping", definition: "Every transaction affects at least two accounts, with debits equal to credits." },
+  { category: "Banking, credit and investing", term: "Interest", definition: "The cost of borrowing or the reward for saving or lending." },
+  { category: "Banking, credit and investing", term: "Compound interest", definition: "Interest earned on both principal and previously earned interest." },
+  { category: "Banking, credit and investing", term: "APR", definition: "Annual percentage rate, the yearly cost of borrowing including fees." },
+  { category: "Banking, credit and investing", term: "Credit score", definition: "A number summarizing creditworthiness." },
+  { category: "Banking, credit and investing", term: "Stock", definition: "Ownership share in a company." },
+  { category: "Banking, credit and investing", term: "Bond", definition: "A loan to a company or government that pays interest." },
+  { category: "Banking, credit and investing", term: "Mutual fund", definition: "A pooled investment managed by professionals." },
+  { category: "Banking, credit and investing", term: "Diversification", definition: "Spreading investments to reduce risk." },
+  { category: "Banking, credit and investing", term: "Inflation", definition: "A general rise in prices that lowers purchasing power." },
+  { category: "Risk and insurance", term: "Premium", definition: "The regular payment for an insurance policy." },
+  { category: "Risk and insurance", term: "Deductible", definition: "What you pay before insurance covers a claim." },
+  { category: "Risk and insurance", term: "Risk management", definition: "Identifying, assessing and reducing risks." },
+  { category: "Risk and insurance", term: "Risk transfer", definition: "Shifting risk to another party, usually through insurance." }
 ];
 
 const termCategory = document.querySelector("#term-category");
 const termName = document.querySelector("#term-name");
 const termDefinition = document.querySelector("#term-definition");
 const termCount = document.querySelector("#term-count");
+const termSearchToggle = document.querySelector("#term-search-toggle");
+const termSearchForm = document.querySelector("#term-search-form");
+const termSearchInput = document.querySelector("#term-search-input");
+const termSearchStatus = document.querySelector("#term-search-status");
 let currentTermIndex = 0;
+
+termSearchToggle.addEventListener("click", function () {
+  const isOpening = termSearchForm.hidden;
+  termSearchForm.hidden = !isOpening;
+  termSearchToggle.setAttribute("aria-expanded", String(isOpening));
+  termSearchToggle.textContent = isOpening ? "Close search" : "🔍 Search";
+
+  if (isOpening) termSearchInput.focus();
+});
 
 function showTerm(index) {
   currentTermIndex = (index + decaTerms.length) % decaTerms.length;
@@ -61,6 +109,29 @@ document.querySelector("#term-prev").addEventListener("click", function () {
 
 document.querySelector("#term-next").addEventListener("click", function () {
   showTerm(currentTermIndex + 1);
+});
+
+termSearchForm.addEventListener("submit", function (event) {
+  event.preventDefault();
+  const query = termSearchInput.value.trim();
+
+  if (!query) {
+    termSearchStatus.textContent = "Enter a term name or card number to search.";
+    termSearchInput.focus();
+    return;
+  }
+
+  const cardNumber = Number(query);
+  const matchingIndex = Number.isInteger(cardNumber) && cardNumber > 0
+    ? cardNumber - 1
+    : decaTerms.findIndex(({ term }) => term.toLowerCase().includes(query.toLowerCase()));
+
+  if (matchingIndex >= 0 && matchingIndex < decaTerms.length) {
+    showTerm(matchingIndex);
+    termSearchStatus.textContent = `Showing card ${matchingIndex + 1}: ${decaTerms[matchingIndex].term}.`;
+  } else {
+    termSearchStatus.textContent = `No card found for “${query}”.`;
+  }
 });
 
 showTerm(currentTermIndex);
@@ -394,12 +465,8 @@ const addEventToggle = document.querySelector("#add-event-toggle");
 const calendarStorageKey = "deca-calendar-events";
 const eventCategories = {
   general: "General",
-  marketing: "Marketing",
-  business: "Business Management + Administration",
-  hospitality: "Hospitality + Tourism",
   finance: "Finance",
-  entrepreneurship: "Entrepreneurship",
-  holiday: "Holiday"
+  holiday: "Holidays"
 };
 // Organizer-managed events stay separate from visitor-added events.
 const recurringTuesdayEvents = [];
@@ -486,9 +553,9 @@ for (let date = new Date(firstAlternatingTuesday); date <= lastSchoolTuesday; da
   if (override || category !== "finance") {
     recurringTuesdayEvents.push({
       date: dateKey,
-      title: override?.title || eventCategories[category],
+      title: override?.title || eventCategories[category] || "Marketing",
       ...(override?.description ? { description: override.description } : {}),
-      category
+      category: eventCategories[category] ? category : "general"
     });
   }
   tuesdayNumber += 1;

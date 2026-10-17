@@ -121,6 +121,99 @@ body.scroll-locked {
   justify-content: flex-start;
 }
 
+.terms-card-header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 12px;
+}
+
+.terms-card-header h2 {
+  margin-bottom: 0;
+}
+
+.term-search-toggle {
+  flex: 0 0 auto;
+  padding: 8px 12px;
+  border: 0;
+  border-radius: 8px;
+  color: #0d1b3d;
+  background: #ffe28a;
+  font: inherit;
+  font-weight: 700;
+  cursor: pointer;
+  white-space: nowrap;
+}
+
+.term-search-toggle:hover,
+.term-search button:hover {
+  background: #fff1bd;
+}
+
+.term-search {
+  display: flex;
+  justify-content: flex-end;
+  margin-top: 10px;
+  max-width: 100%;
+  gap: 6px;
+}
+
+.term-search[hidden] {
+  display: none;
+}
+
+.term-search input {
+  width: min(240px, 70%);
+  min-width: 0;
+  padding: 8px 10px;
+  border: 1px solid rgba(255, 255, 255, 0.55);
+  border-radius: 8px;
+  color: #0d1b3d;
+  font: inherit;
+}
+
+.term-search button {
+  flex: 0 0 auto;
+  padding: 8px 12px;
+  border: 0;
+  border-radius: 8px;
+  color: #0d1b3d;
+  background: #ffe28a;
+  font: inherit;
+  font-weight: 700;
+  cursor: pointer;
+  white-space: nowrap;
+}
+
+.term-search-status {
+  min-height: 1.2em;
+  margin: 6px 0 0;
+  font-size: 0.82rem;
+}
+
+.visually-hidden {
+  position: absolute;
+  width: 1px;
+  height: 1px;
+  padding: 0;
+  margin: -1px;
+  overflow: hidden;
+  clip: rect(0, 0, 0, 0);
+  white-space: nowrap;
+  border: 0;
+}
+
+@media (max-width: 480px) {
+  .term-search {
+    width: 100%;
+  }
+
+  .term-search input {
+    flex: 1;
+    width: auto;
+  }
+}
+
 .terms-carousel {
   display: flex;
   flex: 1;
@@ -360,24 +453,8 @@ body.scroll-locked {
   background: #fff;
 }
 
-.key-marketing {
-  background: #ef4444;
-}
-
-.key-business {
-  background: #facc15;
-}
-
-.key-hospitality {
-  background: #3b82f6;
-}
-
 .key-finance {
   background: #22c55e;
-}
-
-.key-entrepreneurship {
-  background: #9299a3;
 }
 
 .key-holiday {
@@ -388,24 +465,8 @@ body.scroll-locked {
   color: #fff;
 }
 
-.key-label-marketing {
-  color: #ef4444;
-}
-
-.key-label-business {
-  color: #facc15;
-}
-
-.key-label-hospitality {
-  color: #3b82f6;
-}
-
 .key-label-finance {
   color: #22c55e;
-}
-
-.key-label-entrepreneurship {
-  color: #9299a3;
 }
 
 .key-label-holiday {
@@ -463,24 +524,8 @@ body.scroll-locked {
   background: #fff;
 }
 
-.category-marketing {
-  background: #ef4444;
-}
-
-.category-business {
-  background: #facc15;
-}
-
-.category-hospitality {
-  background: #3b82f6;
-}
-
 .category-finance {
   background: #22c55e;
-}
-
-.category-entrepreneurship {
-  background: #9299a3;
 }
 
 .category-holiday {
@@ -609,24 +654,12 @@ body.scroll-locked {
   color: #fff;
 }
 
-#event-category option[value="marketing"] {
-  color: #ef4444;
-}
-
-#event-category option[value="business"] {
-  color: #facc15;
-}
-
-#event-category option[value="hospitality"] {
-  color: #3b82f6;
-}
-
 #event-category option[value="finance"] {
   color: #22c55e;
 }
 
-#event-category option[value="entrepreneurship"] {
-  color: #9299a3;
+#event-category option[value="holiday"] {
+  color: #fff;
 }
 
 .event-form-actions {
