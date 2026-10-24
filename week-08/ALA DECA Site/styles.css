@@ -226,6 +226,12 @@ body.scroll-locked {
   background: rgba(12, 31, 61, 0.28);
 }
 
+.terms-subtitle {
+  margin: 24px 0 12px;
+  color: #ffe28a;
+  font-family: Georgia, "Times New Roman", serif;
+}
+
 .term-category {
   color: #ffe28a;
   font-size: 0.78rem;
@@ -331,7 +337,7 @@ body.scroll-locked {
 .activities-row {
   flex: 1 1 100%;
   display: grid;
-  grid-template-columns: minmax(260px, 330px) minmax(320px, 1fr);
+  grid-template-columns: minmax(0, 1fr);
   gap: var(--space-m);
   align-items: stretch;
 }

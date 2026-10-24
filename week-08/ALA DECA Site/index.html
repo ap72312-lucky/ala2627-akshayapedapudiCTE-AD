@@ -33,7 +33,7 @@
     <!-- DAY 1 · TODO 3: your headline, in your own words -->
     <h1>Welcome to the DECA information center for ALA students!</h1>
     <!-- DAY 1 · TODO 4: one line that tells a stranger what this page is about -->
-    <p class="tagline">Gives you websites and links to DECA resources to avoid unnecessary googling.</p>
+    <p class="tagline">Gives you websites and links to DECA's Finance resources to avoid unnecessary googling.</p>
   </header>
 
   <main class="cards">
@@ -49,7 +49,7 @@
 
     <section class="card terms-card" aria-labelledby="terms-title">
       <div class="terms-card-header">
-        <h2 id="terms-title">DECA Terms</h2>
+        <h2 id="terms-title">DECA & Finance Terms</h2>
         <button id="term-search-toggle" class="term-search-toggle" type="button" aria-expanded="false"
           aria-controls="term-search-form">🔍 Search</button>
       </div>
@@ -69,6 +69,19 @@
           <button id="term-prev" class="term-arrow" type="button" aria-label="Previous term">←</button>
           <span id="term-count" class="term-count" aria-live="polite"></span>
           <button id="term-next" class="term-arrow" type="button" aria-label="Next term">→</button>
+        </div>
+      </div>
+      <h3 class="terms-subtitle">DECA Terms</h3>
+      <div id="deca-terms-carousel" class="terms-carousel" aria-label="DECA organization and competition terms">
+        <span id="deca-term-category" class="term-category"></span>
+        <article class="term-face" aria-live="polite" aria-atomic="true">
+          <h3 id="deca-term-name"></h3>
+          <p id="deca-term-definition"></p>
+        </article>
+        <div class="term-navigation">
+          <button id="deca-term-prev" class="term-arrow" type="button" aria-label="Previous DECA term">←</button>
+          <span id="deca-term-count" class="term-count" aria-live="polite"></span>
+          <button id="deca-term-next" class="term-arrow" type="button" aria-label="Next DECA term">→</button>
         </div>
       </div>
     </section>
@@ -109,35 +122,6 @@
     </section>
 
     <div class="activities-row">
-      <section class="card game-card">
-        <h2>DECA Tetris</h2>
-        <button id="music-toggle" type="button" class="small-btn" aria-pressed="false">Play background music</button>
-        <iframe id="music-player"
-          src="https://www.youtube.com/embed/VCrxWHTCNo8?enablejsapi=1&loop=1&playlist=VCrxWHTCNo8"
-          title="Background music" allow="autoplay"></iframe>
-
-        <div class="game-topline">
-          <div class="score-box">
-            <span>Score</span>
-            <strong id="score">0</strong>
-          </div>
-          <div class="game-controls">
-            <button id="start-stop-game" type="button" class="small-btn">Start</button>
-            <button id="reset-game" type="button" class="small-btn">Reset</button>
-          </div>
-        </div>
-
-        <div id="game-board" class="game-board" aria-label="Tetris board"></div>
-        <p id="game-status" class="game-status">Use arrow keys to play.</p>
-        <ul class="key-guide" aria-label="Tetris key controls">
-          <li><strong>← / →</strong> Move</li>
-          <li><strong>↑</strong> Rotate</li>
-          <li><strong>↓</strong> Soft drop / double tap = hard drop</li>
-          <li><strong>Space</strong> Hard drop</li>
-          <li><strong>F</strong> Scroll lock on / off</li>
-        </ul>
-      </section>
-
       <section class="card calendar-card" aria-labelledby="calendar-title">
         <div class="calendar-heading">
           <h2 id="calendar-title">DECA Calendar</h2>
@@ -189,6 +173,35 @@
             <li><strong>5 minutes</strong><span>Review mistakes and record weak areas</span></li>
           </ul>
         </section>
+      </section>
+
+      <section class="card game-card">
+        <h2>DECA Tetris</h2>
+        <button id="music-toggle" type="button" class="small-btn" aria-pressed="false">Play background music</button>
+        <iframe id="music-player"
+          src="https://www.youtube.com/embed/VCrxWHTCNo8?enablejsapi=1&loop=1&playlist=VCrxWHTCNo8"
+          title="Background music" allow="autoplay"></iframe>
+
+        <div class="game-topline">
+          <div class="score-box">
+            <span>Score</span>
+            <strong id="score">0</strong>
+          </div>
+          <div class="game-controls">
+            <button id="start-stop-game" type="button" class="small-btn">Start</button>
+            <button id="reset-game" type="button" class="small-btn">Reset</button>
+          </div>
+        </div>
+
+        <div id="game-board" class="game-board" aria-label="Tetris board"></div>
+        <p id="game-status" class="game-status">Use arrow keys to play.</p>
+        <ul class="key-guide" aria-label="Tetris key controls">
+          <li><strong>← / →</strong> Move</li>
+          <li><strong>↑</strong> Rotate</li>
+          <li><strong>↓</strong> Soft drop / double tap = hard drop</li>
+          <li><strong>Space</strong> Hard drop</li>
+          <li><strong>F</strong> Scroll lock on / off</li>
+        </ul>
       </section>
     </div>
 
