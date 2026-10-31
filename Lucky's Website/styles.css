@@ -946,9 +946,7 @@ h2 em {
 }
 
 .deca-visual {
-  background-image: url("https://pbs.twimg.com/media/EWNda2oX0AEPlYG.jpg");
-  background-size: cover;
-  background-position: center;
+  background: linear-gradient(135deg, #b9dfb8 0%, #b8e4df 18%, #79bde7 38%, #5879d8 58%, #8a5bb5 78%, #eaa0c5 100%);
 }
 
 .color-picker-toggle-wrap {

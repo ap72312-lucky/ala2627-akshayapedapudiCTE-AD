@@ -28,10 +28,7 @@ body {
   line-height: 1.6;
   letter-spacing: 0.01em;
   color: var(--text);
-  background-image: linear-gradient(135deg, rgba(16, 190, 181, 0.16), rgba(255, 45, 114, 0.12)), url("https://th.bing.com/th/id/OIP.TRDFafLur3_08FnOzKgZ-wAAAA?r=0&o=7rm=3&rs=1&pid=ImgDetMain&o=7&rm=3");
-  background-size: cover;
-  background-position: center;
-  background-repeat: no-repeat;
+  background: linear-gradient(135deg, #8bda88 0%, #aae2db 18%, #4aaeec 38%, #7957e7 58%, #735192 78%, #e3549c 100%);
   background-attachment: fixed;
 }
 
