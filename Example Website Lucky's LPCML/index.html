@@ -72,60 +72,15 @@
       </article>
     </section>
 
-    <section class="dino-showcase" aria-labelledby="dino-title">
-      <div class="dino-showcase__header">
-        <div>
-          <p class="section-label"><span>07</span> Arcade mode</p>
-          <h2 id="dino-title">Dino Dash</h2>
-        </div>
-        <div class="dino-score" aria-live="polite" aria-label="Current and best score">
-          <span>CS</span>
-          <strong class="dino-current-score">0000</strong>
-        </div>
-      </div>
-
-      <div class="dino-stage" aria-label="Mini Dino Dash game scene">
-        <div class="dino-sky" aria-hidden="true">
-          <div class="dino-sun"></div>
-          <div class="dino-cloud dino-cloud--one"></div>
-          <div class="dino-cloud dino-cloud--two"></div>
-        </div>
-
-        <div class="dino-runner" aria-hidden="true">
-          <span class="dino-body"></span>
-          <span class="dino-tail"></span>
-          <span class="dino-leg dino-leg--front"></span>
-          <span class="dino-leg dino-leg--back"></span>
-          <span class="dino-eye"></span>
-        </div>
-
-        <div class="dino-cactus dino-cactus--one" aria-hidden="true"></div>
-        <div class="dino-cactus dino-cactus--two" aria-hidden="true"></div>
-        <div class="dino-ground" aria-hidden="true"></div>
-      </div>
-
-      <div class="dino-controls">
-        <button class="dino-start-button" type="button">Start</button>
-        <button class="dino-jump-button" type="button" disabled>Jump</button>
-        <div class="dino-metrics" aria-label="Game stats">
-          <div>
-            <span class="dino-metric-label">Speed</span>
-            <strong class="dino-speed">1.0x</strong>
-          </div>
-          <div>
-            <span class="dino-metric-label">Best</span>
-            <strong class="dino-best-run">0000</strong>
-          </div>
-        </div>
-      </div>
-    </section>
-
     <footer class="footer">Flexbox layout · CSS keyframes · no JavaScript · YIPPEE · Last update- 11/19/26 · Akshaya
       Pedapudi</footer>
   </main>
 
   <script>
     const stage = document.querySelector('.dino-stage');
+    if (!stage) {
+      // Dino Dash now lives on the Games website.
+    } else {
     const dinoRunner = document.querySelector('.dino-runner');
     const dinoStartButton = document.querySelector('.dino-start-button');
     const dinoJumpButton = document.querySelector('.dino-jump-button');
@@ -288,6 +243,7 @@
 
     stage.classList.add('is-idle');
     renderScores();
+    }
   </script>
 </body>
 

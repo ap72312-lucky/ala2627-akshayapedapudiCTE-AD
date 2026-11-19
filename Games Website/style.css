@@ -1,0 +1,489 @@
+* {
+  box-sizing: border-box;
+}
+
+body {
+  margin: 0;
+  padding: 2rem 1rem;
+  background: #f3f5f9;
+  color: #20283a;
+  font-family: system-ui, sans-serif;
+}
+
+main {
+  width: min(100%, 42rem);
+  margin: 3rem auto;
+  padding: clamp(1.5rem, 6vw, 3rem);
+  border-radius: 1rem;
+  background: #fff;
+  box-shadow: 0 0.75rem 2rem rgb(32 40 58 / 8%);
+}
+
+.eyebrow {
+  color: #5264c8;
+  font-size: 0.8rem;
+  font-weight: 700;
+  letter-spacing: 0.12em;
+}
+
+h1 {
+  margin: 0.25rem 0 0.5rem;
+  font-size: clamp(2rem, 8vw, 3.5rem);
+}
+
+.intro {
+  color: #535d70;
+  font-size: 1.1rem;
+}
+
+section {
+  margin-top: 2rem;
+  padding-top: 1rem;
+  border-top: 1px solid #e3e7ef;
+}
+
+.game-card {
+  max-width: 330px;
+  margin: 18px 0 0;
+  padding: 20px;
+  border-radius: 14px;
+  background: linear-gradient(180deg, #0c1f3d, #16315f);
+  color: #fff;
+  box-shadow: 0 12px 28px rgb(32 40 58 / 18%);
+}
+
+.game-card h3 {
+  margin: 0 0 12px;
+  color: #fff;
+  font-size: 1.5rem;
+}
+
+.small-btn {
+  border: 0;
+  border-radius: 10px;
+  padding: 10px 14px;
+  background: #d9dde3;
+  color: #0d1b3d;
+  font: inherit;
+  font-weight: 700;
+  cursor: pointer;
+}
+
+#music-toggle {
+  margin-bottom: 14px;
+}
+
+#music-player {
+  width: 1px;
+  height: 1px;
+  border: 0;
+  position: absolute;
+  opacity: 0;
+  pointer-events: none;
+}
+
+.game-topline {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 10px;
+  margin-bottom: 14px;
+}
+
+.game-controls {
+  display: flex;
+  gap: 8px;
+}
+
+.score-box {
+  display: inline-flex;
+  min-width: 90px;
+  padding: 8px 14px;
+  flex-direction: column;
+  align-items: center;
+  border: 1px solid rgba(255, 255, 255, 0.2);
+  border-radius: 12px;
+  background: rgba(255, 255, 255, 0.12);
+}
+
+.score-box span {
+  font-size: 0.72rem;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+}
+
+.score-box strong {
+  font-size: 1.5rem;
+}
+
+.game-board {
+  display: grid;
+  width: 100%;
+  max-width: 220px;
+  aspect-ratio: 1 / 1.8;
+  margin: 0 auto 12px;
+  padding: 8px;
+  grid-template-columns: repeat(10, minmax(0, 1fr));
+  gap: 2px;
+  border-radius: 14px;
+  background: rgba(11, 21, 42, 0.75);
+  box-shadow: inset 0 0 0 2px rgba(255, 255, 255, 0.06);
+}
+
+.board-cell {
+  width: 100%;
+  aspect-ratio: 1;
+  border: 1px solid rgba(255, 255, 255, 0.06);
+  border-radius: 4px;
+  background: rgba(255, 255, 255, 0.12);
+}
+
+.board-cell.filled {
+  background: var(--cell-color, #f4c95d);
+  box-shadow: inset 0 0 0 1px rgba(255, 255, 255, 0.35);
+}
+
+.game-status {
+  min-height: 24px;
+  margin: 0;
+  color: #f9f1d2;
+  font-weight: 600;
+  text-align: center;
+}
+
+.key-guide {
+  margin: 12px 0 0;
+  padding-left: 18px;
+  color: #f9f1d2;
+  font-size: 0.82rem;
+  line-height: 1.6;
+}
+
+.key-guide strong {
+  color: #f4c95d;
+}
+
+.dino-showcase {
+  margin-top: 18px;
+  padding: 24px;
+  border: 1px solid #d6e4ef;
+  border-radius: 14px;
+  background: #fff;
+  color: #26304a;
+}
+
+.dino-showcase__header {
+  display: flex;
+  align-items: end;
+  justify-content: space-between;
+  gap: 20px;
+  margin-bottom: 20px;
+}
+
+.dino-section-label {
+  margin: 0 0 6px;
+  color: #737373;
+  font-size: 0.68rem;
+  font-weight: 700;
+  letter-spacing: 0.12em;
+  text-transform: uppercase;
+}
+
+.dino-showcase h3 {
+  margin: 0;
+  color: #26304a;
+  font-size: 2.2rem;
+  line-height: 1;
+}
+
+.dino-score {
+  display: flex;
+  gap: 10px;
+  color: #737373;
+  font-size: 0.68rem;
+  letter-spacing: 0.12em;
+  text-transform: uppercase;
+}
+
+.dino-stage {
+  position: relative;
+  height: 260px;
+  overflow: hidden;
+  border: 1px solid rgba(48, 48, 74, 0.12);
+  border-radius: 12px;
+  background: linear-gradient(180deg, #d9eef8 0%, #bfe7f6 45%, #e9f6d0 100%);
+}
+
+.dino-sky,
+.dino-ground,
+.dino-sun,
+.dino-cloud,
+.dino-runner,
+.dino-cactus {
+  position: absolute;
+}
+
+.dino-sky { inset: 0; }
+
+.dino-sun {
+  top: 30px;
+  left: 58px;
+  width: 70px;
+  height: 70px;
+  border-radius: 50%;
+  background: radial-gradient(circle at 35% 35%, #fff 0%, #f4fc85 28%, #f7d045 100%);
+  box-shadow: 0 0 35px rgba(255, 200, 3, 0.65);
+}
+
+.dino-cloud {
+  height: 18px;
+  border-radius: 18px;
+  background: rgba(255, 255, 255, 0.78);
+  box-shadow: 18px 8px 0 rgba(255, 255, 255, 0.62), 40px 0 0 rgba(255, 255, 255, 0.7);
+  animation: dino-cloud-drift 18s linear infinite;
+}
+
+.dino-cloud--one { top: 44px; right: 180px; width: 84px; }
+.dino-cloud--two { top: 80px; right: 380px; width: 64px; animation-delay: -9s; }
+
+.dino-ground {
+  right: 0;
+  bottom: 30px;
+  left: 0;
+  height: 4px;
+  background: rgba(72, 74, 79, 0.48);
+}
+
+.dino-ground::before {
+  content: "";
+  position: absolute;
+  inset: 7px 0 auto;
+  height: 6px;
+  background: repeating-linear-gradient(90deg, rgba(72, 74, 79, 0.65) 0 26px, transparent 26px 52px);
+  animation: dino-ground-scroll 1.3s linear infinite;
+}
+
+.dino-runner {
+  left: 110px;
+  bottom: 35px;
+  width: 72px;
+  height: 56px;
+  animation: dino-run 0.2s steps(2) infinite;
+  transform-origin: center bottom;
+}
+
+.dino-runner.dino-jump { animation: dino-jump 0.8s ease both; }
+.dino-body, .dino-tail, .dino-leg, .dino-eye { position: absolute; display: block; }
+
+.dino-body {
+  left: 12px;
+  bottom: 12px;
+  width: 42px;
+  height: 28px;
+  background: #252525;
+  clip-path: polygon(0 36%, 28% 36%, 28% 0, 72% 0, 72% 22%, 100% 22%, 100% 60%, 72% 60%, 72% 100%, 16% 100%, 16% 72%, 0 72%);
+}
+
+.dino-tail {
+  left: 0;
+  bottom: 20px;
+  width: 18px;
+  height: 9px;
+  background: #252525;
+  clip-path: polygon(0 50%, 100% 0, 100% 100%);
+}
+
+.dino-leg { bottom: 0; width: 7px; height: 16px; border-radius: 5px; background: #252525; }
+.dino-leg--front { left: 37px; }
+.dino-leg--back { left: 24px; }
+
+.dino-eye {
+  top: 16px;
+  right: 10px;
+  width: 4px;
+  height: 4px;
+  border-radius: 50%;
+  background: #fff;
+  box-shadow: 0 0 0 2px #252525;
+}
+
+.dino-cactus {
+  right: -60px;
+  bottom: 36px;
+  width: 22px;
+  height: 46px;
+  border-radius: 5px 5px 0 0;
+  background: linear-gradient(180deg, #96ffa4 0%, #36b654 100%);
+  box-shadow: inset 0 0 0 3px rgba(15, 90, 35, 0.2);
+  animation: dino-cactus-rush 3.8s linear infinite;
+}
+
+.dino-cactus::before, .dino-cactus::after {
+  content: "";
+  position: absolute;
+  background: inherit;
+  box-shadow: inherit;
+}
+
+.dino-cactus::before { left: -8px; top: 12px; width: 7px; height: 18px; border-radius: 4px; }
+.dino-cactus::after { right: -8px; top: 16px; width: 7px; height: 14px; border-radius: 4px; }
+.dino-cactus--two { width: 18px; height: 38px; animation-delay: -2.1s; }
+
+.dino-controls {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 12px;
+  margin-top: 20px;
+}
+
+.dino-start-button, .dino-jump-button {
+  border: 1px solid rgba(48, 48, 48, 0.2);
+  border-radius: 999px;
+  padding: 10px 18px;
+  background: #303030;
+  color: #fff;
+  cursor: pointer;
+  font: 700 0.7rem/1 system-ui, sans-serif;
+  text-transform: uppercase;
+}
+
+.dino-jump-button:disabled { cursor: default; opacity: 0.5; }
+.dino-metrics { display: flex; gap: 22px; }
+.dino-metrics div { display: flex; flex-direction: column; gap: 4px; }
+.dino-metric-label { color: #737373; font-size: 0.62rem; font-weight: 700; text-transform: uppercase; }
+.dino-metrics strong { font-size: 1.4rem; }
+
+.mole-game {
+  margin-top: 18px;
+  padding: 24px;
+  border-radius: 14px;
+  background: linear-gradient(180deg, #daf1d4, #a9e4ab 48%, #1e6935);
+  color: #173c22;
+  box-shadow: 0 12px 28px rgb(32 40 58 / 14%);
+}
+
+.mole-game-header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 16px;
+  margin-bottom: 18px;
+}
+
+.mole-eyebrow {
+  margin: 0 0 6px;
+  color: #355b39;
+  font-size: 0.68rem;
+  font-weight: 700;
+  letter-spacing: 0.12em;
+  text-transform: uppercase;
+}
+
+.mole-game h3 {
+  margin: 0;
+  color: #173c22;
+  font-size: 1.7rem;
+}
+
+.mole-scoreboard {
+  display: flex;
+  min-width: 100px;
+  align-items: center;
+  justify-content: space-between;
+  gap: 12px;
+  padding: 10px 14px;
+  border-radius: 999px;
+  background: rgba(255, 255, 255, 0.45);
+  color: #173c22;
+  font-size: 0.75rem;
+  font-weight: 700;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+}
+
+.mole-scoreboard strong { font-size: 1.15rem; }
+
+.mole-grid {
+  display: grid;
+  width: min(100%, 420px);
+  margin: 0 auto;
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+  gap: 12px;
+}
+
+.mole-hole {
+  position: relative;
+  min-height: 90px;
+  overflow: hidden;
+  border: 0;
+  border-radius: 50% 50% 20px 20px;
+  background: linear-gradient(180deg, #6d4328, #3a220f);
+  box-shadow: inset 0 7px 0 rgba(255, 255, 255, 0.08);
+  cursor: pointer;
+  transition: transform 0.12s ease;
+}
+
+.mole-hole::before,
+.mole-hole::after {
+  content: "";
+  position: absolute;
+  left: 50%;
+  transform: translateX(-50%) translateY(28px) scale(0.2);
+  transition: transform 0.18s ease;
+}
+
+.mole-hole::before {
+  bottom: 10px;
+  width: 48px;
+  height: 34px;
+  border-radius: 50%;
+  background: linear-gradient(180deg, #e7b57d, #b57442);
+  box-shadow: inset 0 -6px 0 rgba(95, 57, 22, 0.22);
+}
+
+.mole-hole::after {
+  bottom: 20px;
+  width: 28px;
+  height: 18px;
+  border-radius: 50% 50% 45% 45%;
+  background: #4d2d1c;
+}
+
+.mole-hole.is-active::before,
+.mole-hole.is-active::after {
+  transform: translateX(-50%) translateY(0) scale(1);
+}
+
+.mole-hole:hover { transform: translateY(-1px); }
+.mole-hole.is-active { animation: mole-bop 0.18s ease; }
+
+@keyframes mole-bop {
+  50% { transform: scale(1.05); }
+}
+
+.mole-button {
+  display: block;
+  margin: 18px auto 0;
+  border: 1px solid rgba(48, 48, 48, 0.2);
+  border-radius: 999px;
+  padding: 10px 18px;
+  background: #303030;
+  color: #fff;
+  cursor: pointer;
+  font: 700 0.75rem/1 system-ui, sans-serif;
+  text-transform: uppercase;
+}
+
+.mole-button:hover { background: #555; }
+
+.dino-stage.is-idle .dino-cloud,
+.dino-stage.is-idle .dino-ground::before,
+.dino-stage.is-idle .dino-runner,
+.dino-stage.is-idle .dino-cactus { animation-play-state: paused; }
+
+@keyframes dino-cloud-drift { to { transform: translateX(-220px); } }
+@keyframes dino-ground-scroll { to { transform: translateX(-52px); } }
+@keyframes dino-cactus-rush { to { transform: translateX(-1200px); } }
+@keyframes dino-run { 0%, 100% { transform: translateY(0); } 50% { transform: translateY(2px); } }
+@keyframes dino-jump { 0% { transform: translateY(0); } 35%, 60% { transform: translateY(-104px); } 100% { transform: translateY(0); } }

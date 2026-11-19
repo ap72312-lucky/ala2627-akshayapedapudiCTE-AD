@@ -193,31 +193,6 @@
           </div>
         </article>
         <article class="project-card project-secondary glass-panel">
-          <div class="project-number">04 / CROWD FAVORITE</div>
-          <div class="mole-visual" aria-label="Whack-a-Mole mini game">
-            <div class="mole-scoreboard">
-              <span>Score</span>
-              <strong class="mole-score">0</strong>
-            </div>
-            <div class="mole-grid" aria-label="Mole board">
-              <button class="mole-hole" type="button" aria-label="Whack mole"></button>
-              <button class="mole-hole" type="button" aria-label="Whack mole"></button>
-              <button class="mole-hole" type="button" aria-label="Whack mole"></button>
-              <button class="mole-hole" type="button" aria-label="Whack mole"></button>
-              <button class="mole-hole" type="button" aria-label="Whack mole"></button>
-              <button class="mole-hole" type="button" aria-label="Whack mole"></button>
-              <button class="mole-hole" type="button" aria-label="Whack mole"></button>
-              <button class="mole-hole" type="button" aria-label="Whack mole"></button>
-              <button class="mole-hole" type="button" aria-label="Whack mole"></button>
-            </div>
-          </div>
-          <div class="project-content">
-            <h3>Whack-a-Mole</h3>
-            <p>To pass some time, why not... WHACK A FEW MOLES!!</p>
-            <button class="project-link mole-button" type="button">Start game</button>
-          </div>
-        </article>
-        <article class="project-card project-secondary glass-panel">
           <div class="project-number">05 / DECA FINANCE RESOURCE</div>
           <div class="code-visual deca-visual" aria-hidden="true"></div>
           <div class="project-content">
@@ -276,6 +251,18 @@
             <h3>Color Picker</h3>
             <p>A simple color picker tool to customize how this page looks. Make it your own!
             </p>
+          </div>
+        </article>
+        <article class="project-card project-secondary glass-panel">
+          <div class="project-number">07 / GAMES COLLECTION</div>
+          <div class="games-visual" aria-hidden="true">
+            <span class="games-controller">🎮</span>
+          </div>
+          <div class="project-content">
+            <h3>My Games</h3>
+            <p>Visit my games website to find all of the games I have made and share.</p>
+            <a href="https://ap72312-lucky.github.io/ala2627-akshayapedapudiCTE-AD/Games%20Website/index.html"
+              class="project-link">Play games! <span aria-hidden="true">↗</span></a>
           </div>
         </article>
       </div>
@@ -673,62 +660,6 @@
     });
     updatePhotoSlide(photoIndex);
 
-    const moleButtons = document.querySelectorAll('.mole-hole');
-    const moleScore = document.querySelector('.mole-score');
-    const moleStartButton = document.querySelector('.mole-button');
-    let moleScoreValue = 0;
-    let moleTimer = null;
-    let activeMole = null;
-    let gameRunning = false;
-
-    function clearMole() {
-      moleButtons.forEach((button) => button.classList.remove('is-active'));
-      activeMole = null;
-    }
-
-    function popMole() {
-      if (!gameRunning) return;
-      clearMole();
-      const randomIndex = Math.floor(Math.random() * moleButtons.length);
-      const selectedButton = moleButtons[randomIndex];
-      selectedButton.classList.add('is-active');
-      activeMole = selectedButton;
-    }
-
-    function startMoleGame() {
-      if (gameRunning) return;
-      gameRunning = true;
-      moleScoreValue = 0;
-      moleScore.textContent = String(moleScoreValue);
-      moleStartButton.textContent = 'Playing...';
-      clearMole();
-      moleTimer = window.setInterval(popMole, 700);
-    }
-
-    function stopMoleGame() {
-      gameRunning = false;
-      window.clearInterval(moleTimer);
-      clearMole();
-      moleStartButton.textContent = 'Play again';
-    }
-
-    moleButtons.forEach((button) => {
-      button.addEventListener('click', () => {
-        if (!gameRunning || !button.classList.contains('is-active')) return;
-        moleScoreValue += 1;
-        moleScore.textContent = String(moleScoreValue);
-        button.classList.remove('is-active');
-        activeMole = null;
-      });
-    });
-
-    moleStartButton.addEventListener('click', () => {
-      if (gameRunning) {
-        stopMoleGame();
-        return;
-      }
-      startMoleGame();
-    });
   </script>
 
 </body>

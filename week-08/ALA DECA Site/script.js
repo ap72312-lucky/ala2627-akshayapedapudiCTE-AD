@@ -136,6 +136,7 @@ termSearchForm.addEventListener("submit", function (event) {
 showTerm(currentTermIndex);
 
 // ─────────────── Tetris mini-game ───────────────
+if (document.querySelector("#game-board")) {
 const COLS = 10;
 const ROWS = 16;
 const BASE_SPEED = 900;
@@ -449,6 +450,7 @@ musicToggle.addEventListener("click", () => {
   musicToggle.textContent = "Stop background music";
   musicToggle.setAttribute("aria-pressed", "true");
 });
+}
 
 const calendarMonth = document.querySelector("#calendar-month");
 const calendarDays = document.querySelector("#calendar-days");
@@ -914,4 +916,3 @@ eventForm.addEventListener("submit", (event) => {
 
 renderCalendar();
 renderSelectedDate();
-

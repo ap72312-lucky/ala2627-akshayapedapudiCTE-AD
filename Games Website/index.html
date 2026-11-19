@@ -1,0 +1,113 @@
+<!doctype html>
+<html lang="en">
+
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="description" content="A home for my games.">
+  <title>Games!</title>
+  <link rel="icon"
+    href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'%3E%3Ctext y='.9em' font-size='90'%3E%F0%9F%8E%AE%3C/text%3E%3C/svg%3E">
+  <link rel="stylesheet" href="style.css">
+  <script src="script.js" defer></script>
+</head>
+
+<body>
+  <main>
+    <p class="eyebrow">MY WEBSITE</p>
+    <h1>Lucky's Games</h1>
+    <p class="intro">Welcome! This is where I’ll share my games.</p>
+    <section aria-labelledby="games-heading">
+      <h2 id="games-heading">Games</h2>
+      <article class="game-card">
+        <h3>DECA Tetris</h3>
+        <button id="music-toggle" type="button" class="small-btn" aria-pressed="false">Play background music</button>
+        <iframe id="music-player"
+          src="https://www.youtube.com/embed/VCrxWHTCNo8?enablejsapi=1&loop=1&playlist=VCrxWHTCNo8"
+          title="Background music" allow="autoplay"></iframe>
+        <div class="game-topline">
+          <div class="score-box">
+            <span>Score</span>
+            <strong id="score">0</strong>
+          </div>
+          <div class="game-controls">
+            <button id="start-stop-game" type="button" class="small-btn">Start</button>
+            <button id="reset-game" type="button" class="small-btn">Reset</button>
+          </div>
+        </div>
+        <div id="game-board" class="game-board" aria-label="Tetris board"></div>
+        <p id="game-status" class="game-status">Use arrow keys to play.</p>
+        <ul class="key-guide" aria-label="Tetris key controls">
+          <li><strong>← / →</strong> Move</li>
+          <li><strong>↑</strong> Rotate</li>
+          <li><strong>↓</strong> Soft drop / double tap = hard drop</li>
+          <li><strong>Space</strong> Hard drop</li>
+          <li><strong>F</strong> Scroll lock on / off</li>
+        </ul>
+      </article>
+      <article class="mole-game">
+        <div class="mole-game-header">
+          <div>
+            <p class="mole-eyebrow">Crowd favorite</p>
+            <h3>Whack-a-Mole</h3>
+          </div>
+          <div class="mole-scoreboard" aria-live="polite">
+            <span>Score</span>
+            <strong class="mole-score">0</strong>
+          </div>
+        </div>
+        <div class="mole-grid" aria-label="Whack-a-Mole board">
+          <button class="mole-hole" type="button" aria-label="Whack mole"></button>
+          <button class="mole-hole" type="button" aria-label="Whack mole"></button>
+          <button class="mole-hole" type="button" aria-label="Whack mole"></button>
+          <button class="mole-hole" type="button" aria-label="Whack mole"></button>
+          <button class="mole-hole" type="button" aria-label="Whack mole"></button>
+          <button class="mole-hole" type="button" aria-label="Whack mole"></button>
+          <button class="mole-hole" type="button" aria-label="Whack mole"></button>
+          <button class="mole-hole" type="button" aria-label="Whack mole"></button>
+          <button class="mole-hole" type="button" aria-label="Whack mole"></button>
+        </div>
+        <button class="mole-button" type="button">Start game</button>
+      </article>
+      <article class="dino-showcase" aria-labelledby="dino-title">
+        <div class="dino-showcase__header">
+          <div>
+            <p class="dino-section-label">Arcade mode</p>
+            <h3 id="dino-title">Dino Dash</h3>
+          </div>
+          <div class="dino-score" aria-live="polite" aria-label="Current and best score">
+            <span>CS</span>
+            <strong class="dino-current-score">0000</strong>
+          </div>
+        </div>
+        <div class="dino-stage" aria-label="Mini Dino Dash game scene">
+          <div class="dino-sky" aria-hidden="true">
+            <div class="dino-sun"></div>
+            <div class="dino-cloud dino-cloud--one"></div>
+            <div class="dino-cloud dino-cloud--two"></div>
+          </div>
+          <div class="dino-runner" aria-hidden="true">
+            <span class="dino-body"></span>
+            <span class="dino-tail"></span>
+            <span class="dino-leg dino-leg--front"></span>
+            <span class="dino-leg dino-leg--back"></span>
+            <span class="dino-eye"></span>
+          </div>
+          <div class="dino-cactus dino-cactus--one" aria-hidden="true"></div>
+          <div class="dino-cactus dino-cactus--two" aria-hidden="true"></div>
+          <div class="dino-ground" aria-hidden="true"></div>
+        </div>
+        <div class="dino-controls">
+          <button class="dino-start-button" type="button">Start</button>
+          <button class="dino-jump-button" type="button" disabled>Jump</button>
+          <div class="dino-metrics" aria-label="Game stats">
+            <div><span class="dino-metric-label">Speed</span><strong class="dino-speed">1.0x</strong></div>
+            <div><span class="dino-metric-label">Best</span><strong class="dino-best-run">0000</strong></div>
+          </div>
+        </div>
+      </article>
+    </section>
+  </main>
+</body>
+
+</html>
